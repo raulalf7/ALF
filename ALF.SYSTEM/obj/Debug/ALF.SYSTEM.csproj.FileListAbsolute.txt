@@ -1,0 +1,5 @@
+E:\4_Elance\Alf_Project\ALF\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.dll
+E:\4_Elance\Alf_Project\ALF\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.pdb
+E:\4_Elance\Alf_Project\ALF\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.csprojResolveAssemblyReference.cache
+E:\4_Elance\Alf_Project\ALF\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.dll
+E:\4_Elance\Alf_Project\ALF\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.pdb
