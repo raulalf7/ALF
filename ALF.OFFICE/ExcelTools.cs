@@ -106,8 +106,8 @@ namespace ALF.OFFICE
         public static string ExportLargeSqlToExcel(string sql, ExcelInfo excelInfo, DataBaseEngineType dataBaseEngineType = DataBaseEngineType.MsSqlServer)
         {
             MSSQL.Tools.DataBaseType = dataBaseEngineType;
-            var result = MSSQL.Tools.ExportCSV(sql, excelInfo.filePath.Replace(".xlsx", ".csv"));
-            return result != "" ? result : CopyExcelData(new ExcelInfo { filePath = excelInfo.filePath.Replace(".xlsx", ".csv") }, excelInfo);
+            var result = MSSQL.Tools.ExportCSV(sql, excelInfo.FilePath.Replace(".xlsx", ".csv"));
+            return result != "" ? result : CopyExcelData(new ExcelInfo { FilePath = excelInfo.FilePath.Replace(".xlsx", ".csv") }, excelInfo);
         }
 
 
@@ -124,7 +124,7 @@ namespace ALF.OFFICE
         {
             try
             {
-                if (destinationExcelInfo.rowStart < 1 || destinationExcelInfo.columnStart < 1)
+                if (destinationExcelInfo.RowStart < 1 || destinationExcelInfo.ColumnStart < 1)
                 {
                     return @"目标excel初始行列应>0";
                 }
@@ -138,9 +138,9 @@ namespace ALF.OFFICE
                 var sourceBook = _objBook;
                 var sourceSheet = _objSheet;
 
-                if (sourceExcelInfo.filePath != destinationExcelInfo.filePath)
+                if (sourceExcelInfo.FilePath != destinationExcelInfo.FilePath)
                 {
-                    sourceBook = _objBooks.Open(sourceExcelInfo.filePath, ObjOpt, ObjOpt, ObjOpt, ObjOpt,
+                    sourceBook = _objBooks.Open(sourceExcelInfo.FilePath, ObjOpt, ObjOpt, ObjOpt, ObjOpt,
                                               ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt);
                     sourceSheet = OpenSheet(sourceExcelInfo, sourceBook);
                     if (sourceSheet == null)
@@ -150,9 +150,9 @@ namespace ALF.OFFICE
                 }
 
                 var rowCount = CopyDataToClipBoard(sourceExcelInfo, sourceSheet);
-                if (destinationExcelInfo.rowsCount == 0)
+                if (destinationExcelInfo.RowsCount == 0)
                 {
-                    destinationExcelInfo.rowsCount = rowCount;
+                    destinationExcelInfo.RowsCount = rowCount;
                 }
                 for (var n = 1; n <= copyTime; n++)
                 {
@@ -184,15 +184,15 @@ namespace ALF.OFFICE
             try
             {
                 OpenExcel(excelInfo);
-                if (excelInfo.rowsCount == 0 || excelInfo.columnCount == 0)
+                if (excelInfo.RowsCount == 0 || excelInfo.ColumnCount == 0)
                 {
                     _objSheet.UsedRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
                 }
                 else
                 {
-                    var startCell = SYSTEM.WindowsTools.ConvertIntToChar(excelInfo.columnStart) + excelInfo.rowStart;
-                    var endCell = SYSTEM.WindowsTools.ConvertIntToChar(excelInfo.columnStart + excelInfo.columnCount - 1)
-                        + (excelInfo.rowStart + excelInfo.rowsCount - 1);
+                    var startCell = SYSTEM.WindowsTools.ConvertIntToChar(excelInfo.ColumnStart) + excelInfo.RowStart;
+                    var endCell = SYSTEM.WindowsTools.ConvertIntToChar(excelInfo.ColumnStart + excelInfo.ColumnCount - 1)
+                        + (excelInfo.RowStart + excelInfo.RowsCount - 1);
                     var range = _objSheet.Range[startCell, endCell];
                     range.Cells.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
                 }
@@ -250,10 +250,10 @@ namespace ALF.OFFICE
             using (var conn = new OleDbConnection(
                 string.Format(
                     "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{0}\";Extended Properties='Excel 12.0;HDR=YES;IMEX=0'",
-                    excelInfo.filePath)))
+                    excelInfo.FilePath)))
             {
                 conn.Open();
-                DataTable dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+                var dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
                 if (dt == null)
                 {
                     return sheetNameList;
@@ -280,22 +280,22 @@ namespace ALF.OFFICE
 
         private static string OpenExcel(ExcelInfo excelInfo, bool isOpenSheet = true)
         {
-            Console.WriteLine("Open File:【{0}】", excelInfo.filePath);
-            if (!File.Exists(excelInfo.filePath))
+            Console.WriteLine("Open File:【{0}】", excelInfo.FilePath);
+            if (!File.Exists(excelInfo.FilePath))
             {
-                return string.Format("文件【{0}】不存在", excelInfo.filePath);
+                return string.Format("文件【{0}】不存在", excelInfo.FilePath);
             }
 
             _objExcel = new Excel.Application { Visible = false, DisplayAlerts = false, AlertBeforeOverwriting = false };
 
             _objBooks = _objExcel.Workbooks;
-            if (excelInfo.filePath.Equals(String.Empty) || !File.Exists(excelInfo.filePath))
+            if (excelInfo.FilePath.Equals(String.Empty) || !File.Exists(excelInfo.FilePath))
             {
                 _objBook = _objBooks.Add(ObjOpt);
             }
             else
             {
-                _objBook = _objBooks.Open(excelInfo.filePath, ObjOpt, ObjOpt, ObjOpt, ObjOpt,
+                _objBook = _objBooks.Open(excelInfo.FilePath, ObjOpt, ObjOpt, ObjOpt, ObjOpt,
                                           ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt, ObjOpt);
             }
             if (isOpenSheet)
@@ -316,14 +316,14 @@ namespace ALF.OFFICE
             {
                 objSheets = workbook.Worksheets;
             }
-            if (string.IsNullOrEmpty(excelInfo.sheetName))
+            if (string.IsNullOrEmpty(excelInfo.SheetName))
             {
                 return (Excel._Worksheet)(objSheets.Item[1]);
             }
             try
             {
-                Console.WriteLine("Open Sheet:【{0}】", excelInfo.sheetName);
-                return (Excel._Worksheet)(objSheets.Item[excelInfo.sheetName]);
+                Console.WriteLine("Open Sheet:【{0}】", excelInfo.SheetName);
+                return (Excel._Worksheet)(objSheets.Item[excelInfo.SheetName]);
             }
             catch (Exception)
             {
@@ -401,7 +401,7 @@ namespace ALF.OFFICE
                     }
                     SaveDataToExcelImpl(dataTables[n], excelInfos[n]);
                 }
-                SaveAs(excelInfos[0].filePath);
+                SaveAs(excelInfos[0].FilePath);
             }
             catch (Exception err)
             {
@@ -429,32 +429,32 @@ namespace ALF.OFFICE
         private static void SaveDataToExcelImpl(DataTable dataTable, ExcelInfo excelInfo)
         {
             var rowCountUsing = dataTable.Rows.Count;
-            if (dataTable.Rows.Count > excelInfo.rowsCount && excelInfo.rowsCount != 0)
+            if (dataTable.Rows.Count > excelInfo.RowsCount && excelInfo.RowsCount != 0)
             {
-                rowCountUsing = excelInfo.rowsCount;
+                rowCountUsing = excelInfo.RowsCount;
             }
 
             var colCountUsing = dataTable.Columns.Count;
-            if (dataTable.Columns.Count > excelInfo.columnCount && excelInfo.columnCount != 0)
+            if (dataTable.Columns.Count > excelInfo.ColumnCount && excelInfo.ColumnCount != 0)
             {
-                colCountUsing = excelInfo.columnCount;
+                colCountUsing = excelInfo.ColumnCount;
             }
 
 
-            if (excelInfo.isInsert == "1")
+            if (excelInfo.IsInsert == "1")
             {
-                InsertRow(excelInfo.rowStart, rowCountUsing);
+                InsertRow(excelInfo.RowStart, rowCountUsing);
             }
 
-            if (excelInfo.hasTitle == "1")
+            if (excelInfo.HasTitle == "1")
             {
-                SetTitle(excelInfo.rowStart, excelInfo.columnStart, colCountUsing, dataTable);
-                excelInfo.rowStart++;
+                SetTitle(excelInfo.RowStart, excelInfo.ColumnStart, colCountUsing, dataTable);
+                excelInfo.RowStart++;
             }
 
-            if (excelInfo.sheetName != "" && _objSheet.Name == "sheet1")
+            if (excelInfo.SheetName != "" && _objSheet.Name == "sheet1")
             {
-                _objSheet.Name = excelInfo.sheetName;
+                _objSheet.Name = excelInfo.SheetName;
             }
 
             Console.WriteLine("Insert data into excel file");
@@ -465,7 +465,7 @@ namespace ALF.OFFICE
                     _tmpNumber = 0;
                     for (var j = 0; j < colCountUsing; j++)
                     {
-                        SetCellValue(i + excelInfo.rowStart, j + excelInfo.columnStart, dataTable.Rows[i][j].ToString(),
+                        SetCellValue(i + excelInfo.RowStart, j + excelInfo.ColumnStart, dataTable.Rows[i][j].ToString(),
                                      i);
 
                         Console.WriteLine("row:{0},col:{1}", i + 1, j + 1);
@@ -559,8 +559,8 @@ namespace ALF.OFFICE
         private static void CopyDataFromClipBoard(ExcelInfo destinationExcelInfo, int index = 1)
         {
 
-            var startRow = (index - 1) * destinationExcelInfo.rowsCount + destinationExcelInfo.rowStart;
-            var startCell = SYSTEM.WindowsTools.ConvertIntToChar(destinationExcelInfo.columnStart) +
+            var startRow = (index - 1) * destinationExcelInfo.RowsCount + destinationExcelInfo.RowStart;
+            var startCell = SYSTEM.WindowsTools.ConvertIntToChar(destinationExcelInfo.ColumnStart) +
                             startRow.ToString(CultureInfo.InvariantCulture);
             //var endCell = SYSTEM.WindowsTools.ConvertIntToChar(destinationExcelInfo.columnStart + destinationExcelInfo.columnCount - 1) +
             //(startRow + destinationExcelInfo.rowsCount - 1).ToString(CultureInfo.InvariantCulture);
@@ -573,15 +573,15 @@ namespace ALF.OFFICE
 
         private static int CopyDataToClipBoard(ExcelInfo sourceExcelInfo, Excel._Worksheet firstWorksheet)
         {
-            if (sourceExcelInfo.columnCount == 0 || sourceExcelInfo.rowsCount == 0)
+            if (sourceExcelInfo.ColumnCount == 0 || sourceExcelInfo.RowsCount == 0)
             {
                 firstWorksheet.UsedRange.Copy(ObjOpt);
                 return firstWorksheet.UsedRange.Rows.Count;
             }
-            var startCell = SYSTEM.WindowsTools.ConvertIntToChar(sourceExcelInfo.columnStart) +
-                            sourceExcelInfo.rowStart.ToString(CultureInfo.InvariantCulture);
-            var endCell = SYSTEM.WindowsTools.ConvertIntToChar(sourceExcelInfo.columnStart + sourceExcelInfo.columnCount - 1) +
-                          (sourceExcelInfo.rowStart + sourceExcelInfo.rowsCount - 1).ToString(CultureInfo.InvariantCulture);
+            var startCell = SYSTEM.WindowsTools.ConvertIntToChar(sourceExcelInfo.ColumnStart) +
+                            sourceExcelInfo.RowStart.ToString(CultureInfo.InvariantCulture);
+            var endCell = SYSTEM.WindowsTools.ConvertIntToChar(sourceExcelInfo.ColumnStart + sourceExcelInfo.ColumnCount - 1) +
+                          (sourceExcelInfo.RowStart + sourceExcelInfo.RowsCount - 1).ToString(CultureInfo.InvariantCulture);
             var sourceRange = firstWorksheet.Range[startCell, endCell];
             sourceRange.Copy(ObjOpt);
             Console.WriteLine("Copy [{0}][{1}]", startCell, endCell);

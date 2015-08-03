@@ -81,7 +81,7 @@ namespace ALF.MSSQL
                 {
                     return ".";
                 }
-                return ConnInfo.connIp;
+                return ConnInfo.ConnIp;
             }
         }
 
@@ -91,8 +91,8 @@ namespace ALF.MSSQL
             {
                 if (DataBaseType == DataBaseEngineType.Remote)
                 {
-                    return string.Format(SqlConnStringFormat, ConnInfo.connIp,
-                                         string.Format("User ID=sa;Password={0}", ConnInfo.connPw), DBName);
+                    return string.Format(SqlConnStringFormat, ConnInfo.ConnIp,
+                                         string.Format("User ID=sa;Password={0}", ConnInfo.ConnPw), DBName);
                 }
                 return string.Format(SqlConnStringFormat, ServerName, "Integrated Security=True", DBName);
             }
@@ -110,7 +110,7 @@ namespace ALF.MSSQL
                 {
                     return @"-S .\sqlexpress -T ";
                 }
-                return string.Format("-S {0} -U sa -P {1}", ConnInfo.connIp, ConnInfo.connPw);
+                return string.Format("-S {0} -U sa -P {1}", ConnInfo.ConnIp, ConnInfo.ConnPw);
             }
         }
 

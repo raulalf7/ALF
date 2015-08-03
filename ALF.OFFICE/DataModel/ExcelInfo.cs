@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Linq.Mapping;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ALF.OFFICE.DataModel
 {
@@ -37,7 +33,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_excelID", DbType = "UniqueIdentifier NOT NULL")]
-        public Guid excelID
+        public Guid ExcelID
         {
             get { return _excelID; }
             set
@@ -50,7 +46,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_filePath", DbType = "NVarChar(MAX) NOT NULL", CanBeNull = false)]
-        public string filePath
+        public string FilePath
         {
             get { return _filePath; }
             set
@@ -63,7 +59,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_fileName", DbType = "NVarChar(255) NOT NULL", CanBeNull = false)]
-        public string fileName
+        public string FileName
         {
             get { return _fileName; }
             set
@@ -76,7 +72,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_excelName", DbType = "NVarChar(255) NOT NULL", CanBeNull = false)]
-        public string excelName
+        public string ExcelName
         {
             get { return _excelName; }
             set
@@ -89,7 +85,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_rowStart", DbType = "Int NOT NULL")]
-        public int rowStart
+        public int RowStart
         {
             get { return _rowStart; }
             set
@@ -102,7 +98,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_rowsCount", DbType = "Int NOT NULL")]
-        public int rowsCount
+        public int RowsCount
         {
             get { return _rowsCount; }
             set
@@ -115,7 +111,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_columnStart", DbType = "Int NOT NULL")]
-        public int columnStart
+        public int ColumnStart
         {
             get { return _columnStart; }
             set
@@ -128,7 +124,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_columnCount", DbType = "Int NOT NULL")]
-        public int columnCount
+        public int ColumnCount
         {
             get { return _columnCount; }
             set
@@ -141,7 +137,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_hasTitle", DbType = "Int NOT NULL")]
-        public string hasTitle
+        public string HasTitle
         {
             get { return _hasTitle; }
             set
@@ -154,7 +150,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_isInsert", DbType = "Int NOT NULL")]
-        public string isInsert
+        public string IsInsert
         {
             get { return _isInsert; }
             set
@@ -167,7 +163,7 @@ namespace ALF.OFFICE.DataModel
         }
 
         [Column(Storage = "_sheetName", DbType = "NVarChar(255) NOT NULL", CanBeNull = false)]
-        public string sheetName
+        public string SheetName
         {
             get { return _sheetName; }
             set

@@ -24,13 +24,13 @@ namespace ALF.SYSTEM.DataModel
 
         public ConnInfo()
         {
-            rowid = Guid.NewGuid();
-            connID = Guid.NewGuid();
-            updatetime = DateTime.Now;
-            isEnabled = true;
+            Rowid = Guid.NewGuid();
+            ConnID = Guid.NewGuid();
+            Updatetime = DateTime.Now;
+            IsEnabled = true;
         }
 
-        public Guid rowid
+        public Guid Rowid
         {
             get
             {
@@ -45,7 +45,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public Guid connID
+        public Guid ConnID
         {
             get
             {
@@ -60,7 +60,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public string state
+        public string State
         {
             get
             {
@@ -75,7 +75,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public string description
+        public string Description
         {
             get
             {
@@ -90,7 +90,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public DateTime updatetime
+        public DateTime Updatetime
         {
             get
             {
@@ -105,7 +105,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public string connName
+        public string ConnName
         {
             get
             {
@@ -120,7 +120,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public string connPw
+        public string ConnPw
         {
             get
             {
@@ -135,7 +135,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public string connIp
+        public string ConnIp
         {
             get
             {
@@ -150,7 +150,7 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
-        public bool isEnabled
+        public bool IsEnabled
         {
             get
             {
