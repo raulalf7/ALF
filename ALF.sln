@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALF.SYSTEM", "ALF.SYSTEM\AL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALF.MSSQL", "ALF.MSSQL\ALF.MSSQL.csproj", "{92287B21-9F75-4614-ACCC-B8F4BF13D0B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALF.OFFICE", "ALF.OFFICE\ALF.OFFICE.csproj", "{F5FC35F9-6097-4403-BCA0-574539C07164}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{92287B21-9F75-4614-ACCC-B8F4BF13D0B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92287B21-9F75-4614-ACCC-B8F4BF13D0B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92287B21-9F75-4614-ACCC-B8F4BF13D0B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5FC35F9-6097-4403-BCA0-574539C07164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5FC35F9-6097-4403-BCA0-574539C07164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5FC35F9-6097-4403-BCA0-574539C07164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5FC35F9-6097-4403-BCA0-574539C07164}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
