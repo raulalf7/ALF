@@ -2,6 +2,9 @@
 
 namespace ALF.SYSTEM.DataModel
 {
+    /// <summary>
+    /// 连接信息
+    /// </summary>
     public class ConnInfo
     {
         private Guid _rowid;
@@ -22,6 +25,9 @@ namespace ALF.SYSTEM.DataModel
 
         private bool _isEnabled;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public ConnInfo()
         {
             Rowid = Guid.NewGuid();
@@ -30,6 +36,9 @@ namespace ALF.SYSTEM.DataModel
             IsEnabled = true;
         }
 
+        /// <summary>
+        /// 行编号
+        /// </summary>
         public Guid Rowid
         {
             get
@@ -45,6 +54,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 连接ID
+        /// </summary>
         public Guid ConnID
         {
             get
@@ -60,6 +72,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 状态
+        /// </summary>
         public string State
         {
             get
@@ -75,6 +90,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string Description
         {
             get
@@ -90,6 +108,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 更新时间
+        /// </summary>
         public DateTime Updatetime
         {
             get
@@ -105,6 +126,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 连接名称
+        /// </summary>
         public string ConnName
         {
             get
@@ -120,6 +144,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 连接密码
+        /// </summary>
         public string ConnPw
         {
             get
@@ -135,6 +162,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 连接IP
+        /// </summary>
         public string ConnIp
         {
             get
@@ -150,6 +180,9 @@ namespace ALF.SYSTEM.DataModel
             }
         }
 
+        /// <summary>
+        /// 是否启用
+        /// </summary>
         public bool IsEnabled
         {
             get

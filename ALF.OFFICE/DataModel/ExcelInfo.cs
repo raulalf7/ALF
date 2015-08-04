@@ -3,6 +3,9 @@ using System.Data.Linq.Mapping;
 
 namespace ALF.OFFICE.DataModel
 {
+    /// <summary>
+    /// Excel信息
+    /// </summary>
     public class ExcelInfo : ICloneable
     {
         private Guid _excelID;
@@ -32,6 +35,9 @@ namespace ALF.OFFICE.DataModel
             return MemberwiseClone();
         }
 
+        /// <summary>
+        /// ExcelID
+        /// </summary>
         [Column(Storage = "_excelID", DbType = "UniqueIdentifier NOT NULL")]
         public Guid ExcelID
         {
@@ -45,6 +51,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 文件路径
+        /// </summary>
         [Column(Storage = "_filePath", DbType = "NVarChar(MAX) NOT NULL", CanBeNull = false)]
         public string FilePath
         {
@@ -58,6 +67,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 文件名称
+        /// </summary>
         [Column(Storage = "_fileName", DbType = "NVarChar(255) NOT NULL", CanBeNull = false)]
         public string FileName
         {
@@ -71,6 +83,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// Excel名称
+        /// </summary>
         [Column(Storage = "_excelName", DbType = "NVarChar(255) NOT NULL", CanBeNull = false)]
         public string ExcelName
         {
@@ -84,6 +99,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 起始行
+        /// </summary>
         [Column(Storage = "_rowStart", DbType = "Int NOT NULL")]
         public int RowStart
         {
@@ -97,6 +115,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 行数
+        /// </summary>
         [Column(Storage = "_rowsCount", DbType = "Int NOT NULL")]
         public int RowsCount
         {
@@ -110,6 +131,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 起始列
+        /// </summary>
         [Column(Storage = "_columnStart", DbType = "Int NOT NULL")]
         public int ColumnStart
         {
@@ -123,6 +147,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 列数
+        /// </summary>
         [Column(Storage = "_columnCount", DbType = "Int NOT NULL")]
         public int ColumnCount
         {
@@ -136,6 +163,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 是否包含列名
+        /// </summary>
         [Column(Storage = "_hasTitle", DbType = "Int NOT NULL")]
         public string HasTitle
         {
@@ -149,6 +179,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 是否插入
+        /// </summary>
         [Column(Storage = "_isInsert", DbType = "Int NOT NULL")]
         public string IsInsert
         {
@@ -162,6 +195,9 @@ namespace ALF.OFFICE.DataModel
             }
         }
 
+        /// <summary>
+        /// 页签名称
+        /// </summary>
         [Column(Storage = "_sheetName", DbType = "NVarChar(255) NOT NULL", CanBeNull = false)]
         public string SheetName
         {

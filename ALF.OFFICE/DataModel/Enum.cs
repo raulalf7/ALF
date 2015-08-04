@@ -1,15 +1,18 @@
 ﻿
 namespace ALF.OFFICE.DataModel
 {
-    public enum OfficeFormat
-    {
-        Office2003,
-        Office2007,
-        CSV,
-        TXT,
-        HTML
-    }
+    //public enum OfficeFormat
+    //{
+    //    Office2003,
+    //    Office2007,
+    //    CSV,
+    //    TXT,
+    //    HTML
+    //}
 
+    /// <summary>
+    /// Office版本枚举列表
+    /// </summary>
     public enum OfficeVersion
     {
         Office95,

@@ -11,10 +11,11 @@ using Excel=Microsoft.Office.Interop.Excel;
 
 namespace ALF.OFFICE
 {
+    /// <summary>
+    /// Excel处理工具
+    /// </summary>
     public static class ExcelTools
     {
-
-        //Test for Github
         #region Private Fileds
 
         private static Excel.Application _objExcel;
@@ -26,14 +27,7 @@ namespace ALF.OFFICE
         private static int _tmpNumber;
 
         #endregion
-
-
-        #region Public Fields
-
-        public static OfficeVersion ExcelVersion;
-
-        #endregion
-
+        
 
         #region Public Methods
 
@@ -43,7 +37,7 @@ namespace ALF.OFFICE
         /// <param name="dataTables">数据表列表</param>
         /// <param name="excelInfos">Excel信息列表</param>
         /// <param name="isSingleFile">是否导入到单个Excel文件</param>
-        /// <returns></returns>
+        /// <returns>操作结果</returns>
         public static string WriteDataToExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos, bool isSingleFile = false)
         {
 
@@ -62,11 +56,10 @@ namespace ALF.OFFICE
         /// </summary>
         /// <param name="sql">sql查询语句(注：SQL中需要包含数据库名)</param>
         /// <param name="filePath">excel文件所在路径</param>
-        /// <param name="sheetName">索要插入页签名称</param>
-        /// <param name="isLargeData">判断</param>
-        /// <param name="dataBaseEngineType">数据库连接信息</param>
-        /// <returns>执行结果，返回空字符串代表执行成功</returns>
-        public static string ExportSqlToExcel(string sql, string filePath, string sheetName, bool isLargeData = false, DataBaseEngineType dataBaseEngineType = DataBaseEngineType.MsSqlServer)
+        /// <param name="sheetName">所要插入页签名称</param>
+        /// <param name="dataBaseEngineType">数据库引擎类型</param>
+        /// <returns>操作结果</returns>
+        public static string ExportSqlToExcel(string sql, string filePath, string sheetName,DataBaseEngineType dataBaseEngineType = DataBaseEngineType.MsSqlServer)
         {
             if (!File.Exists(filePath))
             {
@@ -80,12 +73,11 @@ namespace ALF.OFFICE
 
             MSSQL.Tools.DataBaseType = dataBaseEngineType;
 
-            string execSql =
+            var execSql =
                 string.Format(
                     @"insert into OPENROWSET('MICROSOFT.ACE.OLEDB.12.0','{3};HDR=YES;DATABASE={0}','SELECT * FROM [{1}$]') {2}",
                     filePath, sheetName, sql, GetExcelVersionString());
-
-
+            
             try
             {
                 return MSSQL.Tools.ExecSql(execSql);
@@ -97,12 +89,12 @@ namespace ALF.OFFICE
         }
 
         /// <summary>
-        /// 导出超过255列的SQL数据
+        /// 将超过255列Sql查询结果插入到指定Excel文件中
         /// </summary>
-        /// <param name="sql">查询语句</param>
+        /// <param name="sql">sql查询语句(注：SQL中需要包含数据库名)</param>
         /// <param name="excelInfo">导出EXCEL信息</param>
         /// <param name="dataBaseEngineType">数据库引擎类型</param>
-        /// <returns></returns>
+        /// <returns>操作结果</returns>
         public static string ExportLargeSqlToExcel(string sql, ExcelInfo excelInfo, DataBaseEngineType dataBaseEngineType = DataBaseEngineType.MsSqlServer)
         {
             MSSQL.Tools.DataBaseType = dataBaseEngineType;
@@ -110,14 +102,11 @@ namespace ALF.OFFICE
             return result != "" ? result : CopyExcelData(new ExcelInfo { FilePath = excelInfo.FilePath.Replace(".xlsx", ".csv") }, excelInfo);
         }
 
-
-
-
         /// <summary>
         /// EXCEL间数据拷贝
         /// </summary>
-        /// <param name="sourceExcelInfo">源数据信息</param>
-        /// <param name="destinationExcelInfo">拷贝目标信息</param>
+        /// <param name="sourceExcelInfo">源数据EXCEL文件信息</param>
+        /// <param name="destinationExcelInfo">拷贝目标EXCEL文件信息</param>
         /// <param name="copyTime">拷贝次数</param>
         /// <returns>拷贝结果</returns>
         public static string CopyExcelData(ExcelInfo sourceExcelInfo, ExcelInfo destinationExcelInfo, int copyTime = 1)
@@ -178,7 +167,7 @@ namespace ALF.OFFICE
         /// 设置单元格边框
         /// </summary>
         /// <param name="excelInfo">需要设置单元格边框的excel信息</param>
-        /// <returns></returns>
+        /// <returns>操作结果</returns>
         public static string SetCellBorder(ExcelInfo excelInfo)
         {
             try
@@ -212,7 +201,7 @@ namespace ALF.OFFICE
         /// </summary>
         /// <param name="excelInfo">EXCEL信息</param>
         /// <param name="sheetNames">待隐藏页签列表</param>
-        /// <returns></returns>
+        /// <returns>操作结果</returns>
         public static string HideSheets(ExcelInfo excelInfo, List<string> sheetNames)
         {
 
@@ -249,8 +238,8 @@ namespace ALF.OFFICE
 
             using (var conn = new OleDbConnection(
                 string.Format(
-                    "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{0}\";Extended Properties='Excel 12.0;HDR=YES;IMEX=0'",
-                    excelInfo.FilePath)))
+                    "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{0}\";Extended Properties='{1};HDR=YES;IMEX=0'",
+                    excelInfo.FilePath, GetExcelVersionString())))
             {
                 conn.Open();
                 var dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
@@ -535,7 +524,7 @@ namespace ALF.OFFICE
 
         private static string GetExcelVersionString()
         {
-            switch (ExcelVersion)
+            switch (Tools.OfficeVersion)
             {
                 case OfficeVersion.Office95:
                     return "Excel 7.0";
@@ -562,13 +551,9 @@ namespace ALF.OFFICE
             var startRow = (index - 1) * destinationExcelInfo.RowsCount + destinationExcelInfo.RowStart;
             var startCell = SYSTEM.WindowsTools.ConvertIntToChar(destinationExcelInfo.ColumnStart) +
                             startRow.ToString(CultureInfo.InvariantCulture);
-            //var endCell = SYSTEM.WindowsTools.ConvertIntToChar(destinationExcelInfo.columnStart + destinationExcelInfo.columnCount - 1) +
-            //(startRow + destinationExcelInfo.rowsCount - 1).ToString(CultureInfo.InvariantCulture);
             var destinationRange = _objSheet.Range[startCell];
-            //var destinationRange = _objSheet.Range[startCell, endCell];
             _objSheet.Paste(destinationRange, false);
             Console.WriteLine("Paste [{0}]", startCell);
-            //ReleaseObj(destinationRange);
         }
 
         private static int CopyDataToClipBoard(ExcelInfo sourceExcelInfo, Excel._Worksheet firstWorksheet)

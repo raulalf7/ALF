@@ -6,10 +6,17 @@ using System.Net.Sockets;
 
 namespace ALF.SYSTEM
 {
+    /// <summary>
+    /// Web工具
+    /// </summary>
     public static class WebTools
     {
 
         #region WEB SERVICE
+        /// <summary>
+        /// 获取GMT时间
+        /// </summary>
+        /// <returns>时间</returns>
         public static DateTime GetGmtTime()
         {
             var result = default(DateTime);
@@ -24,6 +31,12 @@ namespace ALF.SYSTEM
             return result;
         }
 
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <param name="url">文件路径</param>
+        /// <returns>下载结果</returns>
         public static string DownloadFile(string fileName, string url)
         {
             try
@@ -48,6 +61,11 @@ namespace ALF.SYSTEM
             return "";
         }
 
+        /// <summary>
+        /// 判断是否正确URL
+        /// </summary>
+        /// <param name="url">url路径</param>
+        /// <returns>是否正确</returns>
         public static bool IsCorrectUrl(string url)
         {
             var result = false;
@@ -76,6 +94,11 @@ namespace ALF.SYSTEM
             return result;
         }
 
+        /// <summary>
+        /// 保存二进制文件
+        /// </summary>
+        /// <param name="response">Web响应</param>
+        /// <param name="fileName">文件名称</param>
         private static void SaveBinaryFile(WebResponse response, string fileName)
         {
             var buffer = new byte[1024];
@@ -94,7 +117,7 @@ namespace ALF.SYSTEM
                 }
 
                 int l;
-                int size = 0;
+                var size = 0;
                 do
                 {
 

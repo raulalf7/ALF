@@ -14,8 +14,16 @@ using Microsoft.CSharp;
 
 namespace ALF.SYSTEM
 {
+    /// <summary>
+    /// Windows工具
+    /// </summary>
     public static class WindowsTools
     {
+        /// <summary>
+        /// 判断服务是否启动
+        /// </summary>
+        /// <param name="serviceName">服务名称</param>
+        /// <returns>是否启动</returns>
         public static bool IsServeiceStart(string serviceName)
         {
             if (serviceName == "")
@@ -35,14 +43,30 @@ namespace ALF.SYSTEM
             }
         }
 
+        /// <summary>
+        /// 获取文件名
+        /// </summary>
+        /// <param name="fileFullName">完整文件名</param>
+        /// <returns>文件名称</returns>
         public static string GetBasicName(string fileFullName)
         {
             var index = fileFullName.LastIndexOf("\\", StringComparison.Ordinal);
             return fileFullName.Substring(index + 1);
         }
 
+        /// <summary>
+        /// 命令行执行完成事件
+        /// </summary>
         public static Action<string> ExecCmdFinished;
 
+        /// <summary>
+        /// 运行命令行
+        /// </summary>
+        /// <param name="fileName">运行文件名称</param>
+        /// <param name="argName">运行文件参数</param>
+        /// <param name="hideWindow">是否隐藏运行窗口</param>
+        /// <param name="isShowFinished">是否显示运行完成结果</param>
+        /// <returns>运行结果</returns>
         public static string ExecCmd(string fileName, string argName, bool hideWindow = false, bool isShowFinished = false)
         {
             var process = new Process();
@@ -74,9 +98,18 @@ namespace ALF.SYSTEM
                 Console.WriteLine("Cmd error ;{0}", ex.Message);
                 result = ex.Message;
             }
+            if (ExecCmdFinished != null)
+            {
+                ExecCmdFinished(result);
+            }
             return result;
         }
 
+        /// <summary>
+        /// 写入TXT文件
+        /// </summary>
+        /// <param name="path">TXT文件路径</param>
+        /// <param name="infoString">待写入信息</param>
         public static void WriteToTxt(string path, string infoString)
         {
             StreamWriter streamWriter = File.Exists(path) ? File.AppendText(path) : new StreamWriter(path);
@@ -84,18 +117,24 @@ namespace ALF.SYSTEM
             streamWriter.Close();
         }
 
+        /// <summary>
+        /// 读取TXT文件
+        /// </summary>
+        /// <param name="path">TXT文件路径</param>
+        /// <returns>TXT文件内容</returns>
         public static string ReadFromTxt(string path)
         {
             var t = File.ReadAllLines(path, Encoding.Default);
             return t.Aggregate("", (current, s) => current + (s + Environment.NewLine));
         }
 
-        public static bool IsDateString(string dateString)
-        {
-            return true;
-        }
-
-        public static string CreatXml(string filePath, InputType inputType)
+        /// <summary>
+        /// 创建XML配置文件
+        /// </summary>
+        /// <param name="filePath">目标文件夹路径</param>
+        /// <param name="inputType">配置文件类型</param>
+        /// <returns>创建结果</returns>
+        public static string CreatXml(string filePath, ConfigType inputType)
         {
             var dir = new DirectoryInfo(string.Format(@"{0}\", filePath));
             if (!dir.Exists)
@@ -119,7 +158,12 @@ namespace ALF.SYSTEM
             return "";
         }
 
-
+        /// <summary>
+        /// XML序列化
+        /// </summary>
+        /// <param name="itemList">待序列化列表</param>
+        /// <param name="path">生成路径</param>
+        /// <param name="result">序列化结果</param>
         public static void XmlSerialize(object itemList, string path, out string result)
         {
             result = "";
@@ -140,6 +184,14 @@ namespace ALF.SYSTEM
             }
         }
 
+        /// <summary>
+        /// XML反序列化
+        /// </summary>
+        /// <param name="listType">反序列化文件类型</param>
+        /// <param name="path">XML文件路径</param>
+        /// <param name="result">反序列化结果</param>
+        /// <param name="obj">序列化目标类型</param>
+        /// <returns>反序列化结果</returns>
         public static object XmlDeseerializer(Type listType, string path, out string result, object obj = null)
         {
             result = "";
@@ -163,6 +215,11 @@ namespace ALF.SYSTEM
             }
         }
 
+        /// <summary>
+        /// Int根据ASCII转换为Char
+        /// </summary>
+        /// <param name="value">带转化数值</param>
+        /// <returns>转化后结果</returns>
         public static string ConvertIntToChar(int value)
         {
             if (value > Math.Pow(26, 2))
@@ -178,6 +235,13 @@ namespace ALF.SYSTEM
             return value == 0 ? "A" : ((char)(value % 27 + 64)).ToString(CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// 编译代码文件
+        /// </summary>
+        /// <param name="sourceCode">待编译代码</param>
+        /// <param name="filePath">生成文件路径</param>
+        /// <param name="referenceString">引用字符串</param>
+        /// <returns>编译结果</returns>
         public static string CompileCode(string sourceCode, string filePath, string[] referenceString)
         {
             var p = new CSharpCodeProvider();
@@ -190,8 +254,12 @@ namespace ALF.SYSTEM
             return cr.Errors.Count == 0 ? "" : cr.Errors.Cast<CompilerError>().Aggregate("", (current, error) => current + (error + "\n"));
         }
 
-
-        static private IEnumerable<FileInfo> GetFiles(DirectoryInfo dir)
+        /// <summary>
+        /// 获取全部子文件
+        /// </summary>
+        /// <param name="dir">查询目录路径</param>
+        /// <returns>文件列表</returns>
+        private static IEnumerable<FileInfo> GetFiles(DirectoryInfo dir)
         {
             var result = dir.GetFiles().ToList();
             var tmpDirList = dir.GetDirectories();
