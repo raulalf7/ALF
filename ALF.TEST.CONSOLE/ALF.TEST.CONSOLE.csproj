@@ -47,6 +47,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ALF.MSSQL\ALF.MSSQL.csproj">
+      <Project>{92287b21-9f75-4614-accc-b8f4bf13d0b8}</Project>
+      <Name>ALF.MSSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ALF.OFFICE\ALF.OFFICE.csproj">
+      <Project>{f5fc35f9-6097-4403-bca0-574539c07164}</Project>
+      <Name>ALF.OFFICE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ALF.SYSTEM\ALF.SYSTEM.csproj">
+      <Project>{c56ee586-f356-466c-824f-d75bd4e9b2d3}</Project>
+      <Name>ALF.SYSTEM</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

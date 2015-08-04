@@ -57,9 +57,8 @@ namespace ALF.OFFICE
         /// <param name="sql">sql查询语句(注：SQL中需要包含数据库名)</param>
         /// <param name="filePath">excel文件所在路径</param>
         /// <param name="sheetName">所要插入页签名称</param>
-        /// <param name="dataBaseEngineType">数据库引擎类型</param>
         /// <returns>操作结果</returns>
-        public static string ExportSqlToExcel(string sql, string filePath, string sheetName,DataBaseEngineType dataBaseEngineType = DataBaseEngineType.MsSqlServer)
+        public static string ExportSqlToExcel(string sql, string filePath, string sheetName)
         {
             if (!File.Exists(filePath))
             {
@@ -70,8 +69,6 @@ namespace ALF.OFFICE
             {
                 return string.Format("【SQL导入发生错误】: 错误语句：【{0}】，错误信息：【SQL语句不是查询语句】", sql);
             }
-
-            MSSQL.Tools.DataBaseType = dataBaseEngineType;
 
             var execSql =
                 string.Format(
@@ -537,7 +534,8 @@ namespace ALF.OFFICE
                 case OfficeVersion.Office2007:
                     return "Excel 12.0";
                 case OfficeVersion.Office2010:
-                    return "Excel 14.0";
+                    return "Excel 12.0";
+                    //return "Excel 14.0";
                 case OfficeVersion.Office2013:
                     return "Excel 15.0";
                 default:
@@ -574,6 +572,5 @@ namespace ALF.OFFICE
         }
 
         #endregion
-
     }
 }
