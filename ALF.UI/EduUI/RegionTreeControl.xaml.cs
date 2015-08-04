@@ -26,12 +26,14 @@ namespace ALF.UI.EduUI
         /// </summary>
         /// <param name="dataBaseEngineType">数据库引擎类型</param>
         /// <param name="recordYear">统计年份</param>
+        /// <param name="dbName">数据库名称</param>
         /// <param name="showLogo">是否显示区划树上图标</param>
-        public RegionTreeControl(MSSQL.DataModel.DataBaseEngineType dataBaseEngineType, int recordYear, bool showLogo =false)
+        public RegionTreeControl(MSSQL.DataModel.DataBaseEngineType dataBaseEngineType, int recordYear, string dbName, bool showLogo =false)
         {
             InitializeComponent();
             _recordYear = recordYear;
             _showLogo = showLogo;
+            MSSQL.Tools.DBName = dbName;
             MSSQL.Tools.DataBaseType = dataBaseEngineType;
             try
             {
