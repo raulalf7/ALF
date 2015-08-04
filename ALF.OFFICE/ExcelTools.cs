@@ -537,7 +537,8 @@ namespace ALF.OFFICE
                     return "Excel 12.0";
                     //return "Excel 14.0";
                 case OfficeVersion.Office2013:
-                    return "Excel 15.0";
+                    return "Excel 12.0";
+                    //return "Excel 15.0";
                 default:
                     return "Excel 4.0";
             }
