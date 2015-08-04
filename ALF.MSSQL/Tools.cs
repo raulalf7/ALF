@@ -75,6 +75,23 @@ namespace ALF.MSSQL
             }
         }
 
+
+        /// <summary>
+        /// SQL连接字符串
+        /// </summary>
+        public static string SQLConnString
+        {
+            get
+            {
+                if (DataBaseType == DataBaseEngineType.Remote)
+                {
+                    return string.Format(SqlConnStringFormat, ConnInfo.ConnIp,
+                                         string.Format("User ID=sa;Password={0}", ConnInfo.ConnPw), DBName);
+                }
+                return string.Format(SqlConnStringFormat, ServerName, "Integrated Security=True", DBName);
+            }
+        }
+
         #endregion
 
 
@@ -103,19 +120,6 @@ namespace ALF.MSSQL
                     return ".";
                 }
                 return ConnInfo.ConnIp;
-            }
-        }
-
-        private static string SQLConnString
-        {
-            get
-            {
-                if (DataBaseType == DataBaseEngineType.Remote)
-                {
-                    return string.Format(SqlConnStringFormat, ConnInfo.ConnIp,
-                                         string.Format("User ID=sa;Password={0}", ConnInfo.ConnPw), DBName);
-                }
-                return string.Format(SqlConnStringFormat, ServerName, "Integrated Security=True", DBName);
             }
         }
 

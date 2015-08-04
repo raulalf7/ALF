@@ -23,6 +23,8 @@ namespace ALF.TEST.WPF
         public MainWindow()
         {
             InitializeComponent();
+
+            var t = new TextBox();
         }
     }
 }

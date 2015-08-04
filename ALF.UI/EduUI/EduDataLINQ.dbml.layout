@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="EduDataLINQ">
+  <DataContextMoniker Name="/EduDataLINQDataContext" />
+  <nestedChildShapes>
+    <classShape Id="af1127a0-6ee1-4732-be12-da6f5c233ec3" isExpanded="false" absoluteBounds="1.75, 0.625, 2, 0.45">
+      <DataClassMoniker Name="/EduDataLINQDataContext/return_getRegionTreeNodeList" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7fd83d8f-4973-4a17-8c76-d016b8b87994" absoluteBounds="1.7649999999999997, 1.085, 1.9700000000000002, 3.3037821451822915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
