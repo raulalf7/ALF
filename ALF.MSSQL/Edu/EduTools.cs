@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ALF.MSSQL
+namespace ALF.MSSQL.Edu
 {
     /// <summary>
     /// 教育事业相关数据库工具
@@ -9,6 +9,9 @@ namespace ALF.MSSQL
     public static class EduTools
     {
 
+
+        private static int _linkN;
+        private static EduDataClassDataContext _dataDB;
 
         #region Public Fields
 
@@ -42,6 +45,26 @@ namespace ALF.MSSQL
                         return string.Format("eduData{0}DB", RecordYear);
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static EduDataClassDataContext DataDB
+        {
+            get
+            {
+                GC.Collect();
+                if (_dataDB == null)
+                {
+                    _linkN = 0;
+                    _dataDB = new EduDataClassDataContext(Tools.SQLConnString) { CommandTimeout = 1500 };
+                }
+                Console.Write("[{0}]", _linkN++);
+                return _dataDB;
+            }
+            set { _dataDB = value; }
         }
     }
 }

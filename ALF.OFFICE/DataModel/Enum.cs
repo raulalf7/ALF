@@ -15,12 +15,33 @@ namespace ALF.OFFICE.DataModel
     /// </summary>
     public enum OfficeVersion
     {
+        /// <summary>
+        /// Office95
+        /// </summary>
         Office95,
+        /// <summary>
+        /// Office97
+        /// </summary>
         Office97,
+        /// <summary>
+        /// Office2000
+        /// </summary>
         Office2000,
+        /// <summary>
+        /// Office2003
+        /// </summary>
         Office2003,
+        /// <summary>
+        /// Office2007
+        /// </summary>
         Office2007,
+        /// <summary>
+        /// Office2010
+        /// </summary>
         Office2010,
+        /// <summary>
+        /// Office2013
+        /// </summary>
         Office2013,
     }
 }

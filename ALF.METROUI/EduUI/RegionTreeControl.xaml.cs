@@ -7,10 +7,10 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using ALF.MSSQL.Edu;
 
-namespace ALF.UI.EduUI
+namespace ALF.METROUI.EduUI
 {
     /// <summary>
-    /// RegionTreeControl.xaml 的交互逻辑
+    ///     RegionTreeControl.xaml 的交互逻辑
     /// </summary>
     public partial class RegionTreeControl
     {
@@ -29,13 +29,13 @@ namespace ALF.UI.EduUI
         /// <param name="recordYear">统计年份</param>
         /// <param name="dbName">数据库名称</param>
         /// <param name="showLogo">是否显示区划树上图标</param>
-        public RegionTreeControl(MSSQL.DataModel.DataBaseEngineType dataBaseEngineType, int recordYear, string dbName, bool showLogo =false)
+        public RegionTreeControl(ALF.MSSQL.DataModel.DataBaseEngineType dataBaseEngineType, int recordYear, string dbName, bool showLogo =false)
         {
             InitializeComponent();
             _recordYear = recordYear;
             _showLogo = showLogo;
-            MSSQL.Tools.DBName = dbName;
-            MSSQL.Tools.DataBaseType = dataBaseEngineType;
+            ALF.MSSQL.Tools.DBName = dbName;
+            ALF.MSSQL.Tools.DataBaseType = dataBaseEngineType;
             try
             {
                 AnalysisTypeComboBox.ItemsSource = new List<string>

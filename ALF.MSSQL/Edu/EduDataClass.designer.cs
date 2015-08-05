@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ALF.UI.EduUI
+namespace ALF.MSSQL.Edu
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -23,7 +23,7 @@ namespace ALF.UI.EduUI
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="eduData2015DB")]
-	public partial class EduDataLINQDataContext : System.Data.Linq.DataContext
+	public partial class EduDataClassDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -32,31 +32,31 @@ namespace ALF.UI.EduUI
     partial void OnCreated();
     #endregion
 		
-		public EduDataLINQDataContext() : 
-				base(global::ALF.UI.Properties.Settings.Default.eduData2015DBConnectionString, mappingSource)
+		public EduDataClassDataContext() : 
+				base(global::ALF.MSSQL.Properties.Settings.Default.eduData2015DBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public EduDataLINQDataContext(string connection) : 
+		public EduDataClassDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public EduDataLINQDataContext(System.Data.IDbConnection connection) : 
+		public EduDataClassDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public EduDataLINQDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public EduDataClassDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public EduDataLINQDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public EduDataClassDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
