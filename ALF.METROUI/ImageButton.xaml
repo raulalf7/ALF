@@ -1,14 +1,14 @@
 ﻿<UserControl x:Class="ALF.METROUI.ImageButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Button x:Name="ButtonBase" Click="ButtonBase_OnClick"  HorizontalAlignment="Right" >
-        <StackPanel Orientation="Horizontal" x:Name="Panel">
-            <Rectangle x:Name="Rect" Width="20" Height="20" >
+    <Button x:Name="buttonBase" Click="ButtonBase_OnClick"  HorizontalAlignment="Right" >
+        <StackPanel Orientation="Horizontal" x:Name="panel">
+            <Rectangle x:Name="rect" Width="15" Height="15" >
                 <Rectangle.Fill>
                     <VisualBrush Stretch="Uniform"  Visual="{StaticResource appbar_draw_pen}" />
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock x:Name="text" Visibility="Visible" Margin="5" VerticalAlignment="Center" FontSize="14" FontWeight="Light" Text="" />
+            <TextBlock x:Name="textBlock" Visibility="Visible" Margin="5" VerticalAlignment="Center" FontSize="14" FontWeight="Light" Text="" />
         </StackPanel>
     </Button>
 </UserControl>

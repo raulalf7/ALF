@@ -25,8 +25,8 @@ namespace ALF.UI
         /// </summary>
         public string Title
         {
-            get { return TitleText.Text; }
-            set { TitleText.Text = value; }
+            get { return titleText.Text; }
+            set { titleText.Text = value; }
         }
 
         /// <summary>
@@ -36,17 +36,17 @@ namespace ALF.UI
         {
             get
             {
-                return MainGrid.ColumnDefinitions[0].Width.Value;
+                return mainGrid.ColumnDefinitions[0].Width.Value;
             }
 
             set
             {
                 if ((int)value == -1)
                 {
-                    MainGrid.ColumnDefinitions[0].Width = GridLength.Auto;
+                    mainGrid.ColumnDefinitions[0].Width = GridLength.Auto;
                     return;
                 }
-                MainGrid.ColumnDefinitions[0].Width = new GridLength(value);
+                mainGrid.ColumnDefinitions[0].Width = new GridLength(value);
             }
         }
 
@@ -57,17 +57,17 @@ namespace ALF.UI
         {
             get
             {
-                return MainGrid.ColumnDefinitions[1].Width.Value;
+                return mainGrid.ColumnDefinitions[1].Width.Value;
             }
 
             set
             {
                 if ((int)value == -1)
                 {
-                    MainGrid.ColumnDefinitions[1].Width = GridLength.Auto;
+                    mainGrid.ColumnDefinitions[1].Width = GridLength.Auto;
                     return;
                 }
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(value);
+                mainGrid.ColumnDefinitions[1].Width = new GridLength(value);
             }
         }
 
@@ -76,8 +76,8 @@ namespace ALF.UI
         /// </summary>
         public Brush TitleColor
         {
-            get { return TitleText.Foreground; }
-            set { TitleText.Foreground = value; }
+            get { return titleText.Foreground; }
+            set { titleText.Foreground = value; }
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace ALF.UI
         /// </summary>
         public double TitleSize
         {
-            get { return TitleText.FontSize; }
-            set { TitleText.FontSize = value; }
+            get { return titleText.FontSize; }
+            set { titleText.FontSize = value; }
         }
 
         #endregion
@@ -125,7 +125,7 @@ namespace ALF.UI
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
 
-            ValueText.SetBinding(TextBox.TextProperty, myBinding);
+            valueText.SetBinding(TextBox.TextProperty, myBinding);
 
         }
 
@@ -146,16 +146,16 @@ namespace ALF.UI
                 _isLong = value;
                 if (value)
                 {
-                    MainGrid.Height = 200;
-                    ValueText.AcceptsReturn = true;
-                    ValueText.VerticalContentAlignment = VerticalAlignment.Top;
-                    ValueText.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
-                    ValueText.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
+                    mainGrid.Height = 200;
+                    valueText.AcceptsReturn = true;
+                    valueText.VerticalContentAlignment = VerticalAlignment.Top;
+                    valueText.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+                    valueText.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
                     return;
                 }
-                MainGrid.Height = 50;
-                ValueText.AcceptsReturn = false;
-                ValueText.VerticalContentAlignment = VerticalAlignment.Stretch;
+                mainGrid.Height = 50;
+                valueText.AcceptsReturn = false;
+                valueText.VerticalContentAlignment = VerticalAlignment.Stretch;
             }
         }
 
@@ -166,11 +166,11 @@ namespace ALF.UI
         {
             get
             {
-                return ValueText.Text;
+                return valueText.Text;
             }
             set
             {
-                ValueText.Text = value;
+                valueText.Text = value;
             }
         }
         
@@ -179,8 +179,8 @@ namespace ALF.UI
         /// </summary>
         public Brush ValueBackground
         {
-            get { return ValueText.Background; }
-            set { ValueText.Background = value; }
+            get { return valueText.Background; }
+            set { valueText.Background = value; }
         }
 
         
@@ -189,8 +189,8 @@ namespace ALF.UI
         /// </summary>
         public bool IsReadonly
         {
-            get { return ValueText.IsReadOnly; }
-            set { ValueText.IsReadOnly = value; }
+            get { return valueText.IsReadOnly; }
+            set { valueText.IsReadOnly = value; }
         }
 
         /// <summary>
@@ -202,12 +202,12 @@ namespace ALF.UI
             {
                 if (value)
                 {
-                    ValueText.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    valueText.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 }
                 else
                 {
-                    ValueText.BorderThickness = new Thickness(1);
-                    ValueText.BorderBrush = new SolidColorBrush(Colors.Black);
+                    valueText.BorderThickness = new Thickness(1);
+                    valueText.BorderBrush = new SolidColorBrush(Colors.Black);
                 }
             }
         }

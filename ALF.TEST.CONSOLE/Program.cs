@@ -6,12 +6,11 @@ namespace ALF.TEST.CONSOLE
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var readString = "";
             while (readString!="exit")
             {
-
                 Console.WriteLine("input office version: 2007/2010/2013");
                 OfficeVersion o = OfficeVersion.Office2013;
                 switch (Console.ReadLine())
@@ -39,12 +38,7 @@ namespace ALF.TEST.CONSOLE
                 }
 
 
-
-
                 OFFICE.Tools.InitialSqSetting(d, o);
-
-
-
 
                 Console.WriteLine("start output");
                 Console.WriteLine(OFFICE.ExcelTools.ExportSqlToExcel("select top 10 * from eduCodeDB..schoolBusinessRelation",

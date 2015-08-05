@@ -5,12 +5,12 @@
              xmlns:edu="clr-namespace:ALF.MSSQL.Edu;assembly=ALF.MSSQL">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <titleControl:Combo  x:Name="AnalysisTypeComboBox" Grid.Row="0" Title="分析视角" TitleWidth="-1" />
+        <titleControl:Combo  x:Name="analysisTypeComboBox" Grid.Row="0" Title="分析视角" TitleWidth="-1" />
         
-        <TreeView x:Name="TypeTreeView" Grid.Row="1"  BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Background="Transparent" SelectedItemChanged="typeTreeView_SelectedItemChanged">
+        <TreeView x:Name="typeTreeView" Grid.Row="1"  BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Background="Transparent" SelectedItemChanged="typeTreeView_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <DataTemplate DataType="edu:return_getRegionTreeNodeList">
                     <StackPanel  Orientation="Horizontal">

@@ -19,47 +19,47 @@ namespace ALF.METROUI
         
         public Orientation ImageOrientation
         {
-            set { Panel.Orientation = value; }
-            get { return Panel.Orientation; }
+            set { panel.Orientation = value; }
+            get { return panel.Orientation; }
         }
 
         public Visibility ImageTextVisibility
         {
 
-            set { text.Visibility = value; }
-            get { return text.Visibility; }
+            set { textBlock.Visibility = value; }
+            get { return textBlock.Visibility; }
         }
 
         public double ImageSize
         {
             set
             {
-                Rect.Width = value;
-                Rect.Height = value;
+                rect.Width = value;
+                rect.Height = value;
             }
-            get { return Rect.Width; }
+            get { return rect.Width; }
         }
 
         public double ButtonSize
         {
             set
             {
-                ButtonBase.Width = value;
-                ButtonBase.Height = value;
+                buttonBase.Width = value;
+                buttonBase.Height = value;
             }
-            get { return Rect.Width; }
+            get { return rect.Width; }
         }
 
         public double ButtonWidth
         {
             get
             {
-                return ButtonBase.Width;
+                return buttonBase.Width;
             }
 
             set
             {
-                ButtonBase.Width = value;
+                buttonBase.Width = value;
             }
         }
 
@@ -68,11 +68,11 @@ namespace ALF.METROUI
             
             set
             {
-                if (Rect == null)
+                if (rect == null)
                 {
                     return;
                 }
-                var visual = Rect.Fill as VisualBrush;
+                var visual = rect.Fill as VisualBrush;
                 if (visual == null)
                 {
                     return;
@@ -85,17 +85,17 @@ namespace ALF.METROUI
         {
             set
             {
-                if (Rect == null)
+                if (rect == null)
                 {
                     return;
                 }
-                var visual = Rect.Fill as VisualBrush;
+                var visual = rect.Fill as VisualBrush;
                 if (visual == null)
                 {
                     return;
                 }
                 visual.Visual = Application.Current.Resources[value] as Visual;
-                Rect.Fill = visual;
+                rect.Fill = visual;
             }
         }
 
@@ -103,18 +103,18 @@ namespace ALF.METROUI
         {
             get
             {
-                return text.Text;
+                return textBlock.Text;
             }
             set
             {
-                text.Text = value;
+                textBlock.Text = value;
             }
         }
 
         public string ButtonStyle
         {
-            set { ButtonBase.Style = Application.Current.Resources[value] as Style; }
-            get { return ButtonBase.Style.ToString(); }
+            set { buttonBase.Style = Application.Current.Resources[value] as Style; }
+            get { return buttonBase.Style.ToString(); }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

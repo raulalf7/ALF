@@ -9,8 +9,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using ALF.MSSQL.Edu;
 using ALF.UI;
-using ALF.UI.EduUI;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -44,7 +44,7 @@ namespace ALF.UI.EduUI {
         
         #line 11 "..\..\..\EduUI\RegionTreeControl.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal ALF.UI.TitleCombo AnalysisTypeComboBox;
+        internal ALF.UI.TitleCombo analysisTypeComboBox;
         
         #line default
         #line hidden
@@ -52,7 +52,7 @@ namespace ALF.UI.EduUI {
         
         #line 13 "..\..\..\EduUI\RegionTreeControl.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TreeView TypeTreeView;
+        internal System.Windows.Controls.TreeView typeTreeView;
         
         #line default
         #line hidden
@@ -95,13 +95,13 @@ namespace ALF.UI.EduUI {
             switch (connectionId)
             {
             case 1:
-            this.AnalysisTypeComboBox = ((ALF.UI.TitleCombo)(target));
+            this.analysisTypeComboBox = ((ALF.UI.TitleCombo)(target));
             return;
             case 2:
-            this.TypeTreeView = ((System.Windows.Controls.TreeView)(target));
+            this.typeTreeView = ((System.Windows.Controls.TreeView)(target));
             
             #line 13 "..\..\..\EduUI\RegionTreeControl.xaml"
-            this.TypeTreeView.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(this.typeTreeView_SelectedItemChanged);
+            this.typeTreeView.SelectedItemChanged += new System.Windows.RoutedPropertyChangedEventHandler<object>(this.typeTreeView_SelectedItemChanged);
             
             #line default
             #line hidden

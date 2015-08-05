@@ -16,27 +16,13 @@ namespace ALF.METROUI.TitleControl
             InitializeComponent();
         }
 
+
+        #region TitleArea
+
         public string Title
         {
             get { return titleText.Text; }
             set { titleText.Text = value; }
-        }
-
-        public string Value
-        {
-            get
-            {
-                return valueText.Text;
-            }
-            set
-            {
-                valueText.Text = value;
-            }
-        }
-
-        public string Watermark
-        {
-            set { TextBoxHelper.SetWatermark(this,value); }
         }
 
         public double TitleWidth
@@ -48,7 +34,7 @@ namespace ALF.METROUI.TitleControl
 
             set
             {
-                if (value == -1)
+                if ((int)value == -1)
                 {
                     mainGrid.ColumnDefinitions[0].Width = GridLength.Auto;
                     return;
@@ -57,41 +43,22 @@ namespace ALF.METROUI.TitleControl
             }
         }
 
-        public double ValueWidth
-        {
-            get
-            {
-                return mainGrid.ColumnDefinitions[1].Width.Value;
-            }
-
-            set
-            {
-                if (value == -1)
-                {
-                    mainGrid.ColumnDefinitions[1].Width = GridLength.Auto;
-                    return;
-                }
-                mainGrid.ColumnDefinitions[1].Width = new GridLength(value);
-            }
-        }
-
         public Brush TitleColor
         {
             get { return titleText.Foreground; }
             set { titleText.Foreground = value; }
         }
-        
+
         public double TitleSize
         {
             get { return titleText.FontSize; }
             set { titleText.FontSize = value; }
         }
 
-        public Brush ValueBackground
-        {
-            get { return valueText.Background; }
-            set { valueText.Background = value; }
-        }
+        #endregion
+
+
+        #region Binding
 
         private string _bindingString;
 
@@ -121,5 +88,54 @@ namespace ALF.METROUI.TitleControl
             valueText.SetBinding(TextBox.TextProperty, myBinding);
 
         }
+
+        #endregion
+
+
+        #region Value Area
+
+        public string Value
+        {
+            get
+            {
+                return valueText.Text;
+            }
+            set
+            {
+                valueText.Text = value;
+            }
+        }
+
+        public double ValueWidth
+        {
+            get
+            {
+                return mainGrid.ColumnDefinitions[1].Width.Value;
+            }
+
+            set
+            {
+                if ((int)value == -1)
+                {
+                    mainGrid.ColumnDefinitions[1].Width = GridLength.Auto;
+                    return;
+                }
+                mainGrid.ColumnDefinitions[1].Width = new GridLength(value);
+            }
+        }
+
+        public string Watermark
+        {
+            set { TextBoxHelper.SetWatermark(this, value); }
+        }
+
+        public Brush ValueBackground
+        {
+            get { return valueText.Background; }
+            set { valueText.Background = value; }
+        }
+
+        #endregion
+
     }
 }

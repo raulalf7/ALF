@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ALF.OFFICE</name>
+    </assembly>
+    <members>
+        <member name="T:ALF.OFFICE.DataModel.OfficeVersion">
+            <summary>
+            Office版本枚举列表
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office95">
+            <summary>
+            Office95
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office97">
+            <summary>
+            Office97
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office2000">
+            <summary>
+            Office2000
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office2003">
+            <summary>
+            Office2003
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office2007">
+            <summary>
+            Office2007
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office2010">
+            <summary>
+            Office2010
+            </summary>
+        </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office2013">
+            <summary>
+            Office2013
+            </summary>
+        </member>
+        <member name="T:ALF.OFFICE.DataModel.ExcelInfo">
+            <summary>
+            Excel信息
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.ExcelID">
+            <summary>
+            ExcelID
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.FilePath">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.FileName">
+            <summary>
+            文件名称
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.ExcelName">
+            <summary>
+            Excel名称
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.RowStart">
+            <summary>
+            起始行
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.RowsCount">
+            <summary>
+            行数
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.ColumnStart">
+            <summary>
+            起始列
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.ColumnCount">
+            <summary>
+            列数
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.HasTitle">
+            <summary>
+            是否包含列名
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.IsInsert">
+            <summary>
+            是否插入
+            </summary>
+        </member>
+        <member name="P:ALF.OFFICE.DataModel.ExcelInfo.SheetName">
+            <summary>
+            页签名称
+            </summary>
+        </member>
+        <member name="T:ALF.OFFICE.ExcelTools">
+            <summary>
+            Excel处理工具
+            </summary>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.WriteDataToExcel(System.Collections.Generic.List{System.Data.DataTable},System.Collections.Generic.List{ALF.OFFICE.DataModel.ExcelInfo},System.Boolean)">
+            <summary>
+            将DataTable逐个单元格写入Excel中
+            </summary>
+            <param name="dataTables">数据表列表</param>
+            <param name="excelInfos">Excel信息列表</param>
+            <param name="isSingleFile">是否导入到单个Excel文件</param>
+            <returns>操作结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.ExportSqlToExcel(System.String,System.String,System.String)">
+            <summary>
+            将Sql查询结果插入到指定Excel文件中
+            </summary>
+            <param name="sql">sql查询语句(注：SQL中需要包含数据库名)</param>
+            <param name="filePath">excel文件所在路径</param>
+            <param name="sheetName">所要插入页签名称</param>
+            <returns>操作结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.ExportLargeSqlToExcel(System.String,ALF.OFFICE.DataModel.ExcelInfo,ALF.MSSQL.DataModel.DataBaseEngineType)">
+            <summary>
+            将超过255列Sql查询结果插入到指定Excel文件中
+            </summary>
+            <param name="sql">sql查询语句(注：SQL中需要包含数据库名)</param>
+            <param name="excelInfo">导出EXCEL信息</param>
+            <param name="dataBaseEngineType">数据库引擎类型</param>
+            <returns>操作结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.CopyExcelData(ALF.OFFICE.DataModel.ExcelInfo,ALF.OFFICE.DataModel.ExcelInfo,System.Int32)">
+            <summary>
+            EXCEL间数据拷贝
+            </summary>
+            <param name="sourceExcelInfo">源数据EXCEL文件信息</param>
+            <param name="destinationExcelInfo">拷贝目标EXCEL文件信息</param>
+            <param name="copyTime">拷贝次数</param>
+            <returns>拷贝结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.SetCellBorder(ALF.OFFICE.DataModel.ExcelInfo)">
+            <summary>
+            设置单元格边框
+            </summary>
+            <param name="excelInfo">需要设置单元格边框的excel信息</param>
+            <returns>操作结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.HideSheets(ALF.OFFICE.DataModel.ExcelInfo,System.Collections.Generic.List{System.String})">
+            <summary>
+            隐藏页签
+            </summary>
+            <param name="excelInfo">EXCEL信息</param>
+            <param name="sheetNames">待隐藏页签列表</param>
+            <returns>操作结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.ExcelTools.GetSheetName(ALF.OFFICE.DataModel.ExcelInfo)">
+            <summary>
+            获取Excel中页签名称列表
+            </summary>
+            <param name="excelInfo">Excel信息</param>
+            <returns>页签名称列表</returns>
+        </member>
+        <member name="T:ALF.OFFICE.Tools">
+            <summary>
+            Office工具
+            </summary>
+        </member>
+        <member name="M:ALF.OFFICE.Tools.InitialSqSetting(ALF.MSSQL.DataModel.DataBaseEngineType,ALF.OFFICE.DataModel.OfficeVersion)">
+            <summary>
+            初始化SQL里面的OLEDB设置
+            </summary>
+            <param name="dataBaseEngineType">所用数据库引擎</param>
+            <param name="officeVersion">所用OFFICE版本</param>
+            <returns>初始化结果</returns>
+        </member>
+        <member name="P:ALF.OFFICE.Tools.OfficeVersion">
+            <summary>
+            当前使用OFFICE版本
+            </summary>
+        </member>
+    </members>
+</doc>

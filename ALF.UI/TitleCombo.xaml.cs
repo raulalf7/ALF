@@ -19,7 +19,7 @@ namespace ALF.UI
         public TitleCombo()
         {
             InitializeComponent();
-            ValueCombo.ItemsSource = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            valueCombo.ItemsSource = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         }
 
         #region TitleArea
@@ -29,8 +29,8 @@ namespace ALF.UI
         /// </summary>
         public string Title
         {
-            get { return TitleText.Text; }
-            set { TitleText.Text = value; }
+            get { return titleText.Text; }
+            set { titleText.Text = value; }
         }
 
         /// <summary>
@@ -40,17 +40,17 @@ namespace ALF.UI
         {
             get
             {
-                return MainGrid.ColumnDefinitions[0].Width.Value;
+                return mainGrid.ColumnDefinitions[0].Width.Value;
             }
 
             set
             {
                 if ((int)value == -1)
                 {
-                    MainGrid.ColumnDefinitions[0].Width = GridLength.Auto;
+                    mainGrid.ColumnDefinitions[0].Width = GridLength.Auto;
                     return;
                 }
-                MainGrid.ColumnDefinitions[0].Width = new GridLength(value);
+                mainGrid.ColumnDefinitions[0].Width = new GridLength(value);
             }
         }
 
@@ -61,17 +61,17 @@ namespace ALF.UI
         {
             get
             {
-                return MainGrid.ColumnDefinitions[1].Width.Value;
+                return mainGrid.ColumnDefinitions[1].Width.Value;
             }
 
             set
             {
                 if ((int)value == -1)
                 {
-                    MainGrid.ColumnDefinitions[1].Width = GridLength.Auto;
+                    mainGrid.ColumnDefinitions[1].Width = GridLength.Auto;
                     return;
                 }
-                MainGrid.ColumnDefinitions[1].Width = new GridLength(value);
+                mainGrid.ColumnDefinitions[1].Width = new GridLength(value);
             }
         }
 
@@ -80,8 +80,8 @@ namespace ALF.UI
         /// </summary>
         public Brush TitleColor
         {
-            get { return TitleText.Foreground; }
-            set { TitleText.Foreground = value; }
+            get { return titleText.Foreground; }
+            set { titleText.Foreground = value; }
         }
 
         /// <summary>
@@ -89,8 +89,8 @@ namespace ALF.UI
         /// </summary>
         public double TitleSize
         {
-            get { return TitleText.FontSize; }
-            set { TitleText.FontSize = value; }
+            get { return titleText.FontSize; }
+            set { titleText.FontSize = value; }
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace ALF.UI
         /// </summary>
         public bool IsEnable
         {
-            get { return ValueCombo.IsEnabled; }
-            set { ValueCombo.IsEnabled = value; }
+            get { return valueCombo.IsEnabled; }
+            set { valueCombo.IsEnabled = value; }
         }
 
         #endregion
@@ -137,7 +137,7 @@ namespace ALF.UI
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
 
-            ValueCombo.SetBinding(Selector.SelectedItemProperty, myBinding);
+            valueCombo.SetBinding(Selector.SelectedItemProperty, myBinding);
         }
 
         #endregion
@@ -150,11 +150,11 @@ namespace ALF.UI
         {
             get
             {
-                return ValueCombo.SelectedItem;
+                return valueCombo.SelectedItem;
             }
             set
             {
-                ValueCombo.SelectedItem = value;
+                valueCombo.SelectedItem = value;
             }
         }
 
@@ -165,11 +165,11 @@ namespace ALF.UI
         {
             get
             {
-                return ValueCombo.SelectedIndex;
+                return valueCombo.SelectedIndex;
             }
             set
             {
-                ValueCombo.SelectedIndex = value;
+                valueCombo.SelectedIndex = value;
             }
         }
 
@@ -180,8 +180,8 @@ namespace ALF.UI
         {
             set
             {
-                ValueCombo.ItemsSource = null;
-                ValueCombo.ItemsSource = value;
+                valueCombo.ItemsSource = null;
+                valueCombo.ItemsSource = value;
             }
         }
 
@@ -204,11 +204,11 @@ namespace ALF.UI
         {
             set
             {
-                ValueCombo.DisplayMemberPath = value;
+                valueCombo.DisplayMemberPath = value;
             }
             get
             {
-                return ValueCombo.DisplayMemberPath;
+                return valueCombo.DisplayMemberPath;
             }
         }
 

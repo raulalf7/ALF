@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ALF.MSSQL</name>
+    </assembly>
+    <members>
+        <member name="T:ALF.MSSQL.DataModel.DataBaseEngineType">
+            <summary>
+            数据库引擎版本枚举列表
+            </summary>
+        </member>
+        <member name="F:ALF.MSSQL.DataModel.DataBaseEngineType.MsSqlServer">
+            <summary>
+            SQL SERVER正式版
+            </summary>
+        </member>
+        <member name="F:ALF.MSSQL.DataModel.DataBaseEngineType.SqlExpress">
+            <summary>
+            SQL EXPRESS版
+            </summary>
+        </member>
+        <member name="F:ALF.MSSQL.DataModel.DataBaseEngineType.Remote">
+            <summary>
+            远程服务器
+            </summary>
+        </member>
+        <member name="T:ALF.MSSQL.Edu.EduTools">
+            <summary>
+            教育事业相关数据库工具
+            </summary>
+        </member>
+        <member name="F:ALF.MSSQL.Edu.EduTools.RecordYear">
+            <summary>
+            备案年份
+            </summary>
+        </member>
+        <member name="F:ALF.MSSQL.Edu.EduTools.UseEduDB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Edu.EduTools.EduDBName">
+            <summary>
+            教育事业统计数据库名称
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Edu.EduTools.DataDB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ALF.MSSQL.Tools">
+            <summary>
+            MSSQL 处理工具
+            </summary>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.IsDBOpen">
+            <summary>
+            判断数据库是否开启
+            </summary>
+            <returns>是否开启</returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.ExecSql(System.String,System.Int32)">
+            <summary>
+            执行SQL修改语句
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="timeout">超时时间</param>
+            <returns>执行结果</returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.GetSqlDataView(System.String,System.String@,System.Int32)">
+            <summary>
+            执行SQL查询语句，返回DataView
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="result">执行结果</param>
+            <param name="timeout">超时时间</param>
+            <returns>查询结果DataView</returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.GetSqlListString(System.String,System.String@,System.Int32)">
+            <summary>
+            执行SQL查询语句，返回字符串列表
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="result">执行结果</param>
+            <param name="timeout">超时时间</param>
+            <returns>查询结果字符串列表</returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.ExportCSV(System.String,System.String)">
+            <summary>
+            执行SQL查询语句，导出CSV
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="filePath">导出文件路径</param>
+            <returns>执行结果</returns>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.DataBaseType">
+            <summary>
+            当前使用数据库引擎
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.ConnInfo">
+            <summary>
+            当前数据库连接信息
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.DBName">
+            <summary>
+            初始数据库名称
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.ServiceName">
+            <summary>
+            数据库引擎服务名称
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.SQLConnString">
+            <summary>
+            SQL连接字符串
+            </summary>
+        </member>
+    </members>
+</doc>

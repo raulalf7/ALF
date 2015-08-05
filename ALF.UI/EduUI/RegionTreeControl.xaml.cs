@@ -38,14 +38,14 @@ namespace ALF.UI.EduUI
             MSSQL.Tools.DataBaseType = dataBaseEngineType;
             try
             {
-                AnalysisTypeComboBox.ItemsSource = new List<string>
+                analysisTypeComboBox.ItemsSource = new List<string>
                     {
                         "统计",
                         "采集",
                         "区划"
                     };
                 Load(1, false);
-                AnalysisTypeComboBox.SelectedIndex = 0;
+                analysisTypeComboBox.SelectedIndex = 0;
             }
             catch (Exception exception)
             {
@@ -62,15 +62,15 @@ namespace ALF.UI.EduUI
         {
             if (isLock)
             {
-                AnalysisTypeComboBox.SelectedItem = "采集";
-                AnalysisTypeComboBox.IsEnabled = false;
+                analysisTypeComboBox.SelectedItem = "采集";
+                analysisTypeComboBox.IsEnabled = false;
             }
             else
             {
-                AnalysisTypeComboBox.IsEnabled = true;
+                analysisTypeComboBox.IsEnabled = true;
             }
             AppType = type;
-            TypeTreeView.Items.Clear();
+            typeTreeView.Items.Clear();
             var list = EduTools.DataDB.code_getRegionTreeNodeList(AppType, "", "", "", "", 0, _recordYear).ToList();
             foreach (var current in list)
             {
@@ -78,9 +78,9 @@ namespace ALF.UI.EduUI
                 {
                     Header = current,
                     Tag = current,
-                    HeaderTemplate = TypeTreeView.ItemTemplate
+                    HeaderTemplate = typeTreeView.ItemTemplate
                 };
-                TypeTreeView.Items.Add(newItem);
+                typeTreeView.Items.Add(newItem);
             }
         }
 
@@ -112,7 +112,7 @@ namespace ALF.UI.EduUI
         {
             get
             {
-                var treeViewItem = TypeTreeView.SelectedItem as TreeViewItem;
+                var treeViewItem = typeTreeView.SelectedItem as TreeViewItem;
                 return_getRegionTreeNodeList result;
                 if (treeViewItem == null)
                 {
@@ -163,7 +163,7 @@ namespace ALF.UI.EduUI
         private void typeTreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             OnSelectChange();
-            var treeViewItem = TypeTreeView.SelectedItem as TreeViewItem;
+            var treeViewItem = typeTreeView.SelectedItem as TreeViewItem;
             if (treeViewItem == null) return;
             if (treeViewItem.Items.Count != 0) return;
             var returnGetRegionTreeNodeList = treeViewItem.Tag as return_getRegionTreeNodeList;
@@ -182,7 +182,7 @@ namespace ALF.UI.EduUI
                 {
                     Header = current,
                     Tag = current,
-                    HeaderTemplate = TypeTreeView.ItemTemplate
+                    HeaderTemplate = typeTreeView.ItemTemplate
                 };
                 treeViewItem.Items.Add(newItem);
             }
