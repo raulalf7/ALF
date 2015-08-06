@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
 using ALF.MSSQL.DataModel;
 using ALF.OFFICE.DataModel;
 
@@ -8,8 +10,19 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
+            Console.WriteLine(OFFICE.Tools.InitialSqSetting(DataBaseEngineType.MsSqlServer,
+                    OfficeVersion.Office2013));
+            Console.ReadLine();
+        }
+
+        private static void Set()
+        {
+        }
+
+        private static void ExcelVersion()
+        {
             var readString = "";
-            while (readString!="exit")
+            while (readString != "exit")
             {
                 Console.WriteLine("input office version: 2007/2010/2013");
                 OfficeVersion o = OfficeVersion.Office2013;
@@ -48,7 +61,29 @@ namespace ALF.TEST.CONSOLE
 
 
 
-                readString=Console.ReadLine();
+                readString = Console.ReadLine();
+            }
+        }
+
+        private static void DeleteTest()
+        {
+            var readString = "";
+            while (readString != "exit")
+            {
+                Console.WriteLine("input directory");
+                string dir = Console.ReadLine();
+                if (dir != null && Directory.Exists(dir))
+                {
+                    Directory.Delete(dir,true);
+                    Thread.Sleep(500);
+                }
+                if (dir != null)
+                {
+                    Directory.CreateDirectory(dir);
+                    Thread.Sleep(500);
+                }
+                File.Copy(@"d:\test1\1.mp4", @"d:\test\1.mp4");
+                readString = Console.ReadLine();
             }
         }
     }
