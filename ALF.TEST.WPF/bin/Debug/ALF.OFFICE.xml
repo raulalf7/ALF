@@ -174,11 +174,19 @@
         </member>
         <member name="M:ALF.OFFICE.Tools.InitialSqSetting(ALF.MSSQL.DataModel.DataBaseEngineType,ALF.OFFICE.DataModel.OfficeVersion)">
             <summary>
-            初始化SQL里面的OLEDB设置
+            初始化SQL里面的OLEDB设置(OFFICE 2007及以上)
             </summary>
             <param name="dataBaseEngineType">所用数据库引擎</param>
             <param name="officeVersion">所用OFFICE版本</param>
             <returns>初始化结果</returns>
+        </member>
+        <member name="M:ALF.OFFICE.Tools.ResetSqlSetting(ALF.MSSQL.DataModel.DataBaseEngineType,ALF.OFFICE.DataModel.OfficeVersion)">
+            <summary>
+            重置SQL里面的OLEDB设置(OFFICE 2007及以上)
+            </summary>
+            <param name="dataBaseEngineType">所用数据库引擎</param>
+            <param name="officeVersion">所用OFFICE版本</param>
+            <returns>重置结果</returns>
         </member>
         <member name="P:ALF.OFFICE.Tools.OfficeVersion">
             <summary>

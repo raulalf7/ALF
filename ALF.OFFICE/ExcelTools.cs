@@ -37,8 +37,9 @@ namespace ALF.OFFICE
         /// <param name="dataTables">数据表列表</param>
         /// <param name="excelInfos">Excel信息列表</param>
         /// <param name="isSingleFile">是否导入到单个Excel文件</param>
+        /// <param name="dataTableInfos">SQL查询数据区域</param>
         /// <returns>操作结果</returns>
-        public static string WriteDataToExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos, bool isSingleFile = false)
+        public static string WriteDataToExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos, bool isSingleFile = false, List<ExcelInfo> dataTableInfos = null)
         {
 
             if (dataTables.Count != excelInfos.Count)
@@ -48,7 +49,7 @@ namespace ALF.OFFICE
 
             return isSingleFile
                        ? SaveDataToSingleExcel(dataTables, excelInfos)
-                       : SaveDataToMultiExcel(dataTables, excelInfos);
+                       : SaveDataToMultiExcel(dataTables, excelInfos, dataTableInfos);
         }
 
         /// <summary>
@@ -373,7 +374,7 @@ namespace ALF.OFFICE
 
         #endregion
 
-        private static string SaveDataToSingleExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos)
+        private static string SaveDataToSingleExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos, ExcelInfo dataTableInfo = null)
         {
             try
             {
@@ -385,7 +386,7 @@ namespace ALF.OFFICE
                     {
                         return "没有指定页签";
                     }
-                    SaveDataToExcelImpl(dataTables[n], excelInfos[n]);
+                    SaveDataToExcelImpl(dataTables[n], excelInfos[n], dataTableInfo);
                 }
                 SaveAs(excelInfos[0].FilePath);
             }
@@ -399,11 +400,16 @@ namespace ALF.OFFICE
 
         }
 
-        private static string SaveDataToMultiExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos)
+        private static string SaveDataToMultiExcel(List<DataTable> dataTables, List<ExcelInfo> excelInfos, List<ExcelInfo> dataTableInfos )
         {
+            ExcelInfo dataTableInfo = null;
             for (int n = 0; n < dataTables.Count; n++)
             {
-                var tmp = WriteDataToExcel(new List<DataTable>{dataTables[n]},new List<ExcelInfo>{excelInfos[n]});
+                if (dataTableInfos != null)
+                {
+                    dataTableInfo = dataTableInfos[n];
+                }
+                var tmp = WriteDataToExcel(new List<DataTable>{dataTables[n]},new List<ExcelInfo>{excelInfos[n]}, false, new List<ExcelInfo>() {dataTableInfo});
                 if (tmp != "")
                 {
                     return tmp;
@@ -412,7 +418,7 @@ namespace ALF.OFFICE
             return "";
         }
 
-        private static void SaveDataToExcelImpl(DataTable dataTable, ExcelInfo excelInfo)
+        private static void SaveDataToExcelImpl(DataTable dataTable, ExcelInfo excelInfo, ExcelInfo dataTableInfo=null)
         {
             var rowCountUsing = dataTable.Rows.Count;
             if (dataTable.Rows.Count > excelInfo.RowsCount && excelInfo.RowsCount != 0)
@@ -446,20 +452,29 @@ namespace ALF.OFFICE
             Console.WriteLine("Insert data into excel file");
             if (dataTable.Rows.Count > 0)
             {
-                for (var i = 0; i < rowCountUsing; i++)
+                var i = 0;
+                var j = 0;
+                if (dataTableInfo != null)
+                {
+                    i = dataTableInfo.RowStart;
+                    j = dataTableInfo.ColumnStart;
+                }
+
+                while (i<rowCountUsing)
                 {
                     _tmpNumber = 0;
-                    for (var j = 0; j < colCountUsing; j++)
+                    while (j < colCountUsing)
                     {
-                        SetCellValue(i + excelInfo.RowStart, j + excelInfo.ColumnStart, dataTable.Rows[i][j].ToString(),
-                                     i);
-
+                        SetCellValue(i + excelInfo.RowStart, j + excelInfo.ColumnStart, dataTable.Rows[i][j].ToString(),i);
                         Console.WriteLine("row:{0},col:{1}", i + 1, j + 1);
+                        j++;
                     }
+
                     if (rowCountUsing % 20 == 0)
                     {
                         Console.WriteLine("【{0}】/【{1}】 rows of data inserted", i, rowCountUsing);
                     }
+                    i++;
                 }
             }
             Console.WriteLine("Insert finished\n");
