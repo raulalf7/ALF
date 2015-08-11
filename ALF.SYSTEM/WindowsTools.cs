@@ -20,6 +20,41 @@ namespace ALF.SYSTEM
     public static class WindowsTools
     {
         /// <summary>
+        /// 判断是否安装软件
+        /// </summary>
+        /// <param name="softName">软件名称</param>
+        /// <returns>是否安装</returns>
+        public static bool IsSoftInstalled(string softName)
+        {
+            var uninstallNode = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall");
+            if (uninstallNode == null)
+            {
+                return false;
+            }
+            foreach (var subKeyName in uninstallNode.GetSubKeyNames())
+            {
+
+                var subKey = uninstallNode.OpenSubKey(subKeyName);
+                if (subKey == null)
+                {
+                    continue;
+                }
+                var displayName = subKey.GetValue("DisplayName");
+
+                if (displayName == null)
+                {
+                    continue;
+                }
+                if (displayName.ToString()==softName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        /// <summary>
         /// 判断服务是否启动
         /// </summary>
         /// <param name="serviceName">服务名称</param>

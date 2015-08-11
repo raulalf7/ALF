@@ -10,13 +10,25 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            Console.WriteLine(OFFICE.Tools.InitialSqSetting(DataBaseEngineType.MsSqlServer,
-                    OfficeVersion.Office2013));
-            Console.ReadLine();
+            var readString = "";
+            while (readString != "exit")
+            {
+                CheckSoftware();
+                Console.WriteLine("Quit print exit");
+                readString = Console.ReadLine();
+            }
         }
 
-        private static void Set()
+        private static void CheckSoftware()
         {
+            Console.WriteLine("Input soft name");
+            string softName = Console.ReadLine();
+            if (ALF.SYSTEM.WindowsTools.IsSoftInstalled(softName))
+            {
+                Console.WriteLine("Installed");
+                return;
+            }
+            Console.WriteLine("Not Installed");
         }
 
         private static void ExcelVersion()

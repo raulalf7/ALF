@@ -197,6 +197,13 @@
             Windows工具
             </summary>
         </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.IsSoftInstalled(System.String)">
+            <summary>
+            判断是否安装软件
+            </summary>
+            <param name="softName">软件名称</param>
+            <returns>是否安装</returns>
+        </member>
         <member name="M:ALF.SYSTEM.WindowsTools.IsServeiceStart(System.String)">
             <summary>
             判断服务是否启动
