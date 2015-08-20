@@ -5,7 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ALF.MSSQL.Edu;
+using ALF.EDU;
+using ALF.EDU.DataModel;
 
 namespace ALF.UI.EduUI
 {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using ALF.EDU.DataModel;
+using ALF.MSSQL;
 
-namespace ALF.MSSQL.Edu
+namespace ALF.EDU
 {
     /// <summary>
     /// 教育事业相关数据库工具

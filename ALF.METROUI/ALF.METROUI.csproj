@@ -62,9 +62,6 @@
       <DependentUpon>ImageButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EduUI\RegionTreeControl.xaml.cs">
-      <DependentUpon>RegionTreeControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TitleControl\Combo.xaml.cs">
       <DependentUpon>Combo.xaml</DependentUpon>
     </Compile>
@@ -80,6 +77,9 @@
     <Compile Include="TitleControl\Text.xaml.cs">
       <DependentUpon>Text.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EduUI\RegionTreeControl.xaml.cs">
+      <DependentUpon>RegionTreeControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="App.xaml">
@@ -87,10 +87,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ImageButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EduUI\RegionTreeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -118,8 +114,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="EduUI\RegionTreeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ALF.EDU\ALF.EDU.csproj">
+      <Project>{990CD26C-8A9A-4323-8F23-77D9563D03CB}</Project>
+      <Name>ALF.EDU</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ALF.MSSQL\ALF.MSSQL.csproj">
       <Project>{92287b21-9f75-4614-accc-b8f4bf13d0b8}</Project>
       <Name>ALF.MSSQL</Name>
