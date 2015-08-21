@@ -3,19 +3,19 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace ALF.UI
+namespace ALF.UI.TitleControl
 {
     /// <summary>
     /// TitleText.xaml 的交互逻辑
     /// </summary>
-    public partial class TitleTextBox
+    public partial class Text
     {
         #region Title Setting
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TitleTextBox()
+        public Text()
         {
             InitializeComponent();
         }

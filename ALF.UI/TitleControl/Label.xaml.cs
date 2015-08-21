@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace ALF.UI
+namespace ALF.UI.TitleControl
 {
     /// <summary>
-    /// TitleCombo.xaml 的交互逻辑
+    /// TitleLabel.xaml 的交互逻辑
     /// </summary>
-    public partial class TitleCombo
+    public partial class Label
     {
+        #region Title Setting
+
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TitleCombo()
+        public Label()
         {
             InitializeComponent();
-            valueCombo.ItemsSource = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         }
-
-        #region TitleArea
 
         /// <summary>
         /// 标题
@@ -93,15 +89,6 @@ namespace ALF.UI
             set { titleText.FontSize = value; }
         }
 
-        /// <summary>
-        /// 是否启用
-        /// </summary>
-        public bool IsEnable
-        {
-            get { return valueCombo.IsEnabled; }
-            set { valueCombo.IsEnabled = value; }
-        }
-
         #endregion
 
 
@@ -130,6 +117,7 @@ namespace ALF.UI
         /// </summary>
         public void SetBinding()
         {
+
             var myBinding = new Binding(_bindingString)
             {
                 Source = DataContext,
@@ -137,93 +125,35 @@ namespace ALF.UI
                 UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
             };
 
-            valueCombo.SetBinding(Selector.SelectedItemProperty, myBinding);
+            valueText.SetBinding(TextBlock.TextProperty, myBinding);
+
         }
 
         #endregion
 
 
         /// <summary>
-        /// 所选对象
+        /// 值
         /// </summary>
-        public object SelectedItem
+        public string Value
         {
             get
             {
-                return valueCombo.SelectedItem;
+                return valueText.Text;
             }
             set
             {
-                valueCombo.SelectedItem = value;
+                valueText.Text = value;
             }
         }
 
         /// <summary>
-        /// 所选序号
+        /// 值背景颜色
         /// </summary>
-        public int SelectedIndex
+        public Brush ValueBackground
         {
-            get
-            {
-                return valueCombo.SelectedIndex;
-            }
-            set
-            {
-                valueCombo.SelectedIndex = value;
-            }
+            get { return valueText.Background; }
+            set { valueText.Background = value; }
         }
-
-        /// <summary>
-        /// 绑定数据源
-        /// </summary>
-        public IEnumerable<object> ItemsSource
-        {
-            set
-            {
-                valueCombo.ItemsSource = null;
-                valueCombo.ItemsSource = value;
-            }
-        }
-
-        /// <summary>
-        /// 数据源字符串
-        /// </summary>
-        public string Items
-        {
-            set
-            {
-                var itemsList = value.Split(',');
-                ItemsSource = itemsList;
-            }
-        }
-
-        /// <summary>
-        /// 显示属性名称
-        /// </summary>
-        public string DisplayMemberPath
-        {
-            set
-            {
-                valueCombo.DisplayMemberPath = value;
-            }
-            get
-            {
-                return valueCombo.DisplayMemberPath;
-            }
-        }
-
-        /// <summary>
-        /// 选择改变事件处理
-        /// </summary>
-        public event EventHandler SelectionChanged;
-
-        private void ValueCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (SelectionChanged != null)
-            {
-                SelectionChanged(sender, e);
-            }
-        }
-
     }
 }

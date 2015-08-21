@@ -56,14 +56,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="TitleCombo.xaml.cs">
-      <DependentUpon>TitleCombo.xaml</DependentUpon>
+    <Compile Include="TitleControl\Combo.xaml.cs">
+      <DependentUpon>Combo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TitleLabel.xaml.cs">
-      <DependentUpon>TitleLabel.xaml</DependentUpon>
+    <Compile Include="TitleControl\Label.xaml.cs">
+      <DependentUpon>Label.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TitleTextBox.xaml.cs">
-      <DependentUpon>TitleTextBox.xaml</DependentUpon>
+    <Compile Include="TitleControl\Text.xaml.cs">
+      <DependentUpon>Text.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -71,15 +71,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TitleCombo.xaml">
+    <Page Include="TitleControl\Combo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TitleLabel.xaml">
+    <Page Include="TitleControl\Label.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TitleTextBox.xaml">
+    <Page Include="TitleControl\Text.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ALF.UI.TitleTextBox"
+﻿<UserControl x:Class="ALF.UI.TitleControl.Combo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid x:Name="mainGrid" Height="40">
@@ -6,13 +6,9 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
         <TextBlock  x:Name="titleText" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"  />
-        <Border  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5" >
-            <TextBox   x:Name="valueText" Background="Transparent" VerticalContentAlignment="Center" />
+        <Border  Grid.Column="1" Margin="5" >
+            <ComboBox    x:Name="valueCombo" Background="Transparent" SelectionChanged="ValueCombo_OnSelectionChanged" VerticalContentAlignment="Center"/>
         </Border>
     </Grid>
 </UserControl>
