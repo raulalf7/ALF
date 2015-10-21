@@ -101,8 +101,9 @@ namespace ALF.SYSTEM
         /// <param name="argName">运行文件参数</param>
         /// <param name="hideWindow">是否隐藏运行窗口</param>
         /// <param name="isShowFinished">是否显示运行完成结果</param>
+        /// <param name="isWaitFinish">是否等待执行完成</param>
         /// <returns>运行结果</returns>
-        public static string ExecCmd(string fileName, string argName, bool hideWindow = false, bool isShowFinished = false)
+        public static string ExecCmd(string fileName, string argName, bool hideWindow = false, bool isShowFinished = false, bool isWaitFinish=true)
         {
             var process = new Process();
             var result = "";
@@ -126,7 +127,10 @@ namespace ALF.SYSTEM
                 {
                     result = process.StandardOutput.ReadToEnd().Trim();
                 }
-                process.WaitForExit();
+                if (isWaitFinish)
+                {
+                    process.WaitForExit();
+                }
             }
             catch (Exception ex)
             {
