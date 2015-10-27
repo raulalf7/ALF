@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using ALF.MSSQL.DataModel;
 using ALF.SYSTEM.DataModel;
+using Oracle.ManagedDataAccess.Client;
 
 namespace ALF.MSSQL
 {
@@ -22,11 +23,11 @@ namespace ALF.MSSQL
             get { return _dataBaseEngineType; }
             set
             {
+                _dataBaseEngineType = value;
                 if (value == DataBaseEngineType.Remote)
                 {
                     return;
                 }
-                _dataBaseEngineType = value;
                 _connInfo = null;
             }
         }
@@ -264,6 +265,88 @@ namespace ALF.MSSQL
             var cmd = string.Format("\" {0}\" queryout  {1}  -c -t \",\"  {2}", sql, filePath, BCPServerName);
             return SYSTEM.WindowsTools.ExecCmd("bcp.exe", cmd, true);
         }
+
+        /// <summary>
+        /// 将数据从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="orclIP"></param>
+        /// <param name="orclPort"></param>
+        /// <param name="orclServiceName"></param>
+        /// <param name="orclUserID"></param>
+        /// <param name="orclPW"></param>
+        /// <returns></returns>
+        public static string TransferDataToOracle(string tableName, string orclIP, string orclPort,
+            string orclServiceName, string orclUserID, string orclPW)
+        {
+            var result = "";
+            var orclConnString = string.Format("user id={0};password={1};data source={2}:{3}/{4}", orclUserID, orclPW,
+                orclIP, orclPort, orclServiceName);
+            var sqlCmdString =
+                string.Format("select b.name from sysobjects a,syscolumns b where a.name = '{0}' and a.id=b.id order by colid",
+                    tableName);
+
+            var colList = GetSqlListString(sqlCmdString, out result);
+            if (result != "")
+            {
+                return result;
+            }
+            var colString = "(";
+            int n = 0;
+            foreach (var colName in colList)
+            {
+                colString += colName + ",";
+                n++;
+            }
+            colString = colString.Substring(0, colString.Length - 1) + ")";
+            
+            sqlCmdString=String.Format("select * from {0}",tableName);
+            var sqlConn =new SqlConnection(SQLConnString);
+            var sqlCmd =new SqlCommand(sqlCmdString,sqlConn);
+
+            try
+            {
+                sqlConn.Open();
+            }
+            catch (Exception exception)
+            {
+                return exception.Message;
+            }
+
+            var orclCmdString = string.Format("begin\n insert into {0} {1} ", tableName, colString);
+            var sqlReader = sqlCmd.ExecuteReader();
+            
+            while (sqlReader.Read())
+            {
+                try
+                {
+                    orclCmdString += "select ";
+                    for (int index = 0; index < n; index++)
+                    {
+                        orclCmdString += "'" + sqlReader[index].ToString().Trim() + "',";
+                    }
+                    orclCmdString = orclCmdString.Substring(0, orclCmdString.Length - 1) + " from dual union all\n";
+                }
+                catch (Exception exception)
+                {
+                    sqlConn.Close();
+                    return exception.Message;
+                }
+            }
+            orclCmdString = orclCmdString.Substring(0, orclCmdString.Length - 10);
+            orclCmdString += "commit;\n exception\n when others then \n rollback; end;";
+
+            var orclConn = new OracleConnection(orclConnString);
+            orclConn.Open();
+            var orclCmd = orclConn.CreateCommand();
+            orclCmd.CommandType = CommandType.Text;
+            orclCmd.CommandText = orclCmdString;
+            orclCmd.ExecuteNonQuery();
+            orclConn.Close();
+            sqlConn.Close();
+            return result;
+        }
+
 
         #endregion
 

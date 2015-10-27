@@ -223,7 +223,7 @@
             命令行执行完成事件
             </summary>
         </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.ExecCmd(System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:ALF.SYSTEM.WindowsTools.ExecCmd(System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             运行命令行
             </summary>
@@ -231,6 +231,7 @@
             <param name="argName">运行文件参数</param>
             <param name="hideWindow">是否隐藏运行窗口</param>
             <param name="isShowFinished">是否显示运行完成结果</param>
+            <param name="isWaitFinish">是否等待执行完成</param>
             <returns>运行结果</returns>
         </member>
         <member name="M:ALF.SYSTEM.WindowsTools.WriteToTxt(System.String,System.String)">

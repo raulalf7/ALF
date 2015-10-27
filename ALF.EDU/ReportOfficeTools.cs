@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Windows;
 using ALF.EDU.DataModel;
 using ALF.MSSQL;
 using ALF.SYSTEM;
-using Microsoft.CSharp.RuntimeBinder;
-using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Word;
 using Application = Microsoft.Office.Interop.Word.Application;
 
@@ -94,7 +91,7 @@ namespace ALF.EDU
             return resultDocArgList;
         }
 
-        public static string UpdateWord(List<ArgInfo> argInfoList, string regionString, int appType, string filePath)
+        public static string UpdateWord(List<ArgInfo> argInfoList, string regionString, int appType, string filePath, bool isQuitWhenError=true)
         {
             var start = DateTime.Now;
             Console.WriteLine(start.ToString(CultureInfo.InvariantCulture));
@@ -126,11 +123,16 @@ namespace ALF.EDU
                     var sql = AddCondition(argInfo, condition, regionString);
                     var argStartTime = DateTime.Now;
                     Console.WriteLine("***第{1}个参数开始{0}", argInfo.argName, i);
-                    var dataViewValue = Tools.GetSqlDataView(sql, out result, 3600);
+                    var dataViewValue = Tools.GetSqlDataView(sql, out result);
                     if (result != "")
                     {
-                        wordApp.Quit(WdSaveOptions.wdSaveChanges, WdOriginalFormat.wdWordDocument, false);
-                        return string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result);
+                        if (isQuitWhenError)
+                        {
+                            wordApp.Quit(WdSaveOptions.wdSaveChanges, WdOriginalFormat.wdWordDocument, false);
+                            return string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result);
+                        }
+                        MessageBox.Show(string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result));
+                        continue;
                     }
                     if (argInfo.argType == ArgType.文字.ToString())
                     {
@@ -148,8 +150,13 @@ namespace ALF.EDU
                     }
                     if (result != "")
                     {
-                        wordApp.Quit(WdSaveOptions.wdSaveChanges, WdOriginalFormat.wdWordDocument, false);
-                        return string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result);
+                        if (isQuitWhenError)
+                        {
+                            wordApp.Quit(WdSaveOptions.wdSaveChanges, WdOriginalFormat.wdWordDocument, false);
+                            return string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result);
+                        }
+                        MessageBox.Show(string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result));
+                        continue;
                     }
                     var usedTime = DateTime.Now - argStartTime;
                     if (usedTime > maxTime)
