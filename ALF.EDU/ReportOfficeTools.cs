@@ -132,6 +132,10 @@ namespace ALF.EDU
                             return string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result);
                         }
                         MessageBox.Show(string.Format("{0}参数{1}，错误信息：{2}", argInfo.argType, argInfo.argName, result));
+                        if (argInfo.argType == ArgType.表格.ToString())
+                        {
+                            tableCount++;
+                        }
                         continue;
                     }
                     if (argInfo.argType == ArgType.文字.ToString())
