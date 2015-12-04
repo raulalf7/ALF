@@ -1,0 +1,18 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_SilverlightUploadService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://192.168.0.209/SilverlightUploadService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_SilverlightUploadService"
+                contract="SilverlightUploadServiceReference.SilverlightUploadService"
+                name="BasicHttpBinding_SilverlightUploadService" />
+        </client>
+    </system.serviceModel>
+</configuration>

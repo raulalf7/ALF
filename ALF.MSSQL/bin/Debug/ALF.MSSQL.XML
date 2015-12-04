@@ -24,31 +24,6 @@
             远程服务器
             </summary>
         </member>
-        <member name="T:ALF.MSSQL.Edu.EduTools">
-            <summary>
-            教育事业相关数据库工具
-            </summary>
-        </member>
-        <member name="F:ALF.MSSQL.Edu.EduTools.RecordYear">
-            <summary>
-            备案年份
-            </summary>
-        </member>
-        <member name="F:ALF.MSSQL.Edu.EduTools.UseEduDB">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ALF.MSSQL.Edu.EduTools.EduDBName">
-            <summary>
-            教育事业统计数据库名称
-            </summary>
-        </member>
-        <member name="P:ALF.MSSQL.Edu.EduTools.DataDB">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:ALF.MSSQL.Tools">
             <summary>
             MSSQL 处理工具
@@ -93,6 +68,18 @@
             <param name="sql">SQL语句</param>
             <param name="filePath">导出文件路径</param>
             <returns>执行结果</returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.TransferDataToOracle(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            将数据从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
+            </summary>
+            <param name="tableName"></param>
+            <param name="orclIP"></param>
+            <param name="orclPort"></param>
+            <param name="orclServiceName"></param>
+            <param name="orclUserID"></param>
+            <param name="orclPW"></param>
+            <returns></returns>
         </member>
         <member name="P:ALF.MSSQL.Tools.DataBaseType">
             <summary>
