@@ -74,11 +74,11 @@
             将数据从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
             </summary>
             <param name="tableName"></param>
-            <param name="orclIP"></param>
+            <param name="orclIp"></param>
             <param name="orclPort"></param>
             <param name="orclServiceName"></param>
             <param name="orclUserID"></param>
-            <param name="orclPW"></param>
+            <param name="orclPw"></param>
             <returns></returns>
         </member>
         <member name="P:ALF.MSSQL.Tools.DataBaseType">

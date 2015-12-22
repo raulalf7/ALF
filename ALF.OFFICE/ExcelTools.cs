@@ -146,7 +146,7 @@ namespace ALF.OFFICE
                     CopyDataFromClipBoard(destinationExcelInfo, n);
                 }
 
-                sourceBook.Close(false, ObjOpt, ObjOpt);
+                //sourceBook.Close(false, ObjOpt, ObjOpt);
                 ReleaseObj(sourceSheet);
                 ReleaseObj(sourceBook);
                 Clipboard.Clear();

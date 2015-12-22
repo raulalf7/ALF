@@ -267,21 +267,17 @@ namespace ALF.MSSQL
         }
 
         /// <summary>
-        /// 将数据从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
+        /// 将数据整表从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="orclIP"></param>
-        /// <param name="orclPort"></param>
-        /// <param name="orclServiceName"></param>
-        /// <param name="orclUserID"></param>
-        /// <param name="orclPW"></param>
+        /// <param name="tableName">需要导出的报表名称</param>
+        /// <param name="orclConnInfo">Orcale链接信息</param>
         /// <returns></returns>
-        public static string TransferDataToOracle(string tableName, string orclIP, string orclPort,
-            string orclServiceName, string orclUserID, string orclPW)
+        public static string TransferDataToOracle(string tableName, OrclConnInfo orclConnInfo)
         {
-            var result = "";
-            var orclConnString = string.Format("user id={0};password={1};data source={2}:{3}/{4}", orclUserID, orclPW,
-                orclIP, orclPort, orclServiceName);
+            string result;
+            var orclConnString = string.Format("user id={0};password={1};data source={2}:{3}/{4}",
+                orclConnInfo.OrclUserId, orclConnInfo.ConnPw,
+                orclConnInfo.ConnIp, orclConnInfo.ConnPort, orclConnInfo.OrclServiceName);
             var sqlCmdString =
                 string.Format("select b.name from sysobjects a,syscolumns b where a.name = '{0}' and a.id=b.id order by colid",
                     tableName);

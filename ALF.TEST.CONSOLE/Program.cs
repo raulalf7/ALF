@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
 using System.Threading;
-using ALF.EDU.DataModel;
 using ALF.MSSQL.DataModel;
+using ALF.OFFICE;
 using ALF.OFFICE.DataModel;
+using ALF.SYSTEM;
 using ALF.SYSTEM.DataModel;
-using Oracle.ManagedDataAccess.Client;
 
 namespace ALF.TEST.CONSOLE
 {
@@ -15,8 +13,7 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            test();
-
+            SqlOracleTest();
             //ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.Remote;
             //ALF.MSSQL.Tools.ConnInfo = new ConnInfo() { ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123," };
             //ALF.MSSQL.Tools.DBName = "XXJGDM";
@@ -36,7 +33,7 @@ namespace ALF.TEST.CONSOLE
         {
             Console.WriteLine("Input soft name");
             string softName = Console.ReadLine();
-            if (ALF.SYSTEM.WindowsTools.IsSoftInstalled(softName))
+            if (WindowsTools.IsSoftInstalled(softName))
             {
                 Console.WriteLine("Installed");
                 return;
@@ -76,10 +73,10 @@ namespace ALF.TEST.CONSOLE
                 }
 
 
-                OFFICE.Tools.InitialSqSetting(d, o);
+                Tools.InitialSqSetting(d, o);
 
                 Console.WriteLine("start output");
-                Console.WriteLine(OFFICE.ExcelTools.ExportSqlToExcel("select top 10 * from eduCodeDB..schoolBusinessRelation",
+                Console.WriteLine(ExcelTools.ExportSqlToExcel("select top 10 * from eduCodeDB..schoolBusinessRelation",
                     @"c:\test.xlsx", "sheet1"));
 
                 Console.WriteLine("output finished");
@@ -114,136 +111,48 @@ namespace ALF.TEST.CONSOLE
 
         private static void SqlOracleTest()
         {
-
-            var oracleConstring = "user id=jgdm;password=jgdm;data source=192.168.0.201:1521/orcl";
-            var sqlConstring = @"Data Source=192.168.0.20\SQL2012  ;Initial Catalog=XXJGDM;User ID=sa;Password=abc123,;Pooling=False";
-
-
-
-            using (var sqlconn = new SqlConnection(sqlConstring))
-            {
-                sqlconn.Open();
-                var sqlcmd = sqlconn.CreateCommand();
-
-                sqlcmd.CommandText = "select BEIZHU,DM,MC,SJBHLX,DQBS,XTGXRQ,SFCX from JG_JBZ";
-                //sqlcmd.CommandText = "insert into JG_JBZ values(@BEIZHU,@DM,@MC,@SJBHLX,@DQBS,@XTGXRQ,@SFCX)";
-                var sqlReader = sqlcmd.ExecuteReader();
-                while (sqlReader.Read())
+            MSSQL.Tools.ConnInfo = new ConnInfo() {ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123,"};
+            MSSQL.Tools.DBName = "XXJGDM_Z";
+            Console.WriteLine(ALF.MSSQL.Tools.TransferDataToOracle("JG_XXJGDM",
+                new OrclConnInfo()
                 {
-                    //SqlParameter parameter = new SqlParameter("@EMPNO", int.Parse(orcreader["EMPNO"].ToString()));
-                    //sqlcmd.Parameters.Add(parameter);
-                    //parameter = new SqlParameter("@HIREDATE", DateTime.Parse(orcreader["HIREDATE"].ToString()));
-                    //sqlcmd.Parameters.Add(parameter);
-                    //parameter = new SqlParameter("@COMM", decimal.Parse(orcreader["COMM"].ToString()));
-                    //sqlcmd.Parameters.Add(parameter);
+                    ConnIp = "192.168.0.201",
+                    ConnPort = "1521",
+                    OrclServiceName = "orcl",
+                    OrclUserId = "jgdm",
+                    ConnPw = "jgdm"
+                }));
+
+            //var oracleConstring = "user id=jgdm;password=jgdm;data source=192.168.0.201:1521/orcl";
+            //var sqlConstring = @"Data Source=192.168.0.20\SQL2012  ;Initial Catalog=XXJGDM;User ID=sa;Password=abc123,;Pooling=False";
 
 
-                    //if (orcreader.IsDBNull(1))
-                    //{
-                    //    parameter = new SqlParameter("@ENAME", System.Data.SqlDbType.VarChar);
-                    //    parameter.Value = DBNull.Value;
-                    //    sqlcmd.Parameters.Add(parameter);
-                    //}
+
+            //using (var sqlconn = new SqlConnection(sqlConstring))
+            //{
+            //    sqlconn.Open();
+            //    var sqlcmd = sqlconn.CreateCommand();
+
+            //    sqlcmd.CommandText = "select BEIZHU,DM,MC,SJBHLX,DQBS,XTGXRQ,SFCX from JG_JBZ";
+            //    var sqlReader = sqlcmd.ExecuteReader();
+            //    while (sqlReader.Read())
+            //    {
+
+            //        using (var orcconn = new OracleConnection(oracleConstring))
+            //        {
+
+            //            orcconn.Open();
+            //            var orccmd = orcconn.CreateCommand();
+            //            orccmd.CommandType = System.Data.CommandType.Text;
+            //            orccmd.CommandText = string.Format(@"insert into JG_JBZ(BEIZHU,DM,MC,SJBHLX,DQBS,XTGXRQ,SFCX) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", sqlReader[0], sqlReader[1], sqlReader[2], sqlReader[3], sqlReader[4], sqlReader[5], sqlReader[6]);
+            //           orccmd.ExecuteNonQuery();
+            //            orcconn.Close();
+            //        }
+            //    }
+            //    sqlconn.Close();
+            //}
 
 
-                    using (var orcconn = new OracleConnection(oracleConstring))
-                    {
-
-                        orcconn.Open();
-                        var orccmd = orcconn.CreateCommand();
-                        orccmd.CommandType = System.Data.CommandType.Text;
-                        orccmd.CommandText = string.Format(@"insert into JG_JBZ(BEIZHU,DM,MC,SJBHLX,DQBS,XTGXRQ,SFCX) values('{0}','{1}','{2}','{3}','{4}','{5}','{6}')", sqlReader[0], sqlReader[1], sqlReader[2], sqlReader[3], sqlReader[4], sqlReader[5], sqlReader[6]);
-                        //var parameter = new OracleParameter("@BEIZHU", sqlReader["BEIZHU"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        //parameter = new OracleParameter("@DM", sqlReader["DM"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        //parameter = new OracleParameter("@MC", sqlReader["MC"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        //parameter = new OracleParameter("@SJBHLX", sqlReader["SJBHLX"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        //parameter = new OracleParameter("@DQBS", sqlReader["DQBS"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        //parameter = new OracleParameter("@XTGXRQ", sqlReader["XTGXRQ"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        //parameter = new OracleParameter("@SFCX", sqlReader["SFCX"].ToString());
-                        //orccmd.Parameters.Add(parameter);
-                        orccmd.ExecuteNonQuery();
-                        orcconn.Close();
-                    }
-                }
-                sqlconn.Close();
-            }
-
-
-        }
-
-        private static void test()
-        {
-            string tmp = "";
-            var t = ALF.SYSTEM.WindowsTools.XmlDeseerializer(typeof(List<ArgInfo>), @"d:\test.xml", out tmp) as List<ArgInfo>;
-
-            foreach (var argInfo in t)
-            {
-                string sql = string.Format(@"
-
-INSERT INTO eduData2015DB..[dbo].[checkArgInfo]
-           ([rowid]
-           ,[state]
-           ,[description]
-           ,[updatetime]
-           ,[templateID]
-           ,[templateName]
-           ,[schoolAttrib]
-           ,[businessType]
-           ,[argBusinessGroup]
-           ,[argID]
-           ,[argType]
-           ,[argNo]
-           ,[argNo1]
-           ,[argName]
-           ,[argDataSql]
-           ,[upLimit]
-           ,[downLimit]
-           ,[isUsing])
-     VALUES
-           ('{0}'
-           ,'{1}'
-           ,'{2}'
-           ,'{3}'
-           ,'{4}'
-           ,'{5}'
-           ,'{6}'
-           ,'{7}'
-           ,'{8}'
-           ,'{9}'
-           ,'{10}'
-           ,'{11}'
-           ,'{12}'
-           ,'{13}'
-           ,'{14}'
-           ,'{15}'
-           ,'{16}'
-           ,'{17}')", argInfo.rowid
-                    , argInfo.state
-                    , argInfo.description
-                    , argInfo.updatetime
-                    , argInfo.templateID
-                    , argInfo.templateName
-                    , argInfo.schoolAttrib
-                    , argInfo.businessType
-                    , argInfo.argBusinessGroup
-                    , argInfo.argID
-                    , argInfo.argType
-                    , argInfo.argNo
-                    , argInfo.argNo1
-                    , argInfo.argName
-                    , argInfo.argDataSql
-                    , argInfo.upLimit
-                    , argInfo.downLimit
-                    , argInfo.isUsing);
-                ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.SqlExpress;
-                MSSQL.Tools.ExecSql(sql);
-            }
         }
     }
 }

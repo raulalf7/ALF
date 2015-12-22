@@ -17,6 +17,8 @@ namespace ALF.SYSTEM.DataModel
 
         private Guid _connID;
 
+        private string _connPort;
+
         private string _connName;
 
         private string _connIp;
@@ -86,6 +88,24 @@ namespace ALF.SYSTEM.DataModel
                 if ((_state != value))
                 {
                     _state = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public string ConnPort
+        {
+            get
+            {
+                return _connPort;
+            }
+            set
+            {
+                if ((_connPort != value))
+                {
+                    _connPort = value;
                 }
             }
         }
