@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using ALF.EDU.DataModel;
 using ALF.MSSQL;
@@ -67,6 +68,30 @@ namespace ALF.EDU
                 return _dataDB;
             }
             set { _dataDB = value; }
+        }
+
+
+        public static Dictionary<string,List<string>> GetDataColumn( out string result)
+        {
+            var resultDict = new Dictionary<string, List<string>>();
+            var tableList =
+                Tools.GetSqlListString(
+                    "select   templateNo  from  eduData2015DB..excelTemplateTable where templateGroup='基表' and templateOwner='' order by templateNo",
+                    out result);
+            if (result != "")
+            {
+                return null;
+            }
+            foreach (var table in tableList)
+            {
+                var list = Tools.GetSqlListString(string.Format("select distinct columnTag from excelTemplateCell where templateNo='{0}' and showBackgroundColor in('FFFFFF', '8DB4E3')",table), out result);
+                if (result != "")
+                {
+                    return null;
+                }
+                resultDict.Add(table, list);
+            }
+            return resultDict;
         }
     }
 }

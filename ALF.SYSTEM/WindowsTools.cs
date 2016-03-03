@@ -168,6 +168,63 @@ namespace ALF.SYSTEM
         }
 
         /// <summary>
+        /// Int根据ASCII转换为Char
+        /// </summary>
+        /// <param name="value">带转化数值</param>
+        /// <returns>转化后结果</returns>
+        public static string ConvertIntToChar(int value)
+        {
+            if (value > Math.Pow(26, 2))
+            {
+                return ((char)((value / (int)Math.Pow(26, 2)) + 64)).ToString(CultureInfo.InvariantCulture)
+                    + ConvertIntToChar(value % (int)Math.Pow(26, 2));
+            }
+            if (value > 26)
+            {
+                return ConvertIntToChar(value / 26)
+                    + ConvertIntToChar(value % 26);
+            }
+            return value == 0 ? "A" : ((char)(value % 27 + 64)).ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        /// 编译代码文件
+        /// </summary>
+        /// <param name="sourceCode">待编译代码</param>
+        /// <param name="filePath">生成文件路径</param>
+        /// <param name="referenceString">引用字符串</param>
+        /// <returns>编译结果</returns>
+        public static string CompileCode(string sourceCode, string filePath, string[] referenceString)
+        {
+            var p = new CSharpCodeProvider();
+#pragma warning disable 618
+            var cc = p.CreateCompiler();
+#pragma warning restore 618
+            var options = new CompilerParameters(referenceString) { GenerateExecutable = true, OutputAssembly = filePath };
+            var cu = new CodeSnippetCompileUnit(sourceCode);
+            var cr = cc.CompileAssemblyFromDom(options, cu);
+            return cr.Errors.Count == 0 ? "" : cr.Errors.Cast<CompilerError>().Aggregate("", (current, error) => current + (error + "\n"));
+        }
+
+        /// <summary>
+        /// 获取全部子文件
+        /// </summary>
+        /// <param name="dir">查询目录路径</param>
+        /// <returns>文件列表</returns>
+        private static IEnumerable<FileInfo> GetFiles(DirectoryInfo dir)
+        {
+            var result = dir.GetFiles().ToList();
+            var tmpDirList = dir.GetDirectories();
+            foreach (var item in tmpDirList)
+            {
+                result.AddRange(GetFiles(item));
+            }
+            return result;
+        }
+
+        #region XML Process
+
+        /// <summary>
         /// 创建XML配置文件
         /// </summary>
         /// <param name="filePath">目标文件夹路径</param>
@@ -254,59 +311,7 @@ namespace ALF.SYSTEM
             }
         }
 
-        /// <summary>
-        /// Int根据ASCII转换为Char
-        /// </summary>
-        /// <param name="value">带转化数值</param>
-        /// <returns>转化后结果</returns>
-        public static string ConvertIntToChar(int value)
-        {
-            if (value > Math.Pow(26, 2))
-            {
-                return ((char)((value / (int)Math.Pow(26, 2)) + 64)).ToString(CultureInfo.InvariantCulture)
-                    + ConvertIntToChar(value % (int)Math.Pow(26, 2));
-            }
-            if (value > 26)
-            {
-                return ConvertIntToChar(value / 26)
-                    + ConvertIntToChar(value % 26);
-            }
-            return value == 0 ? "A" : ((char)(value % 27 + 64)).ToString(CultureInfo.InvariantCulture);
-        }
 
-        /// <summary>
-        /// 编译代码文件
-        /// </summary>
-        /// <param name="sourceCode">待编译代码</param>
-        /// <param name="filePath">生成文件路径</param>
-        /// <param name="referenceString">引用字符串</param>
-        /// <returns>编译结果</returns>
-        public static string CompileCode(string sourceCode, string filePath, string[] referenceString)
-        {
-            var p = new CSharpCodeProvider();
-#pragma warning disable 618
-            var cc = p.CreateCompiler();
-#pragma warning restore 618
-            var options = new CompilerParameters(referenceString) { GenerateExecutable = true, OutputAssembly = filePath };
-            var cu = new CodeSnippetCompileUnit(sourceCode);
-            var cr = cc.CompileAssemblyFromDom(options, cu);
-            return cr.Errors.Count == 0 ? "" : cr.Errors.Cast<CompilerError>().Aggregate("", (current, error) => current + (error + "\n"));
-        }
-
-        /// <summary>
-        /// 获取全部子文件
-        /// </summary>
-        /// <param name="dir">查询目录路径</param>
-        /// <returns>文件列表</returns>
-        private static IEnumerable<FileInfo> GetFiles(DirectoryInfo dir)
-        {
-            var result = dir.GetFiles().ToList();
-            var tmpDirList = dir.GetDirectories();
-            foreach (var item in tmpDirList)
-            {
-                result.AddRange(GetFiles(item));
-            }
-            return result;
-        }
+        #endregion
     }
 }

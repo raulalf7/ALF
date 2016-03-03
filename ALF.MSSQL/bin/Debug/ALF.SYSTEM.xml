@@ -29,6 +29,11 @@
             状态
             </summary>
         </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.ConnPort">
+            <summary>
+            状态
+            </summary>
+        </member>
         <member name="P:ALF.SYSTEM.DataModel.ConnInfo.Description">
             <summary>
             描述
@@ -92,6 +97,21 @@
         <member name="F:ALF.SYSTEM.DataModel.ConfigType.CodeInput">
             <summary>
             代码导入文件
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.DataModel.OrclConnInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.OrclConnInfo.OrclServiceName">
+            <summary>
+            连接服务名称
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.OrclConnInfo.OrclUserId">
+            <summary>
+            连接用户名
             </summary>
         </member>
         <member name="T:ALF.SYSTEM.DataModel.UpdateFile">

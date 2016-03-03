@@ -69,16 +69,13 @@
             <param name="filePath">导出文件路径</param>
             <returns>执行结果</returns>
         </member>
-        <member name="M:ALF.MSSQL.Tools.TransferDataToOracle(System.String,System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:ALF.MSSQL.Tools.TransferDataToOracle(System.String,ALF.SYSTEM.DataModel.OrclConnInfo,System.Int32)">
             <summary>
-            将数据从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
+            将数据整表从SQLSERVER中导入到ORACLE，要求ORACLE已有相同的表及表结构
             </summary>
-            <param name="tableName"></param>
-            <param name="orclIp"></param>
-            <param name="orclPort"></param>
-            <param name="orclServiceName"></param>
-            <param name="orclUserID"></param>
-            <param name="orclPw"></param>
+            <param name="tableName">需要导出的报表名称</param>
+            <param name="orclConnInfo">Orcale链接信息</param>
+            <param name="infoCount">输出行数</param>
             <returns></returns>
         </member>
         <member name="P:ALF.MSSQL.Tools.DataBaseType">

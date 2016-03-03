@@ -112,8 +112,8 @@ namespace ALF.TEST.CONSOLE
         private static void SqlOracleTest()
         {
             MSSQL.Tools.ConnInfo = new ConnInfo() {ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123,"};
-            MSSQL.Tools.DBName = "XXJGDM_Z";
-            Console.WriteLine(ALF.MSSQL.Tools.TransferDataToOracle("JG_XXJGDM",
+            MSSQL.Tools.DBName = "TS_XXJGDM_DATA";
+            Console.WriteLine(ALF.MSSQL.Tools.TransferDataToOracle("XXJGDM_201504",
                 new OrclConnInfo()
                 {
                     ConnIp = "192.168.0.201",
@@ -122,7 +122,7 @@ namespace ALF.TEST.CONSOLE
                     OrclUserId = "jgdm",
                     ConnPw = "jgdm"
                 }));
-
+            Console.ReadLine();
             //var oracleConstring = "user id=jgdm;password=jgdm;data source=192.168.0.201:1521/orcl";
             //var sqlConstring = @"Data Source=192.168.0.20\SQL2012  ;Initial Catalog=XXJGDM;User ID=sa;Password=abc123,;Pooling=False";
 
@@ -153,6 +153,24 @@ namespace ALF.TEST.CONSOLE
             //}
 
 
+        }
+
+        private static void GenerateRadomData()
+        {
+            //MSSQL.Tools.ConnInfo = new ConnInfo() {ConnIp = "192.168.0.20", ConnPw = "abc123,"};
+            //MSSQL.Tools.DBName = "eduData2015DB";
+            //string tmp;
+            //var ran=new Random();
+            //var colDict = ALF.EDU.EduTools.GetDataColumn(out tmp);
+            //foreach (var colInfo in colDict)
+            //{
+            //    foreach (var colName in colInfo.Value)
+            //    {
+            //        var sql =
+            //            string.Format("update {0} set {1}={1}/{2}", colInfo.Key, colName, ran.Next(0, 100));
+            //        MSSQL.Tools.ExecSql(sql);
+            //    }
+            //}
         }
     }
 }

@@ -271,13 +271,11 @@ namespace ALF.MSSQL
         /// </summary>
         /// <param name="tableName">需要导出的报表名称</param>
         /// <param name="orclConnInfo">Orcale链接信息</param>
+        /// <param name="infoCount">输出行数</param>
         /// <returns></returns>
-        public static string TransferDataToOracle(string tableName, OrclConnInfo orclConnInfo)
+        public static string TransferDataToOracle(string tableName, OrclConnInfo orclConnInfo, int infoCount=100)
         {
             string result;
-            var orclConnString = string.Format("user id={0};password={1};data source={2}:{3}/{4}",
-                orclConnInfo.OrclUserId, orclConnInfo.ConnPw,
-                orclConnInfo.ConnIp, orclConnInfo.ConnPort, orclConnInfo.OrclServiceName);
             var sqlCmdString =
                 string.Format("select b.name from sysobjects a,syscolumns b where a.name = '{0}' and a.id=b.id order by colid",
                     tableName);
@@ -296,7 +294,7 @@ namespace ALF.MSSQL
             }
             colString = colString.Substring(0, colString.Length - 1) + ")";
             
-            sqlCmdString=String.Format("select * from {0}",tableName);
+            sqlCmdString=string.Format("select * from [{0}]",tableName);
             var sqlConn =new SqlConnection(SQLConnString);
             var sqlCmd =new SqlCommand(sqlCmdString,sqlConn);
 
@@ -309,9 +307,10 @@ namespace ALF.MSSQL
                 return exception.Message;
             }
 
-            var orclCmdString = string.Format("begin\n insert into {0} {1} ", tableName, colString);
             var sqlReader = sqlCmd.ExecuteReader();
-            
+
+            int count = 0;
+            var orclCmdString = string.Format(" insert into {0} {1} ", tableName, colString); ;
             while (sqlReader.Read())
             {
                 try
@@ -328,19 +327,57 @@ namespace ALF.MSSQL
                     sqlConn.Close();
                     return exception.Message;
                 }
+
+                count++;
+                if (count % infoCount == 0)
+                {
+                    orclCmdString = orclCmdString.Substring(0, orclCmdString.Length - 10);
+                    //orclCmdString += "commit;\n exception\n when others then \n rollback; end;";
+                    result = ExecOracleSql(orclCmdString, orclConnInfo);
+                    Console.WriteLine(@"Already Inserted {0} rows of data", count);
+                    orclCmdString = string.Format(" insert into {0} {1} ", tableName, colString);
+                }
+                if (result != "")
+                {
+                    sqlConn.Close();
+                    return result;
+                }
             }
-            orclCmdString = orclCmdString.Substring(0, orclCmdString.Length - 10);
-            orclCmdString += "commit;\n exception\n when others then \n rollback; end;";
+            if (count % infoCount != 0)
+            {
+                orclCmdString = orclCmdString.Substring(0, orclCmdString.Length - 10);
+               // orclCmdString += "commit;\n exception\n when others then \n rollback; end;";
+                result = ExecOracleSql(orclCmdString, orclConnInfo);
+                Console.WriteLine(@"Already Inserted {0} rows of data", count);
+            }
+            sqlConn.Close();
+            Console.WriteLine(@"Already Inserted {0} rows of data. Finished.", count);
+            return result;
+        }
+
+        private static string ExecOracleSql(string sql, OrclConnInfo orclConnInfo)
+        {
+            var orclConnString = string.Format("user id={0};password={1};data source={2}:{3}/{4}",
+                orclConnInfo.OrclUserId, orclConnInfo.ConnPw,
+                orclConnInfo.ConnIp, orclConnInfo.ConnPort, orclConnInfo.OrclServiceName);
 
             var orclConn = new OracleConnection(orclConnString);
             orclConn.Open();
             var orclCmd = orclConn.CreateCommand();
             orclCmd.CommandType = CommandType.Text;
-            orclCmd.CommandText = orclCmdString;
-            orclCmd.ExecuteNonQuery();
+            orclCmd.CommandText = sql;
+            try
+            {
+                orclCmd.ExecuteNonQuery();
+            }
+            catch (Exception exception)
+            {
+                orclConn.Close();
+                return exception.Message;
+            }
             orclConn.Close();
-            sqlConn.Close();
-            return result;
+
+            return "";
         }
 
 
