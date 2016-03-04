@@ -4,6 +4,43 @@
         <name>ALF.MSSQL</name>
     </assembly>
     <members>
+        <member name="T:ALF.MSSQL.AccessTools">
+            <summary>
+            Access数据库处理工具
+            </summary>
+        </member>
+        <member name="F:ALF.MSSQL.AccessTools.FilePath">
+            <summary>
+            数据库文件位置
+            </summary>
+        </member>
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteNonQuery(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
+            <summary>
+            执行语句
+            </summary>
+            <param name="cmdText">查询语句</param>
+            <param name="result">执行结果</param>
+            <param name="commandParameters">查询参数</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteReader(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
+            <summary>
+            根据查询语句获取查询访问器
+            </summary>
+            <param name="cmdText">查询语句</param>
+            <param name="result">执行结果</param>
+            <param name="commandParameters">查询参数</param>
+            <returns>查询结果访问器</returns>
+        </member>
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteDataSet(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
+            <summary>
+            根据查询语句获取查询数据集
+            </summary>
+            <param name="cmdText">查询语句</param>
+            <param name="result">执行结果</param>
+            <param name="commandParameters">查询参数</param>
+            <returns>查询结果数据集</returns>
+        </member>
         <member name="T:ALF.MSSQL.DataModel.DataBaseEngineType">
             <summary>
             数据库引擎版本枚举列表
@@ -76,6 +113,15 @@
             <param name="tableName">需要导出的报表名称</param>
             <param name="orclConnInfo">Orcale链接信息</param>
             <param name="infoCount">输出行数</param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.DataSetTransferToList``1(``0,System.Data.DataSet)">
+            <summary>
+            将DataSet转化为泛型的List
+            </summary>
+            <param name="entity"></param>
+            <param name="ds">需要转换的数据集</param>
+            <typeparam name="T">需要转换成为的类型</typeparam>
             <returns></returns>
         </member>
         <member name="P:ALF.MSSQL.Tools.DataBaseType">

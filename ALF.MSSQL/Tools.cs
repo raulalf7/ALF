@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using ALF.MSSQL.DataModel;
 using ALF.SYSTEM.DataModel;
 using Oracle.ManagedDataAccess.Client;
@@ -310,7 +311,7 @@ namespace ALF.MSSQL
             var sqlReader = sqlCmd.ExecuteReader();
 
             int count = 0;
-            var orclCmdString = string.Format(" insert into {0} {1} ", tableName, colString); ;
+            var orclCmdString = string.Format(" insert into {0} {1} ", tableName, colString);
             while (sqlReader.Read())
             {
                 try
@@ -354,6 +355,26 @@ namespace ALF.MSSQL
             Console.WriteLine(@"Already Inserted {0} rows of data. Finished.", count);
             return result;
         }
+        
+        /// <summary>
+        /// 将DataSet转化为泛型的List
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="ds">需要转换的数据集</param>
+        /// <typeparam name="T">需要转换成为的类型</typeparam>
+        /// <returns></returns>
+        public static List<T> DataSetTransferToList<T>(T entity, DataSet ds) where T : new()
+        {
+            var lists = new List<T>();
+            if (ds.Tables[0].Rows.Count <= 0) return lists;
+            lists.AddRange(from DataRow row in ds.Tables[0].Rows select DataRowTransfer(new T(), row));
+            return lists;
+        }
+
+        #endregion
+
+
+        #region Private Methods
 
         private static string ExecOracleSql(string sql, OrclConnInfo orclConnInfo)
         {
@@ -380,8 +401,27 @@ namespace ALF.MSSQL
             return "";
         }
 
-
+        private static T DataRowTransfer<T>(T entity, DataRow row) where T : new()
+        {
+            //初始化 如果为null
+            if (entity == null)
+            {
+                entity = new T();
+            }
+            //得到类型
+            var type = typeof(T);
+            //取得属性集合
+            var pi = type.GetProperties();
+            foreach (var item in pi.Where(item => row[item.Name] != null && row[item.Name] != DBNull.Value))
+            {
+                item.SetValue(entity,
+                    item.PropertyType == typeof(DateTime?)
+                        ? Convert.ToDateTime(row[item.Name].ToString())
+                        : Convert.ChangeType(row[item.Name], item.PropertyType), null);
+            }
+            return entity;
+        }
+        
         #endregion
-
     }
 }

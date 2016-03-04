@@ -268,6 +268,29 @@
             <param name="path">TXT文件路径</param>
             <returns>TXT文件内容</returns>
         </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.ConvertIntToChar(System.Int32)">
+            <summary>
+            Int根据ASCII转换为Char
+            </summary>
+            <param name="value">带转化数值</param>
+            <returns>转化后结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.CompileCode(System.String,System.String,System.String[])">
+            <summary>
+            编译代码文件
+            </summary>
+            <param name="sourceCode">待编译代码</param>
+            <param name="filePath">生成文件路径</param>
+            <param name="referenceString">引用字符串</param>
+            <returns>编译结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.GetFiles(System.IO.DirectoryInfo)">
+            <summary>
+            获取全部子文件
+            </summary>
+            <param name="dir">查询目录路径</param>
+            <returns>文件列表</returns>
+        </member>
         <member name="M:ALF.SYSTEM.WindowsTools.CreatXml(System.String,ALF.SYSTEM.DataModel.ConfigType)">
             <summary>
             创建XML配置文件
@@ -293,29 +316,6 @@
             <param name="result">反序列化结果</param>
             <param name="obj">序列化目标类型</param>
             <returns>反序列化结果</returns>
-        </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.ConvertIntToChar(System.Int32)">
-            <summary>
-            Int根据ASCII转换为Char
-            </summary>
-            <param name="value">带转化数值</param>
-            <returns>转化后结果</returns>
-        </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.CompileCode(System.String,System.String,System.String[])">
-            <summary>
-            编译代码文件
-            </summary>
-            <param name="sourceCode">待编译代码</param>
-            <param name="filePath">生成文件路径</param>
-            <param name="referenceString">引用字符串</param>
-            <returns>编译结果</returns>
-        </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.GetFiles(System.IO.DirectoryInfo)">
-            <summary>
-            获取全部子文件
-            </summary>
-            <param name="dir">查询目录路径</param>
-            <returns>文件列表</returns>
         </member>
     </members>
 </doc>
