@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.OleDb;
 using System.IO;
 
@@ -14,8 +15,13 @@ namespace ALF.MSSQL
         /// </summary>
         public static string FilePath;
 
-        private static readonly string ConnString =
-            string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Persist Security Info=True", FilePath);
+        private static string ConnString
+        {
+            get
+            {
+                 return string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Persist Security Info=True", FilePath);
+            }
+        }
 
         /// <summary>
         /// 执行语句
@@ -69,11 +75,12 @@ namespace ALF.MSSQL
                     cmd.Parameters.Clear();
                     return reader;
                 }
-                catch
+                catch (Exception exception)
                 {
                     //关闭连接，抛出异常
                     conn.Close();
-                    throw;
+                    result = exception.Message;
+                    return null;
                 }
             }
         }
@@ -106,11 +113,12 @@ namespace ALF.MSSQL
                     cmd.Parameters.Clear();
                     return ds;
                 }
-                catch
+                catch (Exception exception)
                 {
                     //关闭连接，抛出异常
                     conn.Close();
-                    throw;
+                    result = exception.Message;
+                    return null;
                 }
             }
         }

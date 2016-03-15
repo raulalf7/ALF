@@ -13,7 +13,8 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            SqlOracleTest();
+            Set();
+            //SqlOracleTest();
             //ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.Remote;
             //ALF.MSSQL.Tools.ConnInfo = new ConnInfo() { ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123," };
             //ALF.MSSQL.Tools.DBName = "XXJGDM";
@@ -171,6 +172,222 @@ namespace ALF.TEST.CONSOLE
             //        MSSQL.Tools.ExecSql(sql);
             //    }
             //}
+        }
+
+        private static void Set()
+        {
+            string test = @"
+--学校模板--
+
+declare	@organizationeType int
+declare @recordYear int
+declare	@organizationNo nvarchar(50)
+declare	@businessTypeNo  nvarchar(50)
+declare	@templateOwner  nvarchar(50)
+
+
+set @organizationeType=5
+set @recordYear=2015
+set @organizationNo='2134019362'
+set @businessTypeNo='119'
+set @templateOwner ='34'
+
+
+	create table #data_getTemplateAndInstanceList_tmp
+	(
+		organizationNo  nvarchar(50) not null,
+		organizationName nvarchar(50) not null, 
+		businessID uniqueidentifier not null,
+		businessType	nvarchar(50) not null,
+		businessTypeNo	nvarchar(50) not null,
+		instanceID	uniqueidentifier not null,
+		approveState int not null,
+		templateBusinessGroup nvarchar(50) not null,
+		templateBusinessType nvarchar(50) not null,
+		templateCategory nvarchar(50) not null,
+		templateGroup nvarchar(50) not null,
+		templateType nvarchar(50) not null,
+		templateNo	nvarchar(50) not null,
+		templateName	nvarchar(50) not null,
+		templateNoDisplay	nvarchar(255) not null
+	)
+	
+	--[1]
+	if @organizationeType=5
+	begin
+		insert into #data_getTemplateAndInstanceList_tmp(
+			organizationNo,
+			organizationName,
+			businessID,
+			businessType,
+			businessTypeNo,
+			instanceID,
+			approveState,
+			templateBusinessGroup,
+			templateBusinessType,
+			templateCategory,
+			templateGroup,
+			templateType,
+			templateNo,
+			templateName,
+			templateNoDisplay
+		)
+		select schoolBusinessRelation.organizationNo
+			  ,schoolBusinessRelation.organizationName
+			  ,schoolBusinessRelation.businessID
+			  ,schoolBusinessRelation.businessType
+			  ,schoolBusinessRelation.businessTypeNo
+			  ,isnull(instanceID,'00000000-0000-0000-0000-000000000000') as instanceID
+			  ,isnull(approveState,-3000) as approveState
+			  ,excelTemplateTable.templateBusinessGroup
+			  ,excelTemplateTable.templateBusinessType
+			  ,excelTemplateTable.templateCategory
+			  ,excelTemplateTable.templateGroup
+			  ,excelTemplateTable.templateType
+			  ,excelTemplateTable.templateNo
+			  ,excelTemplateTable.templateName
+			  ,excelTemplateTable.templateNoDisplay
+			  
+		  from (select organizationNo
+		              ,businessType
+		              ,businessTypeNo 
+		              ,organizationName
+		              ,businessID
+  					  ,businessLevel
+					  ,ownerTypeNo
+					  ,isNation
+					  ,isExistsDoubleLanguage
+					  ,isNetSchool
+					  ,isLastYearCancel
+		          from schoolBusinessRelation 
+		         where organizationNo=@organizationNo 
+		           and businessTypeNo=@businessTypeNo
+		           and recordYear=@recordYear
+		           ) as schoolBusinessRelation
+		  inner join (select * from excelTemplateBusinessRelation 
+		               where businessTypeNo=@businessTypeNo 
+		                 and recordYear=@recordYear) as excelTemplateBusinessRelation
+		  on excelTemplateBusinessRelation.businessTypeNo=schoolBusinessRelation.businessTypeNo
+		  and excelTemplateBusinessRelation.businessLevel=(case when excelTemplateBusinessRelation.businessLevel=-1 then -1 else schoolBusinessRelation.businessLevel end) 
+		  and excelTemplateBusinessRelation.ownerTypeNo=(case when excelTemplateBusinessRelation.ownerTypeNo='' then '' else schoolBusinessRelation.ownerTypeNo end)
+		  and excelTemplateBusinessRelation.isNation=(case when excelTemplateBusinessRelation.isNation=-1 then -1 else schoolBusinessRelation.isNation end)
+		  and excelTemplateBusinessRelation.isLastYearCancel=(case when excelTemplateBusinessRelation.isLastYearCancel=-1 then -1 else schoolBusinessRelation.isLastYearCancel end)
+		  and excelTemplateBusinessRelation.isExistsDoubleLanguage=(case when excelTemplateBusinessRelation.isExistsDoubleLanguage=-1 then -1 else schoolBusinessRelation.isExistsDoubleLanguage end)
+		  and excelTemplateBusinessRelation.isNetSchool=(case when excelTemplateBusinessRelation.isNetSchool=-1 then -1 else schoolBusinessRelation.isNetSchool end)
+	  inner join (select * from excelTemplateTable 
+	               where (case when templateOwner='' then '' else templateOwner end)=(case when templateOwner='' then '' else @templateOwner end) 
+	                 and recordYear=@recordYear ) as excelTemplateTable
+		  on excelTemplateBusinessRelation.templateNo=excelTemplateTable.templateNo
+		  left join 
+		    (select instanceID
+	              ,approveState
+	              ,templateNo
+	              ,businessTypeNo 
+	         from instanceTable 
+	        where organizationNo=@organizationNo
+	          and recordYear=@recordYear) as instanceTable	
+	      on excelTemplateBusinessRelation.templateNo=instanceTable.templateNo
+		  and schoolBusinessRelation.businessTypeNo=instanceTable.businessTypeNo
+
+	end
+	
+	--[2]
+	if @organizationeType=0
+	begin
+		declare @countyCount int 
+		set @countyCount=-1
+		
+		select @countyCount=count(1)
+		  from dbo.statisticsEntity 
+		 where statisticsRegionA+statisticsRegionB in (
+					select distinct regionA+regionB from dbo.codeRegionD where regionC=''
+		       )
+			and statisticsOrganizationLevel=2
+			and statisticsOrganizationNo=@organizationNo
+		
+		insert into #data_getTemplateAndInstanceList_tmp(
+			organizationNo,
+			organizationName,
+			businessID,
+			businessType,
+			businessTypeNo,
+			instanceID,
+			approveState,
+			templateBusinessGroup,
+			templateBusinessType,
+			templateCategory,
+			templateGroup,
+			templateType,
+			templateNo,
+			templateName,
+			templateNoDisplay
+		)
+		select statisticsEntity.organizationNo
+			  ,statisticsEntity.organizationName
+			  ,'00000000-0000-0000-0000-000000000000' as businessID
+			  ,'' as businessType
+			  ,'' as businessTypeNo
+			  ,isnull(instanceID,'00000000-0000-0000-0000-000000000000') as instanceID
+			  ,isnull(approveState,-3000) as approveState
+			  ,excelTemplateTable.templateBusinessGroup
+			  ,excelTemplateTable.templateBusinessType
+			  ,excelTemplateTable.templateCategory
+			  ,excelTemplateTable.templateGroup
+			  ,excelTemplateTable.templateType
+			  ,excelTemplateTable.templateNo
+			  ,excelTemplateTable.templateName
+			  ,excelTemplateTable.templateNoDisplay
+		  from (select statisticsOrganizationNo as organizationNo
+		              ,statisticsOrganizationName as organizationName
+		              ,statisticsOrganizationLevel
+		              ,isImmediacy
+		          from statisticsEntity 
+		         where statisticsOrganizationNo=@organizationNo
+		           and recordYear=@recordYear) as statisticsEntity
+		  inner join (select * from excelTemplateStatisticsRelation 
+		               where recordYear=@recordYear) as excelTemplateStatisticsRelation
+		  on excelTemplateStatisticsRelation.organizationLevel=(case when @countyCount>0 then 3 else statisticsEntity.statisticsOrganizationLevel end)
+		  and excelTemplateStatisticsRelation.isImmediacy=(case when @countyCount>0 then 0 else statisticsEntity.isImmediacy end)
+	  inner join (select * from excelTemplateTable 
+	               where (case when templateOwner='' then '' else templateOwner end)=(case when templateOwner='' then '' else @templateOwner end) 
+	                 and recordYear=@recordYear ) as excelTemplateTable
+		  on excelTemplateStatisticsRelation.templateNo=excelTemplateTable.templateNo
+		  left join 
+		    (select instanceID
+	              ,approveState
+	              ,templateNo
+	         from instanceTable 
+	        where organizationNo=@organizationNo
+	          and recordYear=@recordYear) as instanceTable	
+	      on excelTemplateStatisticsRelation.templateNo=instanceTable.templateNo				
+	end
+
+	select  
+	        organizationNo,
+		    organizationName, 
+		    businessID,
+			businessType,
+			businessTypeNo,
+			instanceID,
+			approveState,
+			templateBusinessGroup,
+			templateBusinessType,
+			templateCategory,
+			templateGroup,
+			templateType,
+			templateNo,
+			templateName,
+			templateNoDisplay
+	   from #data_getTemplateAndInstanceList_tmp 
+	  order by businessTypeNo,templateNo
+";
+
+            string tmp;
+
+            string t2 = "select top 1 * from excelTemplateBusinessRelation";
+            MSSQL.AccessTools.FilePath = @".\eduData2015DB.mdb";
+            var t = ALF.MSSQL.AccessTools.ExecuteDataSet(t2, out tmp);
+            
         }
     }
 }
