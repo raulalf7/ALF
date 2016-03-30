@@ -366,6 +366,10 @@ namespace ALF.MSSQL
         public static List<T> DataSetTransferToList<T>(T entity, DataSet ds) where T : new()
         {
             var lists = new List<T>();
+            if (ds == null || ds.Tables.Count == 0)
+            {
+                return null;
+            }
             if (ds.Tables[0].Rows.Count <= 0) return lists;
             lists.AddRange(from DataRow row in ds.Tables[0].Rows select DataRowTransfer(new T(), row));
             return lists;

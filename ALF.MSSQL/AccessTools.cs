@@ -38,14 +38,25 @@ namespace ALF.MSSQL
                 result = "No Data Files Found";
                 return 0;
             }
-
-            OleDbCommand cmd = new OleDbCommand();
-            using (OleDbConnection conn = new OleDbConnection(ConnString))
+            if (cmdText == "")
             {
-                PrepareCommand(cmd, conn, null, cmdText, commandParameters);
-                int val = cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
-                return val;
+                return 0;
+            }
+            try
+            {
+                var cmd = new OleDbCommand();
+                using (var conn = new OleDbConnection(ConnString))
+                {
+                    PrepareCommand(cmd, conn, null, cmdText, commandParameters);
+                    var val = cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                    return val;
+                }
+            }
+            catch (Exception exception)
+            {
+                result = "[Error in ALF.MSSQL]Access Query Error: " + exception.Message;
+                return 0;
             }
         }
 
@@ -79,7 +90,7 @@ namespace ALF.MSSQL
                 {
                     //关闭连接，抛出异常
                     conn.Close();
-                    result = exception.Message;
+                    result = "[Error in ALF.MSSQL]Access Query Error: " + exception.Message;
                     return null;
                 }
             }
@@ -117,7 +128,7 @@ namespace ALF.MSSQL
                 {
                     //关闭连接，抛出异常
                     conn.Close();
-                    result = exception.Message;
+                    result = "[Error in ALF.MSSQL]Access Query Error: " + exception.Message;
                     return null;
                 }
             }
