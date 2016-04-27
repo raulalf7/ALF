@@ -134,6 +134,33 @@ namespace ALF.MSSQL
             }
         }
 
+        public static string ExportDataToXml(string cmdText, string tableName, string xmlFilePath, params OleDbParameter[] commandParameters)
+        {
+
+            using (OleDbConnection conn = new OleDbConnection(ConnString))
+            {
+                DataSet dataSet = new DataSet();
+                OleDbCommand cmd = new OleDbCommand();
+                PrepareCommand(cmd, conn, null, cmdText, commandParameters);
+                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+                DataTable dataTable = dataSet.Tables.Add("Names_Table");
+                try
+                {
+                    da.Fill(dataTable);
+                    dataTable.WriteXmlSchema("Names.Schema.xml");
+                    dataTable.WriteXml("Names.xml");
+                    return "";
+                }
+                catch (Exception exception)
+                {
+                    //关闭连接，抛出异常
+                    conn.Close();
+                    return "[Error in ALF.MSSQL]Access Query Error: " + exception.Message;
+                    return null;
+                }
+            }
+        }
+
         private static void PrepareCommand(OleDbCommand cmd, OleDbConnection conn, OleDbTransaction trans, string cmdText, OleDbParameter[] cmdParms)
         {
             if (conn.State != ConnectionState.Open)

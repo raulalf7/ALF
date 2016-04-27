@@ -46,6 +46,7 @@
     <Compile Include="DataModel\Enum.cs" />
     <Compile Include="DataModel\OrclConnInfo.cs" />
     <Compile Include="DataModel\UpdateFile.cs" />
+    <Compile Include="EncryptionTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebTools.cs" />
     <Compile Include="WindowsTools.cs" />

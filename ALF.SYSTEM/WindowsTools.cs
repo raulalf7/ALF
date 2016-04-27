@@ -151,7 +151,7 @@ namespace ALF.SYSTEM
         /// <param name="infoString">待写入信息</param>
         public static void WriteToTxt(string path, string infoString)
         {
-            StreamWriter streamWriter = File.Exists(path) ? File.AppendText(path) : new StreamWriter(path);
+            StreamWriter streamWriter = File.Exists(path) ? File.AppendText(path) : new StreamWriter(path,false,Encoding.Default);
             streamWriter.Write(infoString);
             streamWriter.Close();
         }

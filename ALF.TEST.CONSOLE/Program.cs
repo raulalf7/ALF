@@ -13,8 +13,11 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            Set();
-            //SqlOracleTest();
+
+            Encrypt(@"d:\j3125_Z.txt", @"d:\encrypt.txt");
+            Decrypt( @"d:\encrypt.txt",@"d:\j3125_Z_2.txt");
+         //   Set();
+           //SqlOracleTest();
             //ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.Remote;
             //ALF.MSSQL.Tools.ConnInfo = new ConnInfo() { ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123," };
             //ALF.MSSQL.Tools.DBName = "XXJGDM";
@@ -114,7 +117,7 @@ namespace ALF.TEST.CONSOLE
         {
             MSSQL.Tools.ConnInfo = new ConnInfo() {ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123,"};
             MSSQL.Tools.DBName = "TS_XXJGDM_DATA";
-            Console.WriteLine(ALF.MSSQL.Tools.TransferDataToOracle("XXJGDM_201504",
+            Console.WriteLine(ALF.MSSQL.Tools.TransferDataToOracle("XXJGDM_201601",
                 new OrclConnInfo()
                 {
                     ConnIp = "192.168.0.201",
@@ -388,6 +391,21 @@ set @templateOwner ='34'
             MSSQL.AccessTools.FilePath = @".\eduData2015DB.mdb";
             var t = ALF.MSSQL.AccessTools.ExecuteDataSet(t2, out tmp);
             
+        }
+
+        private static void  Encrypt(string filePath,string encryptPath)
+        {
+            var dataString = WindowsTools.ReadFromTxt(filePath);
+            var encryptString = EncryptionTool.SymmetriEncrypt(dataString,5,"");
+            WindowsTools.WriteToTxt(encryptPath, encryptString);
+        }
+
+        private static void Decrypt(string encryptPath,string filePath)
+        {
+            var encryptString = WindowsTools.ReadFromTxt(encryptPath);
+            bool result;
+            var dataString = EncryptionTool.SymmetricDecrypt(encryptString,5,"");
+            WindowsTools.WriteToTxt(filePath, dataString);
         }
     }
 }

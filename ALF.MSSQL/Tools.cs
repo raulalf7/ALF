@@ -333,6 +333,7 @@ namespace ALF.MSSQL
                 if (count % infoCount == 0)
                 {
                     orclCmdString = orclCmdString.Substring(0, orclCmdString.Length - 10);
+
                     //orclCmdString += "commit;\n exception\n when others then \n rollback; end;";
                     result = ExecOracleSql(orclCmdString, orclConnInfo);
                     Console.WriteLine(@"Already Inserted {0} rows of data", count);

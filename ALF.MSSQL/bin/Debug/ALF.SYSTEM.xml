@@ -179,6 +179,96 @@
             错误信息
             </summary>
         </member>
+        <member name="T:ALF.SYSTEM.EncryptionTool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.GetAscIi(System.String)">
+            <summary>
+            Get the ASCII of the letter
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.IsChar(System.String)">
+            <summary>
+            Tell whether the letter is a correct letter in the alphabet  or not
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.IsUpper(System.String)">
+            <summary>
+            Tell whether the letter is upper or not
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.SymmetriEncrypt(System.String,System.Int32,System.String)">
+            <summary>
+            Function of Symmetric Encryption
+            </summary>
+            <param name="originalMessage">The message needs to be encrpypted</param>
+            <param name="keyInt">Key for Ceasar Encryption, while using Vigenere Encryption, make it 0</param>
+            <param name="keyString">Key for Vigenere Encryption, while using Ceasar Encryption, make it ""</param>
+            <returns>Encrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.SymmetricDecrypt(System.String,System.Int32,System.String)">
+            <summary>
+            Function of Symmetric Decryption
+            </summary>
+            <param name="encrpyMessage">The message needs to be decrpypted</param>
+            <param name="keyInt">Key for Ceasar Encryption, while using Vigenere Encryption, make it 0</param>
+            <param name="keyString">Key for Vigenere Encryption, while using Ceasar Encryption, make it ""</param>
+            <returns>Decrypted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.GenerateKey">
+            <summary>
+            Generate the key for MD5
+            </summary>
+            <returns>The key for MD5</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.Md5Encrypt(System.String,System.String)">
+            <summary>
+            MD5 Encryption
+            </summary>
+            <param name="orignialMessage">The message needs to be encrpypted</param>
+            <param name="md5Key">The key for MD5 encryption</param>
+            <returns>Encrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.Md5Decrypt(System.String,System.String)">
+            <summary>
+            MD5 Decryption
+            </summary>
+            <param name="encryptedMessage">The message needs to be decrpypted</param>
+            <param name="md5Key">The key for MD5 decryption</param>
+            <returns>Decrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.RsaKey(System.String@,System.String@)">
+            <summary>
+            Generate the key for rsa encryption and decryption
+            </summary>
+            <param name="xmlPrivateKey">private key for rsa decryption</param>
+            <param name="xmlPublicKey">public key for rsa encryption</param>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.RsaEncrypt(System.String,System.String)">
+            <summary>
+            RSA Encryption
+            </summary>
+            <param name="xmlPublicKey">public key for rsa encryption</param>
+            <param name="encryptString">The message needs to be encrpypted</param>
+            <returns>Encrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.RsaDecrypt(System.String,System.String,System.Boolean@)">
+            <summary>
+            RSA Decryption
+            </summary>
+            <param name="xmlPrivateKey">private key for rsa decryption</param>
+            <param name="decryptString">The message needs to be decrpypted</param>
+            <param name="decryptSuccess">Whether the decryption succeed</param>
+            <returns>Decrpyted message</returns>
+        </member>
         <member name="T:ALF.SYSTEM.WebTools">
             <summary>
             Web工具
