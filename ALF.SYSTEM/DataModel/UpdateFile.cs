@@ -41,7 +41,7 @@ namespace ALF.SYSTEM.DataModel
         /// <summary>
         /// 生成文件类型
         /// </summary>
-        public FileType FileType
+        public ConfigFileType FileType
         { set; get; }
 
         /// <summary>

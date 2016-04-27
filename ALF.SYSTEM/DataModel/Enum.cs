@@ -1,55 +1,53 @@
 ﻿namespace ALF.SYSTEM.DataModel
 {
+
     /// <summary>
-    /// 生成文件类型
+    /// 数据文件类型（标识文件的用途来源）
     /// </summary>
-    public enum FileType
+    public enum ConfigFileType
     {
         /// <summary>
         /// CSV
         /// </summary>
         CSV,
-
         /// <summary>
-        /// DATA
+        /// 
+        /// </summary>
+        Code,
+        /// <summary>
+        /// 
         /// </summary>
         Data,
+        /// <summary>
+        /// 
+        /// </summary>
+        DBF,
+        /// <summary>
+        /// 
+        /// </summary>
+        MiniData,
+        /// <summary>
+        /// 
+        /// </summary>
+        GzData
     }
 
-    ///// <summary>
-    ///// 数据类型
-    ///// </summary>
-    //public enum DataType
-    //{
-    //    /// <summary>
-    //    /// 直属高校数据
-    //    /// </summary>
-    //    GzData,
-
-    //    /// <summary>
-    //    /// 代码数据
-    //    /// </summary>
-    //    CodeData,
-    //}
-
     /// <summary>
-    /// 配置文件类型
+    /// 数据文件格式
     /// </summary>
-    public enum ConfigType
+    public enum ConfigFileFormat
     {
         /// <summary>
-        /// 导入文件
+        /// 
         /// </summary>
         Input,
-
         /// <summary>
-        /// 上报文件
+        /// 
         /// </summary>
         Up,
-
         /// <summary>
-        /// 代码导入文件
+        /// 
         /// </summary>
-        CodeInput
+        UpMini
     }
 }

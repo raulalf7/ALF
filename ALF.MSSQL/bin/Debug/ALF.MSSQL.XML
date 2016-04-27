@@ -124,6 +124,26 @@
             <typeparam name="T">需要转换成为的类型</typeparam>
             <returns></returns>
         </member>
+        <member name="M:ALF.MSSQL.Tools.CloseDB(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbName"></param>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.OpenDB(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbName"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.GetDBFilePath(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbName"></param>
+            <returns></returns>
+        </member>
         <member name="P:ALF.MSSQL.Tools.DataBaseType">
             <summary>
             当前使用数据库引擎

@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
 using System.Xml.Serialization;
 using ALF.SYSTEM.DataModel;
 using Microsoft.CSharp;
@@ -71,6 +72,119 @@ namespace ALF.SYSTEM
             try
             {
                 return (ser.Status == ServiceControllerStatus.Running);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 开启服务
+        /// </summary>
+        /// <param name="serviceName">服务名称</param>
+        /// <returns>是否开启成功</returns>
+        public static bool StartService(string serviceName)
+        {
+            var serviceMsdtc = new ServiceController { ServiceName = serviceName, MachineName = "." };
+            //
+            try
+            {
+                Console.WriteLine(@"{0}服务的状态:{1}", serviceName, serviceMsdtc.Status);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.WriteLine(@"您的系统缺少{0}服务,请安装该服务", serviceName);
+                return false;
+            }
+
+            //
+            try
+            {
+                if (serviceMsdtc.Status != ServiceControllerStatus.Running)
+                {
+                    serviceMsdtc.Start();
+                    Console.WriteLine(@"{0}服务已启动", serviceName);
+                    serviceMsdtc.WaitForStatus(ServiceControllerStatus.Running);
+                    Console.WriteLine(@"{0}服务的状态:{1}", serviceName, serviceMsdtc.Status);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+
+                if (SetServiceStartType(serviceName, 2))
+                {
+                    StartService(serviceName);
+                }
+                else
+                {
+                    string s = string.Format("您的{0}服务已被禁用,请在[控制面板-服务中]开启[{1}]服务", serviceName, serviceMsdtc.DisplayName);
+                    Console.WriteLine(s);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// 设置服务启动类型
+        /// </summary>
+        /// <param name="serviceName"></param>
+        /// <param name="iStartType"></param>
+        /// <returns></returns>
+        public static bool SetServiceStartType(String serviceName, int iStartType)
+        {
+            try
+            {
+
+                var process = new Process
+                {
+                    StartInfo = { FileName = "cmd.exe", CreateNoWindow = false, WindowStyle = ProcessWindowStyle.Hidden }
+                };
+
+
+                string startState = "boot";
+
+                switch (iStartType)
+                {
+                    case 1:
+                        {
+                            startState = "system";
+                            break;
+                        }
+                    case 2:
+                        {
+                            startState = "auto";
+                            break;
+                        }
+                    case 3:
+                        {
+                            startState = "demand";
+                            break;
+                        }
+                    case 4:
+                        {
+                            startState = "disabled";
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+                process.StartInfo.Arguments = "/c sc config " + serviceName + " start= " + startState;
+                process.Start();
+
+
+
+                Thread.Sleep(1000);
+                return true;
             }
             catch
             {
@@ -230,7 +344,7 @@ namespace ALF.SYSTEM
         /// <param name="filePath">目标文件夹路径</param>
         /// <param name="inputType">配置文件类型</param>
         /// <returns>创建结果</returns>
-        public static string CreatXml(string filePath, ConfigType inputType)
+        public static string CreatXml(string filePath, ConfigFileType inputType)
         {
             var dir = new DirectoryInfo(string.Format(@"{0}\", filePath));
             if (!dir.Exists)

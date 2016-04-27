@@ -376,6 +376,65 @@ namespace ALF.MSSQL
             return lists;
         }
 
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbName"></param>
+        public static void CloseDB(string dbName)
+        {
+            try
+            {
+                var tmp = DBName;
+                DBName = "master";
+                ExecSql(string.Format("ALTER DATABASE [{0}] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE", dbName));
+                ExecSql(string.Format("EXEC master.dbo.sp_detach_db @dbname = N'{0}'", dbName));
+                Console.WriteLine(@"数据库{0}已Close", dbName);
+                DBName = tmp;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbName"></param>
+        /// <param name="fileName"></param>
+        public static void OpenDB(string dbName, string fileName)
+        {
+            var tmp = DBName;
+            DBName = "master";
+            ExecSql(string.Format(@"CREATE DATABASE [{0}] ON ( FILENAME = N'{1}.mdf' ),( FILENAME = N'{1}_log.ldf' ) FOR ATTACH ", dbName, fileName));
+            ExecSql(@"EXEC sys.sp_configure N'remote query timeout (s)', N'0'");
+            ExecSql(@"RECONFIGURE WITH OVERRIDE");
+            Console.WriteLine(@"数据库{0}已Open", dbName);
+            DBName = tmp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        public static string GetDBFilePath(string dbName)
+        {
+            string tmp;
+            var result = GetSqlListString(string.Format(@"select physical_name from master.sys.master_files where file_id=1 and database_id=DB_ID('{0}')  ",dbName),out tmp);
+            if (tmp != "")
+            {
+                Console.WriteLine(@"发生错误{0}", result);
+            }
+
+            return result[0];
+        }
+
+
+
         #endregion
 
 
