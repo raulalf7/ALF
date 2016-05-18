@@ -478,10 +478,17 @@ namespace ALF.MSSQL
             var pi = type.GetProperties();
             foreach (var item in pi.Where(item => row[item.Name] != null && row[item.Name] != DBNull.Value))
             {
-                item.SetValue(entity,
-                    item.PropertyType == typeof(DateTime?)
-                        ? Convert.ToDateTime(row[item.Name].ToString())
-                        : Convert.ChangeType(row[item.Name], item.PropertyType), null);
+                try
+                {
+                    item.SetValue(entity,
+                        item.PropertyType == typeof (DateTime?)
+                            ? Convert.ToDateTime(row[item.Name].ToString())
+                            : Convert.ChangeType(row[item.Name], item.PropertyType), null);
+                }
+                catch (Exception exception)
+                {
+                    Console.Write("【类型转换发生错误】属性：[{0}],类型：[{1}]，错误信息：{2}", item.Name, item.PropertyType.FullName, exception.Message);
+                }
             }
             return entity;
         }
