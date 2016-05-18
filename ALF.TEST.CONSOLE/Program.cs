@@ -6,6 +6,7 @@ using ALF.OFFICE;
 using ALF.OFFICE.DataModel;
 using ALF.SYSTEM;
 using ALF.SYSTEM.DataModel;
+using Microsoft.Office.Interop.Word;
 
 namespace ALF.TEST.CONSOLE
 {
@@ -13,9 +14,9 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-
-            Encrypt(@"d:\j3125_Z.txt", @"d:\encrypt.txt");
-            Decrypt( @"d:\encrypt.txt",@"d:\j3125_Z_2.txt");
+            Test();
+            //Encrypt(@"d:\j3125_Z.txt", @"d:\encrypt.txt");
+            //Decrypt( @"d:\encrypt.txt",@"d:\j3125_Z_2.txt");
          //   Set();
            //SqlOracleTest();
             //ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.Remote;
@@ -406,6 +407,55 @@ set @templateOwner ='34'
             bool result;
             var dataString = EncryptionTool.SymmetricDecrypt(encryptString,5,"");
             WindowsTools.WriteToTxt(filePath, dataString);
+        }
+
+        private static void Test()
+        {
+            var wordApp =
+                (Application)
+                    Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("000209FF-0000-0000-C000-000000000046")));
+            object filename = @"E:\ALF_CODE\ALF_TOOL\ALF.Tools\ALF.EduDataCheck\bin\Debug\templateFiles\测试文档2.docx"; //要打开的文档路径 
+            string strKey = "findTest"; //要搜索的文本 
+            object MissingValue = Type.Missing;
+            Document wd = wordApp.Documents.Open(ref filename, ref MissingValue,
+            ref MissingValue, ref MissingValue,
+            ref MissingValue, ref MissingValue,
+            ref MissingValue, ref MissingValue,
+            ref MissingValue, ref MissingValue,
+            ref MissingValue, ref MissingValue,
+            ref MissingValue, ref MissingValue,
+            ref MissingValue, ref MissingValue); 
+            int i = 0, iCount = 0;
+            Find wfnd;
+
+            if (wd.Paragraphs != null && wd.Paragraphs.Count > 0)
+            {
+                iCount = wd.Paragraphs.Count;
+                for (i = 1; i <= iCount; i++)
+                {
+                    wfnd = wd.Paragraphs[i].Range.Find;
+                    wfnd.ClearFormatting();
+                    wfnd.Text = strKey;
+                    if (wfnd.Execute(ref MissingValue, ref MissingValue,
+                        ref MissingValue, ref MissingValue,
+                        ref MissingValue, ref MissingValue,
+                        ref MissingValue, ref MissingValue,
+                        ref MissingValue, ref MissingValue,
+                        ref MissingValue, ref MissingValue,
+                        ref MissingValue, ref MissingValue,
+                        ref MissingValue))
+                    {
+                        Console.WriteLine("Find");
+                        break;
+                    }
+                }
+            } 
+        }
+
+
+        private static void ConvertSqlToXml()
+        {
+
         }
     }
 }

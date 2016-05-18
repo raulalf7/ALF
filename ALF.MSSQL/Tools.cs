@@ -487,7 +487,7 @@ namespace ALF.MSSQL
                 }
                 catch (Exception exception)
                 {
-                    Console.Write("【类型转换发生错误】属性：[{0}],类型：[{1}]，错误信息：{2}", item.Name, item.PropertyType.FullName, exception.Message);
+                    Console.WriteLine("【类型转换发生错误】属性：[{0}],类型：[{1}]，错误信息：{2}", item.Name, item.PropertyType.FullName, exception.Message);
                 }
             }
             return entity;

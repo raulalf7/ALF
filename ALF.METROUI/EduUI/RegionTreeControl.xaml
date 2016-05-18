@@ -21,7 +21,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <titleControl:Combo  x:Name="analysisTypeComboBox" Grid.Row="0" Title="分析视角" TitleWidth="-1" />
+        <titleControl:Combo  x:Name="analysisTypeComboBox" Grid.Row="0" Title="分析视角" TitleWidth="-1"  SelectionChanged="AnalysisTypeComboBox_OnSelectionChanged"/>
         
         <TreeView x:Name="typeTreeView" Grid.Row="1"  BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Background="Transparent" SelectedItemChanged="typeTreeView_SelectedItemChanged">
             <TreeView.ItemTemplate>

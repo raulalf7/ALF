@@ -14,6 +14,9 @@ using Application = Microsoft.Office.Interop.Word.Application;
 
 namespace ALF.EDU
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ReportOfficeTools
     {
         private const string TagDocStart = "统计文字参数开始";
@@ -26,6 +29,12 @@ namespace ALF.EDU
         private static object _mis = Type.Missing;
         private static readonly object RpAll = WdReplace.wdReplaceAll;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="templateInfo"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public static List<ArgInfo> GetArgInfoListFromWord(TemplateInfo templateInfo, out string result)
         {
             result = "";
@@ -42,35 +51,36 @@ namespace ALF.EDU
                     while (enumerator.MoveNext())
                     {
                         var item = (Paragraph) enumerator.Current;
-                        var m = Regex.Match(item.Range.Text,
+                        var m = Regex.Matches(item.Range.Text,
                             string.Format(TagFormat, TagDocStart, TagDocEnd));
-                        var argInfo = new ArgInfo
+                        if (m.Count != 0)
                         {
-                            templateID = templateInfo.templateID,
-                            templateName = templateInfo.templateName
-                        };
-                        if (m.Success && resultDocArgList.All(p => p.argName != m.Groups["tag"].Value))
-                        {
-                            argInfo.argType = ArgType.文字.ToString();
-                            argInfo.argName = m.Groups["tag"].Value;
-                            resultDocArgList.Add(argInfo);
+                            resultDocArgList.AddRange(from Match mItem in m
+                                select new ArgInfo
+                                {
+                                    templateID = templateInfo.templateID, templateName = templateInfo.templateName, argType = ArgType.文字.ToString(), argName = mItem.Groups["tag"].Value
+                                });
                         }
-                        m = Regex.Match(item.Range.Text,
+
+
+                        m = Regex.Matches(item.Range.Text,
                             string.Format(TagFormat, TagTableStart, TagTableEnd));
-                        if (m.Success && resultDocArgList.All(p => p.argName != m.Groups["tag"].Value))
+                        if (m.Count != 0)
                         {
-                            argInfo.argType = ArgType.表格.ToString();
-                            argInfo.argName = m.Groups["tag"].Value;
-                            resultDocArgList.Add(argInfo);
+                            resultDocArgList.AddRange(from Match mItem in m
+                                select new ArgInfo
+                                {
+                                    templateID = templateInfo.templateID, templateName = templateInfo.templateName, argType = ArgType.表格.ToString(), argName = mItem.Groups["tag"].Value
+                                });
                         }
-                        m = Regex.Match(item.Range.Text,
+                        m = Regex.Matches(item.Range.Text,
                             string.Format(TagFormat, TagGraphStart, TagGraphEnd));
-                        if (m.Success && resultDocArgList.All(p => p.argName != m.Groups["tag"].Value))
-                        {
-                            argInfo.argType = ArgType.图形.ToString();
-                            argInfo.argName = m.Groups["tag"].Value;
-                            resultDocArgList.Add(argInfo);
-                        }
+                        if (m.Count == 0) continue;
+                        resultDocArgList.AddRange(from Match mItem in m
+                            select new ArgInfo
+                            {
+                                templateID = templateInfo.templateID, templateName = templateInfo.templateName, argType = ArgType.图形.ToString(), argName = mItem.Groups["tag"].Value
+                            });
                     }
                 }
                 finally
@@ -91,6 +101,15 @@ namespace ALF.EDU
             return resultDocArgList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="argInfoList"></param>
+        /// <param name="regionString"></param>
+        /// <param name="appType"></param>
+        /// <param name="filePath"></param>
+        /// <param name="isQuitWhenError"></param>
+        /// <returns></returns>
         public static string UpdateWord(List<ArgInfo> argInfoList, string regionString, int appType, string filePath, bool isQuitWhenError=true)
         {
             var start = DateTime.Now;
@@ -140,7 +159,7 @@ namespace ALF.EDU
                     }
                     if (argInfo.argType == ArgType.文字.ToString())
                     {
-                        result = EditDocArg(dataViewValue.Table.Rows[0][0].ToString(), argInfo.argName, wordDoc);
+                        result = EditDocArg(dataViewValue.Table.Rows[0][0].ToString(), string.Format("{0}{1}{2}", TagDocStart, argInfo.argName, TagDocEnd), wordDoc);
                     }
                     if (argInfo.argType == ArgType.表格.ToString())
                     {
@@ -200,19 +219,20 @@ namespace ALF.EDU
         private static string EditDocArg(string newValue, string oldValue, Document wordDoc)
         {
             var result = "";
-            try
+
+            var iCount = wordDoc.Paragraphs.Count;
+            for (int i = 1; i <= iCount; i++)
             {
-                var oldTotalValue = string.Format("{0}{1}{2}", TagDocStart, oldValue, TagDocEnd);
-                wordDoc.Content.Find.Text = oldTotalValue;
-                wordDoc.Content.Find.ClearFormatting();
-                wordDoc.Content.Find.Replacement.Text = newValue;
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
+                var wfnd = wordDoc.Paragraphs[i].Range.Find;
+                wfnd.Text = oldValue;
+                wfnd.ClearFormatting();
+                if (wfnd.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, newValue, RpAll, ref _mis, ref _mis, ref _mis, ref _mis))
+                {
+                    Console.WriteLine("Find");
+                    Console.WriteLine(wordDoc.Paragraphs[i].Range.Text);
+                }
             }
-            catch (Exception ex)
-            {
-                result = ex.Message;
-            }
+
             return result;
         }
 
@@ -270,26 +290,12 @@ namespace ALF.EDU
             var result = "";
             try
             {
-                wordDoc.Content.Find.Text = TagDocStart;
-                wordDoc.Content.Find.ClearFormatting();
-                wordDoc.Content.Find.Replacement.Text = "";
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
-                wordDoc.Content.Find.Text = TagDocEnd;
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
-                wordDoc.Content.Find.Text = TagTableStart;
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
-                wordDoc.Content.Find.Text = TagTableEnd;
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
-                wordDoc.Content.Find.Text = TagGraphStart;
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
-                wordDoc.Content.Find.Text = TagGraphEnd;
-                wordDoc.Content.Find.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis,
-                    ref _mis, ref _mis, ref _mis, RpAll, ref _mis, ref _mis, ref _mis, ref _mis);
+                EditDocArg("", TagDocStart, wordDoc);
+                EditDocArg("", TagDocEnd,  wordDoc);
+                EditDocArg("", TagTableStart,  wordDoc);
+                EditDocArg("", TagTableEnd, wordDoc);
+                EditDocArg("", TagGraphStart,wordDoc);
+                EditDocArg("", TagGraphEnd, wordDoc);
             }
             catch (Exception ex)
             {
@@ -355,6 +361,12 @@ namespace ALF.EDU
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="regionString"></param>
+        /// <param name="appType"></param>
+        /// <returns></returns>
         public static string GetRegionCondition(string regionString, int appType)
         {
             var regionPathSql = "";
@@ -379,6 +391,13 @@ namespace ALF.EDU
             return string.Format(" left({0},len('{1}'))='{1}'", regionPathSql, regionString);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="argInfo"></param>
+        /// <param name="condition"></param>
+        /// <param name="regionPath"></param>
+        /// <returns></returns>
         public static string AddCondition(ArgInfo argInfo, string condition, string regionPath = "4=4")
         {
             var sql = argInfo.argDataSql;

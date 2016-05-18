@@ -64,39 +64,59 @@
             是否启用
             </summary>
         </member>
-        <member name="T:ALF.SYSTEM.DataModel.FileType">
+        <member name="T:ALF.SYSTEM.DataModel.ConfigFileType">
             <summary>
-            生成文件类型
+            数据文件类型（标识文件的用途来源）
             </summary>
         </member>
-        <member name="F:ALF.SYSTEM.DataModel.FileType.CSV">
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.CSV">
             <summary>
             CSV
             </summary>
         </member>
-        <member name="F:ALF.SYSTEM.DataModel.FileType.Data">
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.Code">
             <summary>
-            DATA
+            
             </summary>
         </member>
-        <member name="T:ALF.SYSTEM.DataModel.ConfigType">
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.Data">
             <summary>
-            配置文件类型
+            
             </summary>
         </member>
-        <member name="F:ALF.SYSTEM.DataModel.ConfigType.Input">
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.DBF">
             <summary>
-            导入文件
+            
             </summary>
         </member>
-        <member name="F:ALF.SYSTEM.DataModel.ConfigType.Up">
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.MiniData">
             <summary>
-            上报文件
+            
             </summary>
         </member>
-        <member name="F:ALF.SYSTEM.DataModel.ConfigType.CodeInput">
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.GzData">
             <summary>
-            代码导入文件
+            
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.DataModel.ConfigFileFormat">
+            <summary>
+            数据文件格式
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileFormat.Input">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileFormat.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileFormat.UpMini">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:ALF.SYSTEM.DataModel.OrclConnInfo">
@@ -321,6 +341,21 @@
             <param name="serviceName">服务名称</param>
             <returns>是否启动</returns>
         </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.StartService(System.String)">
+            <summary>
+            开启服务
+            </summary>
+            <param name="serviceName">服务名称</param>
+            <returns>是否开启成功</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.SetServiceStartType(System.String,System.Int32)">
+            <summary>
+            设置服务启动类型
+            </summary>
+            <param name="serviceName"></param>
+            <param name="iStartType"></param>
+            <returns></returns>
+        </member>
         <member name="M:ALF.SYSTEM.WindowsTools.GetBasicName(System.String)">
             <summary>
             获取文件名
@@ -381,7 +416,7 @@
             <param name="dir">查询目录路径</param>
             <returns>文件列表</returns>
         </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.CreatXml(System.String,ALF.SYSTEM.DataModel.ConfigType)">
+        <member name="M:ALF.SYSTEM.WindowsTools.CreatXml(System.String,ALF.SYSTEM.DataModel.ConfigFileType)">
             <summary>
             创建XML配置文件
             </summary>

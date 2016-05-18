@@ -225,5 +225,10 @@ namespace ALF.METROUI.EduUI
         }
 
         #endregion
+
+        private void AnalysisTypeComboBox_OnSelectionChanged(object sender, EventArgs e)
+        {
+            Load(analysisTypeComboBox.SelectedIndex, false);
+        }
     }
 }
