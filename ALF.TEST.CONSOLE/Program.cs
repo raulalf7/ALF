@@ -14,7 +14,10 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            Test();
+
+
+
+            //Test();
             //Encrypt(@"d:\j3125_Z.txt", @"d:\encrypt.txt");
             //Decrypt( @"d:\encrypt.txt",@"d:\j3125_Z_2.txt");
          //   Set();
@@ -409,47 +412,39 @@ set @templateOwner ='34'
             WindowsTools.WriteToTxt(filePath, dataString);
         }
 
-        private static void Test()
+        private static void Test(string oldValue,string newValue, string filePath)
         {
             var wordApp =
                 (Application)
                     Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("000209FF-0000-0000-C000-000000000046")));
             object filename = @"E:\ALF_CODE\ALF_TOOL\ALF.Tools\ALF.EduDataCheck\bin\Debug\templateFiles\测试文档2.docx"; //要打开的文档路径 
+            filename = filePath;
             string strKey = "findTest"; //要搜索的文本 
             object MissingValue = Type.Missing;
-            Document wd = wordApp.Documents.Open(ref filename, ref MissingValue,
+            Document wordDoc = wordApp.Documents.Open(ref filename, ref MissingValue,
             ref MissingValue, ref MissingValue,
             ref MissingValue, ref MissingValue,
             ref MissingValue, ref MissingValue,
             ref MissingValue, ref MissingValue,
             ref MissingValue, ref MissingValue,
             ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue); 
-            int i = 0, iCount = 0;
-            Find wfnd;
+            ref MissingValue, ref MissingValue);
+            var result = "";
+             object _mis = Type.Missing;
 
-            if (wd.Paragraphs != null && wd.Paragraphs.Count > 0)
+            var iCount = wordDoc.Paragraphs.Count;
+            for (int i = 1; i <= iCount; i++)
             {
-                iCount = wd.Paragraphs.Count;
-                for (i = 1; i <= iCount; i++)
+                var wfnd = wordDoc.Paragraphs[i].Range.Find;
+                wfnd.Text = oldValue;
+                wfnd.ClearFormatting();
+                if (wfnd.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, newValue, WdReplace.wdReplaceAll, ref _mis, ref _mis, ref _mis, ref _mis))
                 {
-                    wfnd = wd.Paragraphs[i].Range.Find;
-                    wfnd.ClearFormatting();
-                    wfnd.Text = strKey;
-                    if (wfnd.Execute(ref MissingValue, ref MissingValue,
-                        ref MissingValue, ref MissingValue,
-                        ref MissingValue, ref MissingValue,
-                        ref MissingValue, ref MissingValue,
-                        ref MissingValue, ref MissingValue,
-                        ref MissingValue, ref MissingValue,
-                        ref MissingValue, ref MissingValue,
-                        ref MissingValue))
-                    {
-                        Console.WriteLine("Find");
-                        break;
-                    }
+                    Console.WriteLine("Find");
+                    Console.WriteLine(wordDoc.Paragraphs[i].Range.Text);
                 }
-            } 
+            }
+
         }
 
 

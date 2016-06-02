@@ -10,17 +10,23 @@ namespace ALF.MSSQL
     /// </summary>
     public static class AccessTools
     {
+
         /// <summary>
         /// 数据库文件位置
         /// </summary>
         public static string FilePath;
 
+        /// <summary>
+        /// 数据库密码
+        /// </summary>
+        public static string Password;
+
         private static string ConnString
         {
-            get
-            {
-                 return string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Persist Security Info=True", FilePath);
+            get {
+                return Password=="" ? string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Persist Security Info=True", FilePath) : string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';User ID='admin';Password=;Jet OLEDB:Database Password='{1}'", FilePath,Password);
             }
+            //
         }
 
         /// <summary>

@@ -143,7 +143,7 @@ namespace ALF.EDU
                     var argStartTime = DateTime.Now;
                     Console.WriteLine("***第{1}个参数开始{0}", argInfo.argName, i);
                     var dataViewValue = Tools.GetSqlDataView(sql, out result);
-                    if (result != "")
+                    if (result != "" )
                     {
                         if (isQuitWhenError)
                         {
@@ -157,9 +157,18 @@ namespace ALF.EDU
                         }
                         continue;
                     }
+
                     if (argInfo.argType == ArgType.文字.ToString())
                     {
-                        result = EditDocArg(dataViewValue.Table.Rows[0][0].ToString(), string.Format("{0}{1}{2}", TagDocStart, argInfo.argName, TagDocEnd), wordDoc);
+
+                        if (dataViewValue == null || dataViewValue.Table.Rows.Count == 0)
+                        {
+                            result = EditDocArg("没有查询结果", string.Format("{0}{1}{2}", TagDocStart, argInfo.argName, TagDocEnd), wordDoc);
+                        }
+                        else
+                        {
+                            result = EditDocArg(dataViewValue.Table.Rows[0][0].ToString(), string.Format("{0}{1}{2}", TagDocStart, argInfo.argName, TagDocEnd), wordDoc);   
+                        }
                     }
                     if (argInfo.argType == ArgType.表格.ToString())
                     {
