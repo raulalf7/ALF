@@ -92,7 +92,7 @@ namespace ALF.SILVERLIGHT.DataModel
 
             foreach (var file in this)
             {
-                if (file.State == Enum.UploadStates.Pending || file.State == Enum.UploadStates.Uploading)
+                if (file.State == Enum.UploadStates.等待上传 || file.State == Enum.UploadStates.上传中)
                 {
                     totalSize += file.FileSize;
                     totalSizeDone += file.BytesUploaded;

@@ -19,7 +19,10 @@ namespace ALF.SILVERLIGHT.DataModel
         /// <summary>
         ///     上传文件名称
         /// </summary>
+        private string _filePhysicalName;
+
         private string _fileName;
+
 
         /// <summary>
         ///     当前文件大小
@@ -45,8 +48,21 @@ namespace ALF.SILVERLIGHT.DataModel
         /// <summary>
         ///     当前上传文件状态
         /// </summary>
-        private Enum.UploadStates _state = Enum.UploadStates.Pending;
+        private Enum.UploadStates _state = Enum.UploadStates.等待上传;
 
+        /// <summary>
+        ///     上传文件名称
+        /// </summary>
+        public string FilePhysicalName
+        {
+            get { return _filePhysicalName; }
+            set
+            {
+                _filePhysicalName = value;
+                NotifyPropertyChanged("FilePhysicalName");
+            }
+        }
+        
         /// <summary>
         ///     上传文件名称
         /// </summary>
@@ -59,7 +75,6 @@ namespace ALF.SILVERLIGHT.DataModel
                 NotifyPropertyChanged("FileName");
             }
         }
-
         /// <summary>
         ///     当前上传文件的状态，注意这时使用了NotifyPropertyChanged来通知FileRowControl控件中的FileRowControl_PropertyChanged事件
         /// </summary>

@@ -42,7 +42,7 @@ namespace ALF.SILVERLIGHT
             var buffer = new byte[4 * 4096];
             var bytesRead = _file.FileStream.Read(buffer, 0, buffer.Length);
 
-            _file.State = Enum.UploadStates.Uploading;
+            _file.State = Enum.UploadStates.上传中;
             //文件是否上传完毕?
             if (bytesRead != 0)
             {
@@ -53,7 +53,7 @@ namespace ALF.SILVERLIGHT
                     _lastChunk = true; //是否是最后一块数据，这样WCF会在服务端根据该信息来决定是否对临时文件重命名
 
                 //上传当前数据块
-                _client.StoreFileAdvancedAsync(_file.FileName, buffer, bytesRead, null, _firstChunk, _lastChunk);
+                _client.StoreFileAdvancedAsync(_file.FilePhysicalName, buffer, bytesRead, null, _firstChunk, _lastChunk);
 
                 //在第一条消息之后一直为false
                 _firstChunk = false;
@@ -73,7 +73,7 @@ namespace ALF.SILVERLIGHT
             if (e.Error != null)
             {
                 //当错误时放弃上传
-                _file.State = Enum.UploadStates.Error;
+                _file.State = Enum.UploadStates.错误;
             }
             else
             {
@@ -108,7 +108,7 @@ namespace ALF.SILVERLIGHT
         {
             if (!_file.IsDeleted)
             {
-                _file.State = Enum.UploadStates.Finished;
+                _file.State = Enum.UploadStates.上传完成;
             }
         }
 
@@ -117,7 +117,7 @@ namespace ALF.SILVERLIGHT
         /// </summary>
         public void CancelUpload()
         {
-            _client.CancelUploadAsync(_file.FileName);
+            _client.CancelUploadAsync(_file.FilePhysicalName);
         }
 
         #endregion

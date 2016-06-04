@@ -14,6 +14,11 @@
             数据库文件位置
             </summary>
         </member>
+        <member name="F:ALF.MSSQL.AccessTools.Password">
+            <summary>
+            数据库密码
+            </summary>
+        </member>
         <member name="M:ALF.MSSQL.AccessTools.ExecuteNonQuery(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
             <summary>
             执行语句

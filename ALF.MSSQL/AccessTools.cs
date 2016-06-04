@@ -21,7 +21,10 @@ namespace ALF.MSSQL
         /// </summary>
         public static string Password;
 
-        private static string ConnString
+        /// <summary>
+        /// 链接字符串
+        /// </summary>
+        public static string ConnString
         {
             get {
                 return Password=="" ? string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Persist Security Info=True", FilePath) : string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';User ID='admin';Password=;Jet OLEDB:Database Password='{1}'", FilePath,Password);

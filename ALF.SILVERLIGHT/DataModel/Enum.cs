@@ -1,19 +1,7 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-
-namespace ALF.SILVERLIGHT.DataModel
+﻿namespace ALF.SILVERLIGHT.DataModel
 {
     public class Enum
     {
-
         /// <summary>
         /// 可能的状态
         /// </summary>
@@ -22,27 +10,27 @@ namespace ALF.SILVERLIGHT.DataModel
             /// <summary>
             /// 暂停
             /// </summary>
-            Pending = 0,
+            等待上传 = 0,
 
             /// <summary>
             /// 上传中
             /// </summary>
-            Uploading = 1,
+            上传中 = 1,
 
             /// <summary>
             /// 结束
             /// </summary>
-            Finished = 2,
+            上传完成 = 2,
 
             /// <summary>
             /// 移除
             /// </summary>
-            Deleted = 3,
+            移除 = 3,
 
             /// <summary>
             /// 错误
             /// </summary>
-            Error = 4
+            错误 = 4
         }
     }
 }
