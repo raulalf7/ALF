@@ -14,14 +14,19 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-
+            var list = ALF.OFFICE.Tools.GetOfficeVersions();
+            foreach (var officeVersion in list)
+            {
+                Console.WriteLine(officeVersion);
+            }
+            Console.ReadLine();
 
 
             //Test();
             //Encrypt(@"d:\j3125_Z.txt", @"d:\encrypt.txt");
             //Decrypt( @"d:\encrypt.txt",@"d:\j3125_Z_2.txt");
-         //   Set();
-           //SqlOracleTest();
+            //   Set();
+            //SqlOracleTest();
             //ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.Remote;
             //ALF.MSSQL.Tools.ConnInfo = new ConnInfo() { ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123," };
             //ALF.MSSQL.Tools.DBName = "XXJGDM";

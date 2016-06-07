@@ -46,6 +46,11 @@
             <param name="commandParameters">查询参数</param>
             <returns>查询结果数据集</returns>
         </member>
+        <member name="P:ALF.MSSQL.AccessTools.ConnString">
+            <summary>
+            链接字符串
+            </summary>
+        </member>
         <member name="T:ALF.MSSQL.DataModel.DataBaseEngineType">
             <summary>
             数据库引擎版本枚举列表

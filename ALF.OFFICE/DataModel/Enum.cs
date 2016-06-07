@@ -24,6 +24,10 @@ namespace ALF.OFFICE.DataModel
         /// </summary>
         Office97,
         /// <summary>
+        /// OfficeXP
+        /// </summary>
+        OfficeXp,
+        /// <summary>
         /// Office2000
         /// </summary>
         Office2000,
