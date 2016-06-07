@@ -277,8 +277,17 @@ namespace ALF.SYSTEM
         /// <returns>TXT文件内容</returns>
         public static string ReadFromTxt(string path)
         {
-            var t = File.ReadAllLines(path, Encoding.Default);
-            return t.Aggregate("", (current, s) => current + (s + Environment.NewLine));
+            try
+            {
+                Console.WriteLine("Reading Path :"+path);
+                var t = File.ReadAllLines(path, Encoding.Default);
+                return t.Aggregate("", (current, s) => current + (s + Environment.NewLine));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Reading Error :"+ exception.Message );
+                return "";
+            }
         }
 
         /// <summary>
