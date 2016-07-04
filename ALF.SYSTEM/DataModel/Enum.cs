@@ -44,6 +44,10 @@
         /// <summary>
         /// 
         /// </summary>
+        InputMini,
+        /// <summary>
+        /// 
+        /// </summary>
         Up,
         /// <summary>
         /// 
