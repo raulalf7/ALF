@@ -119,16 +119,20 @@ namespace ALF.MSSQL
                 return null;
             }
 
-            OleDbCommand cmd = new OleDbCommand();
-            using (OleDbConnection conn = new OleDbConnection(ConnString))
+            var cmd = new OleDbCommand();
+            using (var conn = new OleDbConnection(ConnString))
             {
                 PrepareCommand(cmd, conn, null, cmdText);
-                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-                DataSet ds = new DataSet();
+                var da = new OleDbDataAdapter(cmd);
+                var ds = new DataSet();
                 try
                 {
                     da.Fill(ds);
                     cmd.Parameters.Clear();
+                    if (tableName != "")
+                    {
+                        ds.Tables[0].TableName = tableName;
+                    }
                     return ds;
                 }
                 catch (Exception exception)
@@ -147,11 +151,12 @@ namespace ALF.MSSQL
         /// <param name="sql">查询语句</param>
         /// <param name="path">保存文件完整路径</param>
         /// <param name="dataFormat">数据格式</param>
+        /// <param name="tableName">表名</param>
         /// <returns>错误信息</returns>
-        public static string ExportDataToXml(string sql, string path, string dataFormat)
+        public static string ExportDataToXml(string sql, string path, string dataFormat, string tableName="")
         {
             string tmp;
-            var ds = ExecuteDataSet(sql, out tmp);
+            var ds = ExecuteDataSet(sql, out tmp, tableName);
             if (tmp != "")
             {
                 Console.WriteLine(tmp);
