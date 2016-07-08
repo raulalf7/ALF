@@ -37,9 +37,8 @@ namespace ALF.MSSQL
         /// </summary>
         /// <param name="cmdText">查询语句</param>
         /// <param name="result">执行结果</param>
-        /// <param name="commandParameters">查询参数</param>
         /// <returns>影响行数</returns>
-        public static int ExecuteNonQuery(string cmdText,out string result, params OleDbParameter[] commandParameters)
+        public static int ExecuteNonQuery(string cmdText,out string result)
         {
             result = "";
             if (!File.Exists(FilePath))
@@ -56,7 +55,7 @@ namespace ALF.MSSQL
                 var cmd = new OleDbCommand();
                 using (var conn = new OleDbConnection(ConnString))
                 {
-                    PrepareCommand(cmd, conn, null, cmdText, commandParameters);
+                    PrepareCommand(cmd, conn, null, cmdText);
                     var val = cmd.ExecuteNonQuery();
                     cmd.Parameters.Clear();
                     return val;
@@ -74,9 +73,8 @@ namespace ALF.MSSQL
         /// </summary>
         /// <param name="cmdText">查询语句</param>
         /// <param name="result">执行结果</param>
-        /// <param name="commandParameters">查询参数</param>
         /// <returns>查询结果访问器</returns>
-        public static OleDbDataReader ExecuteReader(string cmdText, out string result, params OleDbParameter[] commandParameters)
+        public static OleDbDataReader ExecuteReader(string cmdText, out string result)
         {
             result = "";
             if (!File.Exists(FilePath))
@@ -90,7 +88,7 @@ namespace ALF.MSSQL
             {
                 try
                 {
-                    PrepareCommand(cmd, conn, null, cmdText, commandParameters);
+                    PrepareCommand(cmd, conn, null, cmdText);
                     OleDbDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                     cmd.Parameters.Clear();
                     return reader;
@@ -110,9 +108,9 @@ namespace ALF.MSSQL
         /// </summary>
         /// <param name="cmdText">查询语句</param>
         /// <param name="result">执行结果</param>
-        /// <param name="commandParameters">查询参数</param>
+        /// <param name="tableName">数据表名称</param>
         /// <returns>查询结果数据集</returns>
-        public static DataSet ExecuteDataSet(string cmdText, out string result, params OleDbParameter[] commandParameters)
+        public static DataSet ExecuteDataSet(string cmdText, out string result,string tableName="")
         {
             result = "";
             if (!File.Exists(FilePath))
@@ -124,7 +122,7 @@ namespace ALF.MSSQL
             OleDbCommand cmd = new OleDbCommand();
             using (OleDbConnection conn = new OleDbConnection(ConnString))
             {
-                PrepareCommand(cmd, conn, null, cmdText, commandParameters);
+                PrepareCommand(cmd, conn, null, cmdText);
                 OleDbDataAdapter da = new OleDbDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 try
@@ -143,34 +141,95 @@ namespace ALF.MSSQL
             }
         }
 
-        public static string ExportDataToXml(string cmdText, string tableName, string xmlFilePath, params OleDbParameter[] commandParameters)
+        /// <summary>
+        /// 从ACCESS库中导出数据为XML
+        /// </summary>
+        /// <param name="sql">查询语句</param>
+        /// <param name="path">保存文件完整路径</param>
+        /// <param name="dataFormat">数据格式</param>
+        /// <returns>错误信息</returns>
+        public static string ExportDataToXml(string sql, string path, string dataFormat)
         {
-
-            using (OleDbConnection conn = new OleDbConnection(ConnString))
+            string tmp;
+            var ds = ExecuteDataSet(sql, out tmp);
+            if (tmp != "")
             {
-                DataSet dataSet = new DataSet();
-                OleDbCommand cmd = new OleDbCommand();
-                PrepareCommand(cmd, conn, null, cmdText, commandParameters);
-                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-                DataTable dataTable = dataSet.Tables.Add("Names_Table");
-                try
-                {
-                    da.Fill(dataTable);
-                    dataTable.WriteXmlSchema("Names.Schema.xml");
-                    dataTable.WriteXml("Names.xml");
-                    return "";
-                }
-                catch (Exception exception)
-                {
-                    //关闭连接，抛出异常
-                    conn.Close();
-                    return "[Error in ALF.MSSQL]Access Query Error: " + exception.Message;
-                    return null;
-                }
+                Console.WriteLine(tmp);
+                return string.Format("导出数据错误：{0}", tmp);
             }
+            var dir = new DirectoryInfo(path);
+            if (!dir.Exists)
+            {
+                Directory.CreateDirectory(path);
+            }
+            try
+            {
+                ds.WriteXmlSchema(string.Format(@"{0}{1}Schema", path, dataFormat));
+                ds.WriteXml(string.Format(@"{0}{1}", path, dataFormat));
+            
+            }
+            catch (Exception ex)
+            {
+                return string.Format("导出数据错误：{0}", ex.Message);
+            }
+            return "";
         }
 
-        private static void PrepareCommand(OleDbCommand cmd, OleDbConnection conn, OleDbTransaction trans, string cmdText, OleDbParameter[] cmdParms)
+        /// <summary>
+        /// 从XML导入ACCESS
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="path">文件路径</param>
+        /// <returns>错误信息</returns>
+        public static string ImportDataFromXml(string tableName,string path)
+        {
+            var dataSet = new DataSet();
+            try
+            {
+                dataSet.ReadXml(path);
+                dataSet.ReadXmlSchema(path + "Schema");
+            }
+            catch (Exception ex)
+            {
+                return string.Format("导入数据错误：{0}", ex.Message); 
+            }
+            var columnTags = "";
+            var rowValues = "";
+            var sqlFormat = "Insert into {0} ({1}) values ({2})";
+
+            foreach (DataRow row in dataSet.Tables[0].Rows)
+            {
+                foreach (DataColumn column in dataSet.Tables[0].Columns)
+                {
+                    columnTags += string.Format("{0},", column.ColumnName);
+
+                    if (column.DataType == typeof (Guid))
+                    {
+                        rowValues += string.Format("{{{0}}},", row[column]);
+                    }
+                    else if (column.DataType == typeof(string))
+                    {
+                        rowValues += string.Format("'{0}',", row[column]);
+                    }
+                    else
+                    {
+                        rowValues += string.Format("{0},", row[column]);
+                    }
+                }
+                columnTags = columnTags.Substring(0, columnTags.Length - 1);
+                rowValues = rowValues.Substring(0, rowValues.Length - 1);
+                var sql = string.Format(sqlFormat, dataSet.Tables[0].TableName, columnTags, rowValues);
+                string tmp;
+                ExecuteNonQuery(sql, out tmp);
+                if (tmp != "")
+                {
+                    return string.Format("导入数据错误：{0}", tmp);
+                }
+            }
+            return "";
+        }
+
+        private static void PrepareCommand(OleDbCommand cmd, OleDbConnection conn, OleDbTransaction trans, string cmdText)
         {
             if (conn.State != ConnectionState.Open)
                 conn.Open();
@@ -179,11 +238,6 @@ namespace ALF.MSSQL
             if (trans != null)
                 cmd.Transaction = trans;
             cmd.CommandType = CommandType.Text;
-            if (cmdParms != null)
-            {
-                foreach (OleDbParameter parm in cmdParms)
-                    cmd.Parameters.Add(parm);
-            }
         }
         
     }

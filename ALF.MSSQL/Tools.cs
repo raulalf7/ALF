@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using ALF.MSSQL.DataModel;
 using ALF.SYSTEM.DataModel;
@@ -377,7 +378,43 @@ namespace ALF.MSSQL
         }
 
 
+        /// <summary>
+        /// 从XML导入SQLSERVER
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>错误信息</returns>
+        public static string ImportDataFromXml(string tableName, string filePath)
+        {
 
+            using (var conn = new SqlConnection(SQLConnString))
+            {
+                conn.Open();
+                string result="";
+                var bcp = new SqlBulkCopy(conn) { DestinationTableName = tableName };
+                var ds = new DataSet();
+                if (!File.Exists(filePath) || !File.Exists(filePath + "Scheme"))
+                {
+                    result = string.Format("导入数据失败：{0}【数据文件或者配置文件不存在】", filePath);
+                    Console.WriteLine(result);
+                    return result;
+                }
+                try
+                {
+                    ds.ReadXmlSchema(filePath + "Scheme");
+                    ds.ReadXml(filePath);
+                    bcp.WriteToServer(ds.Tables[0]);
+                }
+                catch (Exception ex)
+                {
+                    conn.Close();
+                    result = string.Format("导入数据失败：{0}【{1}】", filePath, ex.Message);
+                    Console.WriteLine(result);
+                    return result;
+                }
+                return result;
+            }
+        }
 
         /// <summary>
         /// 
