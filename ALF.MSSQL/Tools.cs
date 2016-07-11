@@ -393,7 +393,7 @@ namespace ALF.MSSQL
                 string result="";
                 var bcp = new SqlBulkCopy(conn) { DestinationTableName = tableName };
                 var ds = new DataSet();
-                if (!File.Exists(filePath) || !File.Exists(filePath + "Scheme"))
+                if (!File.Exists(filePath) || !File.Exists(filePath + "Schema"))
                 {
                     result = string.Format("导入数据失败：{0}【数据文件或者配置文件不存在】", filePath);
                     Console.WriteLine(result);
@@ -401,7 +401,7 @@ namespace ALF.MSSQL
                 }
                 try
                 {
-                    ds.ReadXmlSchema(filePath + "Scheme");
+                    ds.ReadXmlSchema(filePath + "Schema");
                     ds.ReadXml(filePath);
                     bcp.WriteToServer(ds.Tables[0]);
                 }

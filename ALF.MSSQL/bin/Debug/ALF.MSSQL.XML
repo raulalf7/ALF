@@ -44,13 +44,14 @@
             <param name="tableName">数据表名称</param>
             <returns>查询结果数据集</returns>
         </member>
-        <member name="M:ALF.MSSQL.AccessTools.ExportDataToXml(System.String,System.String,System.String)">
+        <member name="M:ALF.MSSQL.AccessTools.ExportDataToXml(System.String,System.String,System.String,System.String)">
             <summary>
             从ACCESS库中导出数据为XML
             </summary>
             <param name="sql">查询语句</param>
             <param name="path">保存文件完整路径</param>
             <param name="dataFormat">数据格式</param>
+            <param name="tableName">表名</param>
             <returns>错误信息</returns>
         </member>
         <member name="M:ALF.MSSQL.AccessTools.ImportDataFromXml(System.String,System.String)">

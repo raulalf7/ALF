@@ -14,58 +14,32 @@
             数据库文件位置
             </summary>
         </member>
-        <member name="F:ALF.MSSQL.AccessTools.Password">
-            <summary>
-            数据库密码
-            </summary>
-        </member>
-        <member name="M:ALF.MSSQL.AccessTools.ExecuteNonQuery(System.String,System.String@)">
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteNonQuery(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
             <summary>
             执行语句
             </summary>
             <param name="cmdText">查询语句</param>
             <param name="result">执行结果</param>
+            <param name="commandParameters">查询参数</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:ALF.MSSQL.AccessTools.ExecuteReader(System.String,System.String@)">
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteReader(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
             <summary>
             根据查询语句获取查询访问器
             </summary>
             <param name="cmdText">查询语句</param>
             <param name="result">执行结果</param>
+            <param name="commandParameters">查询参数</param>
             <returns>查询结果访问器</returns>
         </member>
-        <member name="M:ALF.MSSQL.AccessTools.ExecuteDataSet(System.String,System.String@,System.String)">
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteDataSet(System.String,System.String@,System.Data.OleDb.OleDbParameter[])">
             <summary>
             根据查询语句获取查询数据集
             </summary>
             <param name="cmdText">查询语句</param>
             <param name="result">执行结果</param>
-            <param name="tableName">数据表名称</param>
+            <param name="commandParameters">查询参数</param>
             <returns>查询结果数据集</returns>
-        </member>
-        <member name="M:ALF.MSSQL.AccessTools.ExportDataToXml(System.String,System.String,System.String,System.String)">
-            <summary>
-            从ACCESS库中导出数据为XML
-            </summary>
-            <param name="sql">查询语句</param>
-            <param name="path">保存文件完整路径</param>
-            <param name="dataFormat">数据格式</param>
-            <param name="tableName">表名</param>
-            <returns>错误信息</returns>
-        </member>
-        <member name="M:ALF.MSSQL.AccessTools.ImportDataFromXml(System.String,System.String)">
-            <summary>
-            从XML导入ACCESS
-            </summary>
-            <param name="tableName">表名</param>
-            <param name="path">文件路径</param>
-            <returns>错误信息</returns>
-        </member>
-        <member name="P:ALF.MSSQL.AccessTools.ConnString">
-            <summary>
-            链接字符串
-            </summary>
         </member>
         <member name="T:ALF.MSSQL.DataModel.DataBaseEngineType">
             <summary>
@@ -149,14 +123,6 @@
             <param name="ds">需要转换的数据集</param>
             <typeparam name="T">需要转换成为的类型</typeparam>
             <returns></returns>
-        </member>
-        <member name="M:ALF.MSSQL.Tools.ImportDataFromXml(System.String,System.String)">
-            <summary>
-            从XML导入SQLSERVER
-            </summary>
-            <param name="tableName">表名</param>
-            <param name="filePath">文件路径</param>
-            <returns>错误信息</returns>
         </member>
         <member name="M:ALF.MSSQL.Tools.CloseDB(System.String)">
             <summary>

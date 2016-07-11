@@ -153,7 +153,7 @@ namespace ALF.MSSQL
         /// <param name="dataFormat">数据格式</param>
         /// <param name="tableName">表名</param>
         /// <returns>错误信息</returns>
-        public static string ExportDataToXml(string sql, string path, string dataFormat, string tableName="")
+        public static string ExportDataToXml(string sql, string path, string dataFormat, string tableName)
         {
             string tmp;
             var ds = ExecuteDataSet(sql, out tmp, tableName);
@@ -169,8 +169,8 @@ namespace ALF.MSSQL
             }
             try
             {
-                ds.WriteXmlSchema(string.Format(@"{0}{1}Schema", path, dataFormat));
-                ds.WriteXml(string.Format(@"{0}{1}", path, dataFormat));
+                ds.WriteXmlSchema(string.Format(@"{0}{1}{2}Schema", path,tableName, dataFormat));
+                ds.WriteXml(string.Format(@"{0}{1}{2}", path, tableName, dataFormat));
             
             }
             catch (Exception ex)

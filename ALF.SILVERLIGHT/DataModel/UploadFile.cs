@@ -24,6 +24,8 @@ namespace ALF.SILVERLIGHT.DataModel
         private string _fileName;
 
 
+        private string _fileDescription;
+
         /// <summary>
         ///     当前文件大小
         /// </summary>
@@ -62,7 +64,19 @@ namespace ALF.SILVERLIGHT.DataModel
                 NotifyPropertyChanged("FilePhysicalName");
             }
         }
-        
+
+        /// <summary>
+        ///     上传文件名称
+        /// </summary>
+        public string FileDescription
+        {
+            get { return _fileDescription; }
+            set
+            {
+                _fileDescription = value;
+                NotifyPropertyChanged("FileDescription");
+            }
+        }
         /// <summary>
         ///     上传文件名称
         /// </summary>
