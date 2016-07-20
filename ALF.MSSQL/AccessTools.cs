@@ -198,12 +198,12 @@ namespace ALF.MSSQL
             {
                 return string.Format("导入数据错误：{0}", ex.Message); 
             }
-            var columnTags = "";
-            var rowValues = "";
             var sqlFormat = "Insert into {0} ({1}) values ({2})";
 
             foreach (DataRow row in dataSet.Tables[0].Rows)
             {
+                var rowValues = "";
+                var columnTags = "";
                 foreach (DataColumn column in dataSet.Tables[0].Columns)
                 {
                     columnTags += string.Format("{0},", column.ColumnName);
@@ -228,7 +228,7 @@ namespace ALF.MSSQL
                 ExecuteNonQuery(sql, out tmp);
                 if (tmp != "")
                 {
-                    return string.Format("导入数据错误：{0}", tmp);
+                    return string.Format("导入数据错误：{0}，导入SQL{1}", tmp,sql);
                 }
             }
             return "";

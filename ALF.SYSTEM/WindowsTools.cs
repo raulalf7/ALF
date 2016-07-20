@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -433,6 +434,41 @@ namespace ALF.SYSTEM
                 return exception.Message;
             }
         }
+
+
+
+        /// <summary>
+        /// 对象转换
+        /// </summary>
+        /// <param name="targetType">目标数据类型</param>
+        /// <param name="origObject">需要转换的对象</param>
+        /// <returns>转换后的对象</returns>
+        public static object DataClassTransfer(Type targetType, object origObject)
+        {
+            var destObject = targetType.Assembly.CreateInstance(targetType.FullName);
+            if (destObject == null)
+            {
+                return null;
+            }
+            var destinationProperties = destObject.GetType().GetProperties();
+
+            foreach (var pi in destinationProperties)
+            {
+                var property = origObject.GetType().GetProperty(pi.Name);
+                if (property == null)
+                {
+                    continue;
+                }
+                var o = property.GetValue(origObject, null);
+                if (o == null)
+                {
+                    continue;
+                }
+                pi.SetValue(destObject, o, null);
+            }
+            return destObject;
+        }
+
 
 
         #endregion

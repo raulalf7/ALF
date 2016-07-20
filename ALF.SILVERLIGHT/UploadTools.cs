@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ServiceModel;
+using System.Windows;
 using ALF.SILVERLIGHT.DataModel;
 using ALF.SILVERLIGHT.SilverlightUploadServiceReference;
 using Enum = ALF.SILVERLIGHT.DataModel.Enum;
@@ -74,6 +75,7 @@ namespace ALF.SILVERLIGHT
             {
                 //当错误时放弃上传
                 _file.State = Enum.UploadStates.错误;
+                MessageBox.Show(e.Error.Message);
             }
             else
             {
