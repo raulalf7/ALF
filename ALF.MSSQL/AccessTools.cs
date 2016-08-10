@@ -191,8 +191,8 @@ namespace ALF.MSSQL
             var dataSet = new DataSet();
             try
             {
-                dataSet.ReadXml(path);
                 dataSet.ReadXmlSchema(path + "Schema");
+                dataSet.ReadXml(path);
             }
             catch (Exception ex)
             {
@@ -215,6 +215,10 @@ namespace ALF.MSSQL
                     else if (column.DataType == typeof(string))
                     {
                         rowValues += string.Format("'{0}',", row[column]);
+                    }
+                    else if (column.DataType == typeof(DateTime))
+                    {
+                        rowValues += string.Format("'{0}',", ((DateTime)row[column]).ToString("yyyy-MM-dd hh:mm:ss"));
                     }
                     else
                     {

@@ -447,5 +447,13 @@
             <param name="obj">序列化目标类型</param>
             <returns>反序列化结果</returns>
         </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.DataClassTransfer(System.Type,System.Object)">
+            <summary>
+            对象转换
+            </summary>
+            <param name="targetType">目标数据类型</param>
+            <param name="origObject">需要转换的对象</param>
+            <returns>转换后的对象</returns>
+        </member>
     </members>
 </doc>

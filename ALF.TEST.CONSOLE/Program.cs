@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using ALF.MSSQL;
 using ALF.MSSQL.DataModel;
 using ALF.OFFICE;
 using ALF.OFFICE.DataModel;
 using ALF.SYSTEM;
 using ALF.SYSTEM.DataModel;
 using Microsoft.Office.Interop.Word;
+using Microsoft.Win32;
+using Tools = ALF.OFFICE.Tools;
 
 namespace ALF.TEST.CONSOLE
 {
@@ -14,32 +18,7 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            var list = ALF.OFFICE.Tools.GetOfficeVersions();
-            foreach (var officeVersion in list)
-            {
-                Console.WriteLine(officeVersion);
-            }
-            Console.ReadLine();
-
-
-            //Test();
-            //Encrypt(@"d:\j3125_Z.txt", @"d:\encrypt.txt");
-            //Decrypt( @"d:\encrypt.txt",@"d:\j3125_Z_2.txt");
-            //   Set();
-            //SqlOracleTest();
-            //ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.Remote;
-            //ALF.MSSQL.Tools.ConnInfo = new ConnInfo() { ConnIp = @"192.168.0.20\sql2012", ConnPw = "abc123," };
-            //ALF.MSSQL.Tools.DBName = "XXJGDM";
-            //ALF.MSSQL.Tools.TransferDataToOracle("JG_JBZ", "192.168.0.201", "1521", "orcl", "jgdm", "jgdm");
-
-            //SqlOracleTest();
-            //var readString = "";
-            //while (readString != "exit")
-            //{
-            //    CheckSoftware();
-            //    Console.WriteLine("Quit print exit");
-            //    readString = Console.ReadLine();
-            //}
+            AccessTools.ImportDataFromXml("schoolInfo", @"F:\schoolInfo.eduData");
         }
 
         private static void CheckSoftware()
