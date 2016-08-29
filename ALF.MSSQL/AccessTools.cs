@@ -24,13 +24,9 @@ namespace ALF.MSSQL
         /// <summary>
         /// 链接字符串
         /// </summary>
-        public static string ConnString
-        {
-            get {
-                return Password=="" ? string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';Persist Security Info=True", FilePath) : string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{0}';User ID='admin';Password=;Jet OLEDB:Database Password='{1}'", FilePath,Password);
-            }
-            //
-        }
+        public static string ConnString => Password=="" ?
+            $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{FilePath}';Persist Security Info=True"
+            : $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source='{FilePath}';User ID='admin';Password=;Jet OLEDB:Database Password='{Password}'";
 
         /// <summary>
         /// 执行语句
@@ -160,7 +156,7 @@ namespace ALF.MSSQL
             if (tmp != "")
             {
                 Console.WriteLine(tmp);
-                return string.Format("导出数据错误：{0}", tmp);
+                return $"导出数据错误：{tmp}";
             }
             var dir = new DirectoryInfo(path);
             if (!dir.Exists)
@@ -169,13 +165,13 @@ namespace ALF.MSSQL
             }
             try
             {
-                ds.WriteXmlSchema(string.Format(@"{0}{1}{2}Schema", path,tableName, dataFormat));
-                ds.WriteXml(string.Format(@"{0}{1}{2}", path, tableName, dataFormat));
+                ds.WriteXmlSchema($@"{path}{tableName}{dataFormat}Schema");
+                ds.WriteXml($@"{path}{tableName}{dataFormat}");
             
             }
             catch (Exception ex)
             {
-                return string.Format("导出数据错误：{0}", ex.Message);
+                return $"导出数据错误：{ex.Message}";
             }
             return "";
         }
@@ -196,7 +192,7 @@ namespace ALF.MSSQL
             }
             catch (Exception ex)
             {
-                return string.Format("导入数据错误：{0}", ex.Message); 
+                return $"导入数据错误：{ex.Message}"; 
             }
             var sqlFormat = "Insert into {0} ({1}) values ({2})";
 
@@ -206,23 +202,23 @@ namespace ALF.MSSQL
                 var columnTags = "";
                 foreach (DataColumn column in dataSet.Tables[0].Columns)
                 {
-                    columnTags += string.Format("{0},", column.ColumnName);
+                    columnTags += $"{column.ColumnName},";
 
                     if (column.DataType == typeof (Guid))
                     {
-                        rowValues += string.Format("{{{0}}},", row[column]);
+                        rowValues += $"{{{row[column]}}},";
                     }
                     else if (column.DataType == typeof(string))
                     {
-                        rowValues += string.Format("'{0}',", row[column]);
+                        rowValues += $"'{row[column]}',";
                     }
                     else if (column.DataType == typeof(DateTime))
                     {
-                        rowValues += string.Format("'{0}',", ((DateTime)row[column]).ToString("yyyy-MM-dd hh:mm:ss"));
+                        rowValues += $"'{(DateTime) row[column]:yyyy-MM-dd hh:mm:ss}',";
                     }
                     else
                     {
-                        rowValues += string.Format("{0},", row[column]);
+                        rowValues += $"{row[column]},";
                     }
                 }
                 columnTags = columnTags.Substring(0, columnTags.Length - 1);
@@ -232,7 +228,7 @@ namespace ALF.MSSQL
                 ExecuteNonQuery(sql, out tmp);
                 if (tmp != "")
                 {
-                    return string.Format("导入数据错误：{0}，导入SQL{1}", tmp,sql);
+                    return $"导入数据错误：{tmp}，导入SQL{sql}";
                 }
             }
             return "";
