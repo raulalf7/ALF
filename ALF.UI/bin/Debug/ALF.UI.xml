@@ -33,11 +33,6 @@
             <param name="type">加载类型</param>
             <param name="isLock">是否锁定</param>
         </member>
-        <member name="M:ALF.UI.EduUI.RegionTreeControl.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
         <member name="E:ALF.UI.EduUI.RegionTreeControl.SelectChange">
             <summary>
             选择改变事件
@@ -56,6 +51,11 @@
         <member name="P:ALF.UI.EduUI.RegionTreeControl.SelectedPath">
             <summary>
             选择路径
+            </summary>
+        </member>
+        <member name="M:ALF.UI.EduUI.RegionTreeControl.InitializeComponent">
+            <summary>
+            InitializeComponent
             </summary>
         </member>
         <member name="T:ALF.UI.Annotations.CanBeNullAttribute">
@@ -598,233 +598,233 @@
             The attribute must be mentioned in your member reordering patterns
             </remarks>
         </member>
-        <member name="T:ALF.UI.TitleCombo">
+        <member name="T:ALF.UI.TitleControl.Combo">
             <summary>
             TitleCombo.xaml 的交互逻辑
             </summary>
             <summary>
-            TitleCombo
+            Combo
             </summary>
         </member>
-        <member name="M:ALF.UI.TitleCombo.#ctor">
+        <member name="M:ALF.UI.TitleControl.Combo.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:ALF.UI.TitleCombo.SetBinding">
-            <summary>
-            设置绑定
-            </summary>
-        </member>
-        <member name="M:ALF.UI.TitleCombo.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="P:ALF.UI.TitleCombo.Title">
+        <member name="P:ALF.UI.TitleControl.Combo.Title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.TitleWidth">
+        <member name="P:ALF.UI.TitleControl.Combo.TitleWidth">
             <summary>
             标题区域宽度
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.ValueWidth">
+        <member name="P:ALF.UI.TitleControl.Combo.ValueWidth">
             <summary>
             值区域宽度
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.TitleColor">
+        <member name="P:ALF.UI.TitleControl.Combo.TitleColor">
             <summary>
             标题颜色
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.TitleSize">
+        <member name="P:ALF.UI.TitleControl.Combo.TitleSize">
             <summary>
             标题大小
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.IsEnable">
+        <member name="P:ALF.UI.TitleControl.Combo.IsEnable">
             <summary>
             是否启用
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.Binding">
+        <member name="P:ALF.UI.TitleControl.Combo.Binding">
             <summary>
             绑定属性名称
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.SelectedItem">
+        <member name="M:ALF.UI.TitleControl.Combo.SetBinding">
+            <summary>
+            设置绑定
+            </summary>
+        </member>
+        <member name="P:ALF.UI.TitleControl.Combo.SelectedItem">
             <summary>
             所选对象
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.SelectedIndex">
+        <member name="P:ALF.UI.TitleControl.Combo.SelectedIndex">
             <summary>
             所选序号
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.ItemsSource">
+        <member name="P:ALF.UI.TitleControl.Combo.ItemsSource">
             <summary>
             绑定数据源
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.Items">
+        <member name="P:ALF.UI.TitleControl.Combo.Items">
             <summary>
             数据源字符串
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleCombo.DisplayMemberPath">
+        <member name="P:ALF.UI.TitleControl.Combo.DisplayMemberPath">
             <summary>
             显示属性名称
             </summary>
         </member>
-        <member name="E:ALF.UI.TitleCombo.SelectionChanged">
+        <member name="E:ALF.UI.TitleControl.Combo.SelectionChanged">
             <summary>
             选择改变事件处理
             </summary>
         </member>
-        <member name="T:ALF.UI.TitleLabel">
+        <member name="M:ALF.UI.TitleControl.Combo.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ALF.UI.TitleControl.Label">
             <summary>
             TitleLabel.xaml 的交互逻辑
             </summary>
             <summary>
-            TitleLabel
+            Label
             </summary>
         </member>
-        <member name="M:ALF.UI.TitleLabel.#ctor">
+        <member name="M:ALF.UI.TitleControl.Label.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:ALF.UI.TitleLabel.SetBinding">
-            <summary>
-            设置绑定
-            </summary>
-        </member>
-        <member name="M:ALF.UI.TitleLabel.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="P:ALF.UI.TitleLabel.Title">
+        <member name="P:ALF.UI.TitleControl.Label.Title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.TitleWidth">
+        <member name="P:ALF.UI.TitleControl.Label.TitleWidth">
             <summary>
             标题区域宽度
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.ValueWidth">
+        <member name="P:ALF.UI.TitleControl.Label.ValueWidth">
             <summary>
             值区域宽度
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.TitleColor">
+        <member name="P:ALF.UI.TitleControl.Label.TitleColor">
             <summary>
             标题颜色
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.TitleSize">
+        <member name="P:ALF.UI.TitleControl.Label.TitleSize">
             <summary>
             标题大小
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.Binding">
+        <member name="P:ALF.UI.TitleControl.Label.Binding">
             <summary>
             绑定属性名称
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.Value">
+        <member name="M:ALF.UI.TitleControl.Label.SetBinding">
+            <summary>
+            设置绑定
+            </summary>
+        </member>
+        <member name="P:ALF.UI.TitleControl.Label.Value">
             <summary>
             值
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleLabel.ValueBackground">
+        <member name="P:ALF.UI.TitleControl.Label.ValueBackground">
             <summary>
             值背景颜色
             </summary>
         </member>
-        <member name="T:ALF.UI.TitleTextBox">
+        <member name="M:ALF.UI.TitleControl.Label.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ALF.UI.TitleControl.Text">
             <summary>
             TitleText.xaml 的交互逻辑
             </summary>
             <summary>
-            TitleTextBox
+            Text
             </summary>
         </member>
-        <member name="M:ALF.UI.TitleTextBox.#ctor">
+        <member name="M:ALF.UI.TitleControl.Text.#ctor">
             <summary>
             构造函数
             </summary>
         </member>
-        <member name="M:ALF.UI.TitleTextBox.SetBinding">
-            <summary>
-            设置绑定
-            </summary>
-        </member>
-        <member name="M:ALF.UI.TitleTextBox.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
-        <member name="P:ALF.UI.TitleTextBox.Title">
+        <member name="P:ALF.UI.TitleControl.Text.Title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.TitleWidth">
+        <member name="P:ALF.UI.TitleControl.Text.TitleWidth">
             <summary>
             标题区域宽度
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.ValueWidth">
+        <member name="P:ALF.UI.TitleControl.Text.ValueWidth">
             <summary>
             值区域宽度
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.TitleColor">
+        <member name="P:ALF.UI.TitleControl.Text.TitleColor">
             <summary>
             标题颜色
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.TitleSize">
+        <member name="P:ALF.UI.TitleControl.Text.TitleSize">
             <summary>
             标题大小
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.Binding">
+        <member name="P:ALF.UI.TitleControl.Text.Binding">
             <summary>
             绑定属性名称
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.IsLong">
+        <member name="M:ALF.UI.TitleControl.Text.SetBinding">
+            <summary>
+            设置绑定
+            </summary>
+        </member>
+        <member name="P:ALF.UI.TitleControl.Text.IsLong">
             <summary>
             是否长字符串
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.Value">
+        <member name="P:ALF.UI.TitleControl.Text.Value">
             <summary>
             值
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.ValueBackground">
+        <member name="P:ALF.UI.TitleControl.Text.ValueBackground">
             <summary>
             值背景颜色
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.IsReadonly">
+        <member name="P:ALF.UI.TitleControl.Text.IsReadonly">
             <summary>
             是否只读
             </summary>
         </member>
-        <member name="P:ALF.UI.TitleTextBox.VanishBorder">
+        <member name="P:ALF.UI.TitleControl.Text.VanishBorder">
             <summary>
             是否显示边框
+            </summary>
+        </member>
+        <member name="M:ALF.UI.TitleControl.Text.InitializeComponent">
+            <summary>
+            InitializeComponent
             </summary>
         </member>
     </members>

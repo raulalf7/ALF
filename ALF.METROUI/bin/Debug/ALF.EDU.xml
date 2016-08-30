@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ALF.EDU</name>
+    </assembly>
+    <members>
+        <member name="T:ALF.EDU.EduTools">
+            <summary>
+            教育事业相关数据库工具
+            </summary>
+        </member>
+        <member name="F:ALF.EDU.EduTools.RecordYear">
+            <summary>
+            备案年份
+            </summary>
+        </member>
+        <member name="F:ALF.EDU.EduTools.UseEduDB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALF.EDU.EduTools.EduDBName">
+            <summary>
+            教育事业统计数据库名称
+            </summary>
+        </member>
+        <member name="P:ALF.EDU.EduTools.DataDB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ALF.EDU.ReportOfficeTools">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ALF.EDU.ReportOfficeTools.GetArgInfoListFromWord(ALF.EDU.DataModel.TemplateInfo,System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="templateInfo"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.EDU.ReportOfficeTools.UpdateWord(System.Collections.Generic.List{ALF.EDU.DataModel.ArgInfo},System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="argInfoList"></param>
+            <param name="regionString"></param>
+            <param name="appType"></param>
+            <param name="filePath"></param>
+            <param name="isQuitWhenError"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.EDU.ReportOfficeTools.GetRegionCondition(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="regionString"></param>
+            <param name="appType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.EDU.ReportOfficeTools.AddCondition(ALF.EDU.DataModel.ArgInfo,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="argInfo"></param>
+            <param name="condition"></param>
+            <param name="regionPath"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

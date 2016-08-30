@@ -1,0 +1,14 @@
+E:\文档\5_Code\ALF_DLL\ALF.EDU\obj\Debug\ALF.EDU.csprojResolveAssemblyReference.cache
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.EDU.dll.config
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.EDU.XML
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.EDU.dll
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.EDU.pdb
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.MSSQL.dll
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.SYSTEM.dll
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.MSSQL.pdb
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.MSSQL.xml
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.SYSTEM.pdb
+E:\文档\5_Code\ALF_DLL\ALF.EDU\bin\Debug\ALF.SYSTEM.xml
+E:\文档\5_Code\ALF_DLL\ALF.EDU\obj\Debug\ALF.EDU.dll
+E:\文档\5_Code\ALF_DLL\ALF.EDU\obj\Debug\ALF.EDU.pdb

@@ -19,6 +19,11 @@
             Office97
             </summary>
         </member>
+        <member name="F:ALF.OFFICE.DataModel.OfficeVersion.OfficeXp">
+            <summary>
+            OfficeXP
+            </summary>
+        </member>
         <member name="F:ALF.OFFICE.DataModel.OfficeVersion.Office2000">
             <summary>
             Office2000
@@ -109,13 +114,14 @@
             Excel处理工具
             </summary>
         </member>
-        <member name="M:ALF.OFFICE.ExcelTools.WriteDataToExcel(System.Collections.Generic.List{System.Data.DataTable},System.Collections.Generic.List{ALF.OFFICE.DataModel.ExcelInfo},System.Boolean)">
+        <member name="M:ALF.OFFICE.ExcelTools.WriteDataToExcel(System.Collections.Generic.List{System.Data.DataTable},System.Collections.Generic.List{ALF.OFFICE.DataModel.ExcelInfo},System.Boolean,System.Collections.Generic.List{ALF.OFFICE.DataModel.ExcelInfo})">
             <summary>
             将DataTable逐个单元格写入Excel中
             </summary>
             <param name="dataTables">数据表列表</param>
             <param name="excelInfos">Excel信息列表</param>
             <param name="isSingleFile">是否导入到单个Excel文件</param>
+            <param name="dataTableInfos">SQL查询数据区域</param>
             <returns>操作结果</returns>
         </member>
         <member name="M:ALF.OFFICE.ExcelTools.ExportSqlToExcel(System.String,System.String,System.String)">
@@ -172,6 +178,11 @@
             Office工具
             </summary>
         </member>
+        <member name="P:ALF.OFFICE.Tools.OfficeVersion">
+            <summary>
+            当前使用OFFICE版本
+            </summary>
+        </member>
         <member name="M:ALF.OFFICE.Tools.InitialSqSetting(ALF.MSSQL.DataModel.DataBaseEngineType,ALF.OFFICE.DataModel.OfficeVersion)">
             <summary>
             初始化SQL里面的OLEDB设置(OFFICE 2007及以上)
@@ -188,10 +199,11 @@
             <param name="officeVersion">所用OFFICE版本</param>
             <returns>重置结果</returns>
         </member>
-        <member name="P:ALF.OFFICE.Tools.OfficeVersion">
+        <member name="M:ALF.OFFICE.Tools.GetOfficeVersions">
             <summary>
-            当前使用OFFICE版本
+            
             </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

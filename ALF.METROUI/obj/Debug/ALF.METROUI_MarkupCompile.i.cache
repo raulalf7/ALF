@@ -16,5 +16,5 @@ DEBUG;TRACE
 18-1173377297
 App.xaml;ImageButton.xaml;Resources\Icons.xaml;TitleControl\Combo.xaml;TitleControl\Label.xaml;TitleControl\OpenFile.xaml;TitleControl\OpenFolder.xaml;TitleControl\Text.xaml;EduUI\RegionTreeControl.xaml;
 
-False
+True
 
