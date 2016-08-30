@@ -1,0 +1,446 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ALF.SYSTEM</name>
+    </assembly>
+    <members>
+        <member name="T:ALF.SYSTEM.DataModel.ConnInfo">
+            <summary>
+            连接信息
+            </summary>
+        </member>
+        <member name="M:ALF.SYSTEM.DataModel.ConnInfo.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.Rowid">
+            <summary>
+            行编号
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.ConnID">
+            <summary>
+            连接ID
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.ConnPort">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.Updatetime">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.ConnName">
+            <summary>
+            连接名称
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.ConnPw">
+            <summary>
+            连接密码
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.ConnIp">
+            <summary>
+            连接IP
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.ConnInfo.IsEnabled">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.DataModel.ConfigFileType">
+            <summary>
+            数据文件类型（标识文件的用途来源）
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.CSV">
+            <summary>
+            CSV
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.DBF">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.MiniData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileType.GzData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.DataModel.ConfigFileFormat">
+            <summary>
+            数据文件格式
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileFormat.Input">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileFormat.Up">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ALF.SYSTEM.DataModel.ConfigFileFormat.UpMini">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.DataModel.OrclConnInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.OrclConnInfo.OrclServiceName">
+            <summary>
+            连接服务名称
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.OrclConnInfo.OrclUserId">
+            <summary>
+            连接用户名
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.DataModel.UpdateFile">
+            <summary>
+            上传文件信息
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.RecordYear">
+            <summary>
+            备案年份
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.MustSoftVer">
+            <summary>
+            必要软件版本
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.MustDBVer">
+            <summary>
+            必要数据库版本
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.SequenceID">
+            <summary>
+            序列号
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.Ver">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.FileType">
+            <summary>
+            生成文件类型
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.FileName">
+            <summary>
+            文件名称
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.FileSize">
+            <summary>
+            文件大小
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.Describe">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.CurrentPath">
+            <summary>
+            当前路径
+            </summary>
+        </member>
+        <member name="P:ALF.SYSTEM.DataModel.UpdateFile.ErrMessage">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:ALF.SYSTEM.EncryptionTool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.GetAscIi(System.String)">
+            <summary>
+            Get the ASCII of the letter
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.IsChar(System.String)">
+            <summary>
+            Tell whether the letter is a correct letter in the alphabet  or not
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.IsUpper(System.String)">
+            <summary>
+            Tell whether the letter is upper or not
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.SymmetriEncrypt(System.String,System.Int32,System.String)">
+            <summary>
+            Function of Symmetric Encryption
+            </summary>
+            <param name="originalMessage">The message needs to be encrpypted</param>
+            <param name="keyInt">Key for Ceasar Encryption, while using Vigenere Encryption, make it 0</param>
+            <param name="keyString">Key for Vigenere Encryption, while using Ceasar Encryption, make it ""</param>
+            <returns>Encrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.SymmetricDecrypt(System.String,System.Int32,System.String)">
+            <summary>
+            Function of Symmetric Decryption
+            </summary>
+            <param name="encrpyMessage">The message needs to be decrpypted</param>
+            <param name="keyInt">Key for Ceasar Encryption, while using Vigenere Encryption, make it 0</param>
+            <param name="keyString">Key for Vigenere Encryption, while using Ceasar Encryption, make it ""</param>
+            <returns>Decrypted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.GenerateKey">
+            <summary>
+            Generate the key for MD5
+            </summary>
+            <returns>The key for MD5</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.Md5Encrypt(System.String,System.String)">
+            <summary>
+            MD5 Encryption
+            </summary>
+            <param name="orignialMessage">The message needs to be encrpypted</param>
+            <param name="md5Key">The key for MD5 encryption</param>
+            <returns>Encrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.Md5Decrypt(System.String,System.String)">
+            <summary>
+            MD5 Decryption
+            </summary>
+            <param name="encryptedMessage">The message needs to be decrpypted</param>
+            <param name="md5Key">The key for MD5 decryption</param>
+            <returns>Decrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.RsaKey(System.String@,System.String@)">
+            <summary>
+            Generate the key for rsa encryption and decryption
+            </summary>
+            <param name="xmlPrivateKey">private key for rsa decryption</param>
+            <param name="xmlPublicKey">public key for rsa encryption</param>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.RsaEncrypt(System.String,System.String)">
+            <summary>
+            RSA Encryption
+            </summary>
+            <param name="xmlPublicKey">public key for rsa encryption</param>
+            <param name="encryptString">The message needs to be encrpypted</param>
+            <returns>Encrpyted message</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.EncryptionTool.RsaDecrypt(System.String,System.String,System.Boolean@)">
+            <summary>
+            RSA Decryption
+            </summary>
+            <param name="xmlPrivateKey">private key for rsa decryption</param>
+            <param name="decryptString">The message needs to be decrpypted</param>
+            <param name="decryptSuccess">Whether the decryption succeed</param>
+            <returns>Decrpyted message</returns>
+        </member>
+        <member name="T:ALF.SYSTEM.WebTools">
+            <summary>
+            Web工具
+            </summary>
+        </member>
+        <member name="M:ALF.SYSTEM.WebTools.GetGmtTime">
+            <summary>
+            获取GMT时间
+            </summary>
+            <returns>时间</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WebTools.DownloadFile(System.String,System.String)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="fileName">文件名称</param>
+            <param name="url">文件路径</param>
+            <returns>下载结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WebTools.IsCorrectUrl(System.String)">
+            <summary>
+            判断是否正确URL
+            </summary>
+            <param name="url">url路径</param>
+            <returns>是否正确</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WebTools.SaveBinaryFile(System.Net.WebResponse,System.String)">
+            <summary>
+            保存二进制文件
+            </summary>
+            <param name="response">Web响应</param>
+            <param name="fileName">文件名称</param>
+        </member>
+        <member name="T:ALF.SYSTEM.WindowsTools">
+            <summary>
+            Windows工具
+            </summary>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.IsSoftInstalled(System.String)">
+            <summary>
+            判断是否安装软件
+            </summary>
+            <param name="softName">软件名称</param>
+            <returns>是否安装</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.IsServeiceStart(System.String)">
+            <summary>
+            判断服务是否启动
+            </summary>
+            <param name="serviceName">服务名称</param>
+            <returns>是否启动</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.StartService(System.String)">
+            <summary>
+            开启服务
+            </summary>
+            <param name="serviceName">服务名称</param>
+            <returns>是否开启成功</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.SetServiceStartType(System.String,System.Int32)">
+            <summary>
+            设置服务启动类型
+            </summary>
+            <param name="serviceName"></param>
+            <param name="iStartType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.GetBasicName(System.String)">
+            <summary>
+            获取文件名
+            </summary>
+            <param name="fileFullName">完整文件名</param>
+            <returns>文件名称</returns>
+        </member>
+        <member name="F:ALF.SYSTEM.WindowsTools.ExecCmdFinished">
+            <summary>
+            命令行执行完成事件
+            </summary>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.ExecCmd(System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            运行命令行
+            </summary>
+            <param name="fileName">运行文件名称</param>
+            <param name="argName">运行文件参数</param>
+            <param name="hideWindow">是否隐藏运行窗口</param>
+            <param name="isShowFinished">是否显示运行完成结果</param>
+            <param name="isWaitFinish">是否等待执行完成</param>
+            <returns>运行结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.WriteToTxt(System.String,System.String)">
+            <summary>
+            写入TXT文件
+            </summary>
+            <param name="path">TXT文件路径</param>
+            <param name="infoString">待写入信息</param>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.ReadFromTxt(System.String)">
+            <summary>
+            读取TXT文件
+            </summary>
+            <param name="path">TXT文件路径</param>
+            <returns>TXT文件内容</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.ConvertIntToChar(System.Int32)">
+            <summary>
+            Int根据ASCII转换为Char
+            </summary>
+            <param name="value">带转化数值</param>
+            <returns>转化后结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.CompileCode(System.String,System.String,System.String[])">
+            <summary>
+            编译代码文件
+            </summary>
+            <param name="sourceCode">待编译代码</param>
+            <param name="filePath">生成文件路径</param>
+            <param name="referenceString">引用字符串</param>
+            <returns>编译结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.GetFiles(System.IO.DirectoryInfo)">
+            <summary>
+            获取全部子文件
+            </summary>
+            <param name="dir">查询目录路径</param>
+            <returns>文件列表</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.CreatXml(System.String,ALF.SYSTEM.DataModel.ConfigFileType)">
+            <summary>
+            创建XML配置文件
+            </summary>
+            <param name="filePath">目标文件夹路径</param>
+            <param name="inputType">配置文件类型</param>
+            <returns>创建结果</returns>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.XmlSerialize(System.Object,System.String,System.String@)">
+            <summary>
+            XML序列化
+            </summary>
+            <param name="itemList">待序列化列表</param>
+            <param name="path">生成路径</param>
+            <param name="result">序列化结果</param>
+        </member>
+        <member name="M:ALF.SYSTEM.WindowsTools.XmlDeseerializer(System.Type,System.String,System.String@,System.Object)">
+            <summary>
+            XML反序列化
+            </summary>
+            <param name="listType">反序列化文件类型</param>
+            <param name="path">XML文件路径</param>
+            <param name="result">反序列化结果</param>
+            <param name="obj">序列化目标类型</param>
+            <returns>反序列化结果</returns>
+        </member>
+    </members>
+</doc>

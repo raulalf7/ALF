@@ -65,7 +65,7 @@ namespace ALF.MSSQL
         }
 
         /// <summary>
-        /// 根据查询语句获取查询访问器
+        /// 根据查询语句获查询结果中第一行第一列的数据
         /// </summary>
         /// <param name="cmdText">查询语句</param>
         /// <param name="result">执行结果</param>
