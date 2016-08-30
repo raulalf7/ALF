@@ -1,3 +1,16 @@
 E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.TEST.CONSOLE.exe.config
 E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\obj\Debug\ALF.TEST.CONSOLE.exe
 E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\obj\Debug\ALF.TEST.CONSOLE.pdb
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.TEST.CONSOLE.exe
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.TEST.CONSOLE.pdb
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.MSSQL.dll
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.OFFICE.dll
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.SYSTEM.dll
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.MSSQL.pdb
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.MSSQL.xml
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.OFFICE.pdb
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.OFFICE.xml
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.SYSTEM.pdb
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.SYSTEM.xml
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\obj\Debug\ALF.TEST.CONSOLE.csprojResolveAssemblyReference.cache

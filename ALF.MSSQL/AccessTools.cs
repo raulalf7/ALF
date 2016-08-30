@@ -70,7 +70,7 @@ namespace ALF.MSSQL
         /// <param name="cmdText">查询语句</param>
         /// <param name="result">执行结果</param>
         /// <returns>查询结果访问器</returns>
-        public static OleDbDataReader ExecuteReader(string cmdText, out string result)
+        public static object ExecuteScalar(string cmdText, out string result)
         {
             result = "";
             if (!File.Exists(FilePath))
@@ -85,9 +85,9 @@ namespace ALF.MSSQL
                 try
                 {
                     PrepareCommand(cmd, conn, null, cmdText);
-                    OleDbDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    var execResult = cmd.ExecuteScalar();
                     cmd.Parameters.Clear();
-                    return reader;
+                    return execResult;
                 }
                 catch (Exception exception)
                 {

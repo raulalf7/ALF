@@ -1,0 +1,11 @@
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.MSSQL.dll.config
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.MSSQL.XML
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.MSSQL.dll
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.MSSQL.pdb
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.SYSTEM.dll
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\Oracle.ManagedDataAccess.dll
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.SYSTEM.pdb
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\bin\Debug\ALF.SYSTEM.xml
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\obj\Debug\ALF.MSSQL.csprojResolveAssemblyReference.cache
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\obj\Debug\ALF.MSSQL.dll
+E:\文档\5_Code\ALF_DLL\ALF.MSSQL\obj\Debug\ALF.MSSQL.pdb

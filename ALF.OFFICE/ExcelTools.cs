@@ -63,12 +63,12 @@ namespace ALF.OFFICE
         {
             if (!File.Exists(filePath))
             {
-                return string.Format("【SQL导入发生错误】: 错误语句：【{0}】，错误信息：【没有指定文件】", sql);
+                return $"【SQL导入发生错误】: 错误语句：【{sql}】，错误信息：【没有指定文件】";
             }
 
             if (!sql.Trim().ToLower().StartsWith("select"))
             {
-                return string.Format("【SQL导入发生错误】: 错误语句：【{0}】，错误信息：【SQL语句不是查询语句】", sql);
+                return $"【SQL导入发生错误】: 错误语句：【{sql}】，错误信息：【SQL语句不是查询语句】";
             }
 
             var execSql =
@@ -82,7 +82,7 @@ namespace ALF.OFFICE
             }
             catch (Exception exception)
             {
-                return string.Format("【SQL导入发生错误】: 错误语句：【{0}】，错误信息：【{1}】", sql, exception.Message);
+                return $"【SQL导入发生错误】: 错误语句：【{sql}】，错误信息：【{exception.Message}】";
             }
         }
 
@@ -235,9 +235,7 @@ namespace ALF.OFFICE
             var sheetNameList = new List<string>();
 
             using (var conn = new OleDbConnection(
-                string.Format(
-                    "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{0}\";Extended Properties='{1};HDR=YES;IMEX=0'",
-                    excelInfo.FilePath, GetExcelVersionString())))
+                $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\"{excelInfo.FilePath}\";Extended Properties='{GetExcelVersionString()};HDR=YES;IMEX=0'"))
             {
                 conn.Open();
                 var dt = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
@@ -270,7 +268,7 @@ namespace ALF.OFFICE
             Console.WriteLine("Open File:【{0}】", excelInfo.FilePath);
             if (!File.Exists(excelInfo.FilePath))
             {
-                return string.Format("文件【{0}】不存在", excelInfo.FilePath);
+                return $"文件【{excelInfo.FilePath}】不存在";
             }
 
             _objExcel = new Excel.Application { Visible = false, DisplayAlerts = false, AlertBeforeOverwriting = false };
@@ -337,14 +335,8 @@ namespace ALF.OFFICE
 
         private static void CloseExcel()
         {
-            if (_objBook != null)
-            {
-                _objBook.Close(false, ObjOpt, ObjOpt);
-            }
-            if (_objExcel != null)
-            {
-                _objExcel.Quit();
-            }
+            _objBook?.Close(false, ObjOpt, ObjOpt);
+            _objExcel?.Quit();
             Dispose();
         }
 

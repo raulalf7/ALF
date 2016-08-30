@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using ALF.MSSQL;
@@ -8,7 +7,6 @@ using ALF.OFFICE;
 using ALF.OFFICE.DataModel;
 using ALF.SYSTEM;
 using ALF.SYSTEM.DataModel;
-using Microsoft.Office.Interop.Word;
 using Microsoft.Win32;
 using Tools = ALF.OFFICE.Tools;
 
@@ -18,7 +16,12 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            AccessTools.ImportDataFromXml("schoolInfo", @"F:\schoolInfo.eduData");
+            ALF.MSSQL.AccessTools.FilePath = @"D:\EDUDBM\DATA2016\eduData2016DB.mdb";
+            AccessTools.Password = "12485708";
+            string tmp;
+            var reader = AccessTools.ExecuteScalar("select count(1) from excelTemplatePower", out tmp);
+           
+           // var list = ALF.MSSQL.Tools.DataSetTransferToList(new Int32(), ds);
         }
 
         private static void CheckSoftware()
@@ -395,42 +398,7 @@ set @templateOwner ='34'
             var dataString = EncryptionTool.SymmetricDecrypt(encryptString,5,"");
             WindowsTools.WriteToTxt(filePath, dataString);
         }
-
-        private static void Test(string oldValue,string newValue, string filePath)
-        {
-            var wordApp =
-                (Application)
-                    Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("000209FF-0000-0000-C000-000000000046")));
-            object filename = @"E:\ALF_CODE\ALF_TOOL\ALF.Tools\ALF.EduDataCheck\bin\Debug\templateFiles\测试文档2.docx"; //要打开的文档路径 
-            filename = filePath;
-            string strKey = "findTest"; //要搜索的文本 
-            object MissingValue = Type.Missing;
-            Document wordDoc = wordApp.Documents.Open(ref filename, ref MissingValue,
-            ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue,
-            ref MissingValue, ref MissingValue);
-            var result = "";
-             object _mis = Type.Missing;
-
-            var iCount = wordDoc.Paragraphs.Count;
-            for (int i = 1; i <= iCount; i++)
-            {
-                var wfnd = wordDoc.Paragraphs[i].Range.Find;
-                wfnd.Text = oldValue;
-                wfnd.ClearFormatting();
-                if (wfnd.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, newValue, WdReplace.wdReplaceAll, ref _mis, ref _mis, ref _mis, ref _mis))
-                {
-                    Console.WriteLine("Find");
-                    Console.WriteLine(wordDoc.Paragraphs[i].Range.Text);
-                }
-            }
-
-        }
-
+        
 
         private static void ConvertSqlToXml()
         {

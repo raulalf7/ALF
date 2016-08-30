@@ -19,6 +19,11 @@
             数据库密码
             </summary>
         </member>
+        <member name="P:ALF.MSSQL.AccessTools.ConnString">
+            <summary>
+            链接字符串
+            </summary>
+        </member>
         <member name="M:ALF.MSSQL.AccessTools.ExecuteNonQuery(System.String,System.String@)">
             <summary>
             执行语句
@@ -27,7 +32,7 @@
             <param name="result">执行结果</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:ALF.MSSQL.AccessTools.ExecuteReader(System.String,System.String@)">
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteScalar(System.String,System.String@)">
             <summary>
             根据查询语句获取查询访问器
             </summary>
@@ -62,11 +67,6 @@
             <param name="path">文件路径</param>
             <returns>错误信息</returns>
         </member>
-        <member name="P:ALF.MSSQL.AccessTools.ConnString">
-            <summary>
-            链接字符串
-            </summary>
-        </member>
         <member name="T:ALF.MSSQL.DataModel.DataBaseEngineType">
             <summary>
             数据库引擎版本枚举列表
@@ -90,6 +90,31 @@
         <member name="T:ALF.MSSQL.Tools">
             <summary>
             MSSQL 处理工具
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.DataBaseType">
+            <summary>
+            当前使用数据库引擎
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.ConnInfo">
+            <summary>
+            当前数据库连接信息
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.DBName">
+            <summary>
+            初始数据库名称
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.ServiceName">
+            <summary>
+            数据库引擎服务名称
+            </summary>
+        </member>
+        <member name="P:ALF.MSSQL.Tools.SQLConnString">
+            <summary>
+            SQL连接字符串
             </summary>
         </member>
         <member name="M:ALF.MSSQL.Tools.IsDBOpen">
@@ -177,31 +202,6 @@
             </summary>
             <param name="dbName"></param>
             <returns></returns>
-        </member>
-        <member name="P:ALF.MSSQL.Tools.DataBaseType">
-            <summary>
-            当前使用数据库引擎
-            </summary>
-        </member>
-        <member name="P:ALF.MSSQL.Tools.ConnInfo">
-            <summary>
-            当前数据库连接信息
-            </summary>
-        </member>
-        <member name="P:ALF.MSSQL.Tools.DBName">
-            <summary>
-            初始数据库名称
-            </summary>
-        </member>
-        <member name="P:ALF.MSSQL.Tools.ServiceName">
-            <summary>
-            数据库引擎服务名称
-            </summary>
-        </member>
-        <member name="P:ALF.MSSQL.Tools.SQLConnString">
-            <summary>
-            SQL连接字符串
-            </summary>
         </member>
     </members>
 </doc>
