@@ -190,6 +190,27 @@ namespace ALF.MSSQL
         }
 
         /// <summary>
+        /// 批量执行SQL
+        /// </summary>
+        /// <param name="sqlList">SQL列表</param>
+        /// <returns>执行结果</returns>
+        public static string ExecBatchSql(List<string> sqlList)
+        {
+            string result = "";
+            int n = 0;
+            foreach (var sql in sqlList)
+            {
+                n++;
+                var tmp = ExecSql(sql);
+                if (tmp != "")
+                {
+                    result += string.Format("第{0}条查询语句发生错误：【{1}】\n", n, tmp);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
         /// 执行SQL查询语句，返回DataView
         /// </summary>
         /// <param name="sql">SQL语句</param>
