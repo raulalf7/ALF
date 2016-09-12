@@ -384,18 +384,20 @@
             <param name="isWaitFinish">是否等待执行完成</param>
             <returns>运行结果</returns>
         </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.WriteToTxt(System.String,System.String)">
+        <member name="M:ALF.SYSTEM.WindowsTools.WriteToTxt(System.String,System.String,System.Text.Encoding)">
             <summary>
             写入TXT文件
             </summary>
             <param name="path">TXT文件路径</param>
             <param name="infoString">待写入信息</param>
+            <param name="encodingType">编译类型</param>
         </member>
-        <member name="M:ALF.SYSTEM.WindowsTools.ReadFromTxt(System.String)">
+        <member name="M:ALF.SYSTEM.WindowsTools.ReadFromTxt(System.String,System.Text.Encoding)">
             <summary>
             读取TXT文件
             </summary>
             <param name="path">TXT文件路径</param>
+            <param name="codingType">编译类型</param>
             <returns>TXT文件内容</returns>
         </member>
         <member name="M:ALF.SYSTEM.WindowsTools.ConvertIntToChar(System.Int32)">

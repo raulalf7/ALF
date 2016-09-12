@@ -169,7 +169,7 @@ namespace ALF.SYSTEM
             }
             catch (Exception exception)
             {
-                Console.WriteLine("加密报错[{0}]", exception.Message);
+                Console.WriteLine("Error in Alf.SYSTEM:加密报错[{0}]", exception.Message);
                 return "";
             }
         }
@@ -189,8 +189,16 @@ namespace ALF.SYSTEM
                 var inputByteArray = new byte[encryptedMessage.Length / 2];
                 for (var x = 0; x < encryptedMessage.Length / 2; x++)
                 {
-                    var i = (Convert.ToInt32(encryptedMessage.Substring(x * 2, 2), 16));
-                    inputByteArray[x] = (byte)i;
+                    try
+                    {
+                        
+                        var i = (Convert.ToInt32(encryptedMessage.Substring(x * 2, 2), 16));
+                        inputByteArray[x] = (byte)i;
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
 
                 des.Key = Encoding.ASCII.GetBytes(md5Key);
@@ -203,8 +211,9 @@ namespace ALF.SYSTEM
                 return Encoding.Default.GetString(ms.ToArray());
 
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Console.WriteLine("Error in Alf.SYSTEM:解密报错[{0}]", exception.Message);
                 return "";
             }
         }

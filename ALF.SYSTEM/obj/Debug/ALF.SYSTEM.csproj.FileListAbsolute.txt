@@ -7,3 +7,4 @@ E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.dll
 E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.pdb
 E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.dll
 E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.pdb
+E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.csprojResolveAssemblyReference.cache

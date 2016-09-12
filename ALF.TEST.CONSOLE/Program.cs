@@ -9,6 +9,7 @@ using ALF.SYSTEM;
 using ALF.SYSTEM.DataModel;
 using Microsoft.Win32;
 using Tools = ALF.OFFICE.Tools;
+using System.Text;
 
 namespace ALF.TEST.CONSOLE
 {
@@ -16,16 +17,18 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            var s =ALF.SYSTEM.WindowsTools.ReadFromTxt(@"D:\test.txt");
+            var s =ALF.SYSTEM.WindowsTools.ReadFromTxt(@"D:\t.txt",Encoding.ASCII);
 
 
             var r = ALF.SYSTEM.EncryptionTool.Md5Encrypt(s, "raulalf7");
 
-            WindowsTools.WriteToTxt(@"d:\e.txt",r);
+            WindowsTools.WriteToTxt(@"d:\e",r, Encoding.ASCII);
 
-            var d = EncryptionTool.Md5Decrypt(r, "raulalf7");
 
-            WindowsTools.WriteToTxt(@"D:\d.txt", d);
+            var einfo = WindowsTools.ReadFromTxt(@"d:\e", Encoding.ASCII);
+            var d = EncryptionTool.Md5Decrypt(einfo, "raulalf7").Trim();
+
+            WindowsTools.WriteToTxt(@"D:\d.txt", d, Encoding.ASCII);
 
             Console.ReadLine();
            // var list = ALF.MSSQL.Tools.DataSetTransferToList(new Int32(), ds);
@@ -393,17 +396,17 @@ set @templateOwner ='34'
 
         private static void  Encrypt(string filePath,string encryptPath)
         {
-            var dataString = WindowsTools.ReadFromTxt(filePath);
+            var dataString = WindowsTools.ReadFromTxt(filePath,Encoding.Default);
             var encryptString = EncryptionTool.SymmetriEncrypt(dataString,5,"");
-            WindowsTools.WriteToTxt(encryptPath, encryptString);
+            WindowsTools.WriteToTxt(encryptPath, encryptString, Encoding.Default);
         }
 
         private static void Decrypt(string encryptPath,string filePath)
         {
-            var encryptString = WindowsTools.ReadFromTxt(encryptPath);
+            var encryptString = WindowsTools.ReadFromTxt(encryptPath, Encoding.Default);
             bool result;
             var dataString = EncryptionTool.SymmetricDecrypt(encryptString,5,"");
-            WindowsTools.WriteToTxt(filePath, dataString);
+            WindowsTools.WriteToTxt(filePath, dataString, Encoding.Default);
         }
         
 

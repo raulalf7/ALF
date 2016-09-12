@@ -284,7 +284,12 @@ namespace ALF.SYSTEM
             {
                 Console.WriteLine("Reading Path :"+path);
                 var t = File.ReadAllLines(path, Encoding.Default);
-                return t.Aggregate("", (current, s) => current + (s + Environment.NewLine));
+                if (t.Count() == 0)
+                {
+                    return "";
+                }
+                var result = t.Aggregate("", (current, s) => current + (s + Environment.NewLine));
+                return result.Remove(result.Length - 2);
             }
             catch (Exception exception)
             {
