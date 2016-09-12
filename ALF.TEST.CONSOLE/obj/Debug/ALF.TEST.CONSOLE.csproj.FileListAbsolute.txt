@@ -14,3 +14,6 @@ E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.OFFICE.xml
 E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.SYSTEM.pdb
 E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.SYSTEM.xml
 E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\obj\Debug\ALF.TEST.CONSOLE.csprojResolveAssemblyReference.cache
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.EDU.dll
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.EDU.pdb
+E:\文档\5_Code\ALF_DLL\ALF.TEST.CONSOLE\bin\Debug\ALF.EDU.xml

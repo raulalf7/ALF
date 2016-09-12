@@ -264,9 +264,10 @@ namespace ALF.SYSTEM
         /// </summary>
         /// <param name="path">TXT文件路径</param>
         /// <param name="infoString">待写入信息</param>
-        public static void WriteToTxt(string path, string infoString)
-        {
-            StreamWriter streamWriter = File.Exists(path) ? File.AppendText(path) : new StreamWriter(path,false,Encoding.Default);
+        /// <param name="encodingType">编译类型</param>
+        public static void WriteToTxt(string path, string infoString, Encoding encodingType)
+        {            
+            StreamWriter streamWriter = File.Exists(path) ? File.AppendText(path) : new StreamWriter(path,false, encodingType);
             streamWriter.Write(infoString);
             streamWriter.Close();
         }
@@ -275,8 +276,9 @@ namespace ALF.SYSTEM
         /// 读取TXT文件
         /// </summary>
         /// <param name="path">TXT文件路径</param>
+        /// <param name="codingType">编译类型</param>
         /// <returns>TXT文件内容</returns>
-        public static string ReadFromTxt(string path)
+        public static string ReadFromTxt(string path, Encoding codingType)
         {
             try
             {

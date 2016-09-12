@@ -16,11 +16,18 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            ALF.MSSQL.AccessTools.FilePath = @"D:\EDUDBM\DATA2016\eduData2016DB.mdb";
-            AccessTools.Password = "12485708";
-            string tmp;
-            var reader = AccessTools.ExecuteScalar("select count(1) from excelTemplatePower", out tmp);
-           
+            var s =ALF.SYSTEM.WindowsTools.ReadFromTxt(@"D:\test.txt");
+
+
+            var r = ALF.SYSTEM.EncryptionTool.Md5Encrypt(s, "raulalf7");
+
+            WindowsTools.WriteToTxt(@"d:\e.txt",r);
+
+            var d = EncryptionTool.Md5Decrypt(r, "raulalf7");
+
+            WindowsTools.WriteToTxt(@"D:\d.txt", d);
+
+            Console.ReadLine();
            // var list = ALF.MSSQL.Tools.DataSetTransferToList(new Int32(), ds);
         }
 

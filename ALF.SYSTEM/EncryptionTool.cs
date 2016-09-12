@@ -167,8 +167,9 @@ namespace ALF.SYSTEM
                 }
                 return ret.ToString();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                Console.WriteLine("加密报错[{0}]", exception.Message);
                 return "";
             }
         }
