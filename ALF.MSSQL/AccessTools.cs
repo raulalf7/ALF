@@ -65,6 +65,32 @@ namespace ALF.MSSQL
             }
         }
 
+
+
+        /// <summary>
+        /// 批量执行SQL
+        /// </summary>
+        /// <param name="sqlList">SQL列表</param>
+        /// <returns>执行结果</returns>
+        public static string ExecBatchSql(List<string> sqlList)
+        {
+            string result = "";
+            int n = 0;
+            foreach (var sql in sqlList)
+            {
+                n++;
+                var tmp = "";
+                ExecuteNonQuery(sql,out tmp);
+                if (tmp != "")
+                {
+                    result += string.Format("第{0}条查询语句发生错误：【{1}】\n", n, tmp);
+                }
+            }
+            return result;
+        }
+
+
+
         /// <summary>
         /// 根据查询语句获查询结果中第一行第一列的数据
         /// </summary>
@@ -142,6 +168,14 @@ namespace ALF.MSSQL
             }
         }
 
+        /// <summary>
+        /// 根据查询语句获取查询数据列表
+        /// </summary>
+        /// <param name="entity">列表中单元对象</param>
+        /// <param name="cmdText">查询语句</param>
+        /// <param name="result">执行结果</param>
+        /// <param name="tableName">数据表名称</param>
+        /// <returns>查询结果数据集</returns>
         public static List<T> ExecuteDataList<T>(T entity,string cmdText, out string result, string tableName = "") where T : new()
         {
             result = "";

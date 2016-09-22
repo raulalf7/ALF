@@ -573,7 +573,7 @@ namespace ALF.MSSQL
                     {
                         value = Convert.ToDouble(row[item.Name]);
                     }
-                    else if (item.PropertyType == typeof(double?))
+                    else if (item.PropertyType == typeof(DateTime?))
                     {
                         value = Convert.ToDateTime(row[item.Name]).ToString();
                     }
