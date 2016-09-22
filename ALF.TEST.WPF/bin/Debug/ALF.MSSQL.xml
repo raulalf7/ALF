@@ -131,6 +131,22 @@
             <param name="timeout">超时时间</param>
             <returns>执行结果</returns>
         </member>
+        <member name="M:ALF.MSSQL.Tools.ExecSql(System.String,System.String@,System.Int32)">
+            <summary>
+            执行SQL修改语句
+            </summary>
+            <param name="sql">SQL语句</param>
+            <param name="timeout">超时时间</param>
+            <param name="tmp">返回结果</param>
+            <returns>执行结果</returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.ExecBatchSql(System.Collections.Generic.List{System.String})">
+            <summary>
+            批量执行SQL
+            </summary>
+            <param name="sqlList">SQL列表</param>
+            <returns>执行结果</returns>
+        </member>
         <member name="M:ALF.MSSQL.Tools.GetSqlDataView(System.String,System.String@,System.Int32)">
             <summary>
             执行SQL查询语句，返回DataView

@@ -11,6 +11,7 @@ using ALF.MSSQL;
 using ALF.SYSTEM;
 using Microsoft.Office.Interop.Word;
 using Application = Microsoft.Office.Interop.Word.Application;
+using System.Text;
 
 namespace ALF.EDU
 {
@@ -213,7 +214,7 @@ namespace ALF.EDU
                     Console.WriteLine( "用时：" + timeSpan);
                     timeSpan = DateTime.Now - start;
                     infoString = infoString + string.Format("总用时：{0}\r\n\r\n", timeSpan);
-                    WindowsTools.WriteToTxt(Environment.CurrentDirectory + "\\timeUsed.txt", infoString);
+                    WindowsTools.WriteToTxt(Environment.CurrentDirectory + "\\timeUsed.txt", infoString,Encoding.Default);
                     result2 = result;
                 }
             }

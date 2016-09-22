@@ -190,6 +190,36 @@ namespace ALF.MSSQL
         }
 
         /// <summary>
+        /// 执行SQL修改语句
+        /// </summary>
+        /// <param name="sql">SQL语句</param>
+        /// <param name="timeout">超时时间</param>
+        /// <param name="tmp">返回结果</param>
+        /// <returns>执行结果</returns>
+        public static int ExecSql(string sql,out string tmp, int timeout = 36000)
+        {
+            var count = 0;
+            tmp = "";
+            using (var conn = new SqlConnection(SQLConnString + "Connect Timeout=" + timeout))
+            {
+                conn.Open();
+                try
+                {
+                    var sqlCommand = new SqlCommand(sql, conn) { CommandTimeout = timeout };
+                    count = sqlCommand.ExecuteNonQuery();
+                    conn.Close();
+                    return count;
+                }
+                catch (Exception ex)
+                {
+                    conn.Close();
+                    tmp= ex.Message;
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
         /// 批量执行SQL
         /// </summary>
         /// <param name="sqlList">SQL列表</param>
@@ -538,10 +568,21 @@ namespace ALF.MSSQL
             {
                 try
                 {
-                    item.SetValue(entity,
-                        item.PropertyType == typeof (DateTime?)
-                            ? Convert.ToDateTime(row[item.Name].ToString())
-                            : Convert.ChangeType(row[item.Name], item.PropertyType), null);
+                    object value;
+                    if (item.PropertyType == typeof(double?))
+                    {
+                        value = Convert.ToDouble(row[item.Name]);
+                    }
+                    else if (item.PropertyType == typeof(double?))
+                    {
+                        value = Convert.ToDateTime(row[item.Name]).ToString();
+                    }
+                    else
+                    {
+                        value = Convert.ChangeType(row[item.Name], item.PropertyType);
+                    }
+                    
+                    item.SetValue(entity,value, null);
                 }
                 catch (Exception exception)
                 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
@@ -139,6 +140,13 @@ namespace ALF.MSSQL
                     return null;
                 }
             }
+        }
+
+        public static List<T> ExecuteDataList<T>(T entity,string cmdText, out string result, string tableName = "") where T : new()
+        {
+            result = "";
+            var ds = ExecuteDataSet(cmdText, out result, tableName);
+            return Tools.DataSetTransferToList(entity, ds);
         }
 
         /// <summary>
