@@ -127,7 +127,8 @@ namespace ALF.EDU
             wordDoc.PageSetup.RightMargin = wordApp.CentimetersToPoints(float.Parse("0.6"));
             wordDoc.PageSetup.BottomMargin = wordApp.CentimetersToPoints(float.Parse("0.6"));
             wordDoc.PageSetup.Orientation = WdOrientation.wdOrientLandscape;
-            wordDoc.SpellingChecked = false;
+            wordDoc.SpellingChecked = true;
+            wordDoc.GrammarChecked = true;
             wordDoc.ShowSpellingErrors = false;
             var infoString = string.Format("\r\n\r\n 日期：{0}  文件名：{1}  \r\n",
                 DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), filePath);
@@ -229,18 +230,20 @@ namespace ALF.EDU
         private static string EditDocArg(string newValue, string oldValue, Document wordDoc)
         {
             var result = "";
-
-            var iCount = wordDoc.Paragraphs.Count;
-            for (int i = 1; i <= iCount; i++)
+            try
             {
-                var wfnd = wordDoc.Paragraphs[i].Range.Find;
+                var wfnd = wordDoc.Range().Find;
                 wfnd.Text = oldValue;
                 wfnd.ClearFormatting();
                 if (wfnd.Execute(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, newValue, RpAll, ref _mis, ref _mis, ref _mis, ref _mis))
                 {
                     Console.WriteLine("Find");
-                    Console.WriteLine(wordDoc.Paragraphs[i].Range.Text);
                 }
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message;
+                Console.WriteLine("Error:" + ex.Message);
             }
 
             return result;
