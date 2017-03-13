@@ -427,8 +427,7 @@ namespace ALF.MSSQL
             lists.AddRange(from DataRow row in ds.Tables[0].Rows select DataRowTransfer(new T(), row));
             return lists;
         }
-
-
+        
         /// <summary>
         /// 从XML导入SQLSERVER
         /// </summary>
@@ -521,7 +520,56 @@ namespace ALF.MSSQL
             return result[0];
         }
 
+        /// <summary>
+        /// 将DataView插入到数据库中
+        /// 若数据库中已有表则会往已有数据表中插入数据
+        /// 若数据库中没有表则会先新建数据表再插入数据
+        /// </summary>
+        /// <param name="dataView">数据视图</param>
+        /// <param name="tableName">数据表名</param>
+        /// <returns></returns>
+        public static string DataViewToSqlTable(DataView dataView, string tableName)
+        {
+            var result = "";
+            var columnNameList = new List<string>();
+            var sql = string.Format("Create table {0} (", tableName);
+            foreach (DataColumn column in dataView.Table.Columns)
+            {
+                columnNameList.Add(column.ColumnName);
+                sql += string.Format("{0} nvarchar(MAX),", column.ColumnName);
+            }
+            sql = sql.Substring(0, sql.Length - 1);
+            sql += ")";
 
+            var sqle = string.Format(@"IF NOT EXISTS  
+                (SELECT * FROM dbo.SysObjects 
+                  WHERE ID = object_id(N'[{0}]') 
+                    AND OBJECTPROPERTY(ID, 'IsTable') = 1) 
+                    {1}", tableName, sql);
+
+
+            result = ExecSql(sqle);
+            if (result != "")
+            {
+                return string.Format("创建报表发生错误：【{0}】", tableName);
+            }
+            foreach (DataRow row in dataView.Table.Rows)
+            {
+                var dataSql = "";
+                foreach (var columnName in columnNameList)
+                {
+                    dataSql += string.Format("'{0}',", row[columnName]);
+                }
+                dataSql = dataSql.Substring(0, dataSql.Length - 1);
+                sql = string.Format("INSERT INTO {0} VALUES ({1})", tableName, dataSql);
+            }
+            result = ExecSql(sql);
+            if (result != "")
+            {
+                return string.Format("插入数据发生错误：【{0}】", tableName);
+            }
+            return result;
+        }
 
         #endregion
 

@@ -32,6 +32,13 @@
             <param name="result">执行结果</param>
             <returns>影响行数</returns>
         </member>
+        <member name="M:ALF.MSSQL.AccessTools.ExecBatchSql(System.Collections.Generic.List{System.String})">
+            <summary>
+            批量执行SQL
+            </summary>
+            <param name="sqlList">SQL列表</param>
+            <returns>执行结果</returns>
+        </member>
         <member name="M:ALF.MSSQL.AccessTools.ExecuteScalar(System.String,System.String@)">
             <summary>
             根据查询语句获查询结果中第一行第一列的数据
@@ -44,6 +51,16 @@
             <summary>
             根据查询语句获取查询数据集
             </summary>
+            <param name="cmdText">查询语句</param>
+            <param name="result">执行结果</param>
+            <param name="tableName">数据表名称</param>
+            <returns>查询结果数据集</returns>
+        </member>
+        <member name="M:ALF.MSSQL.AccessTools.ExecuteDataList``1(``0,System.String,System.String@,System.String)">
+            <summary>
+            根据查询语句获取查询数据列表
+            </summary>
+            <param name="entity">列表中单元对象</param>
             <param name="cmdText">查询语句</param>
             <param name="result">执行结果</param>
             <param name="tableName">数据表名称</param>
@@ -217,6 +234,15 @@
             
             </summary>
             <param name="dbName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALF.MSSQL.Tools.DataViewToSqlTable(System.Data.DataView,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dataView"></param>
+            <param name="tableName"></param>
+            <param name="isCreate"></param>
             <returns></returns>
         </member>
     </members>

@@ -17,18 +17,12 @@ namespace ALF.TEST.CONSOLE
     {
         static void Main()
         {
-            var s =ALF.SYSTEM.WindowsTools.ReadFromTxt(@"D:\t.txt",Encoding.ASCII);
+            var tmp = "";
+            ALF.MSSQL.Tools.DBName = "eduData2016DB";
+            ALF.MSSQL.Tools.DataBaseType = DataBaseEngineType.SqlExpress;
+            var t = ALF.MSSQL.Tools.GetSqlDataView("select * from test1",out tmp);
+            var t2 = MSSQL.Tools.DataViewToSqlTable(t, "test1");
 
-
-            var r = ALF.SYSTEM.EncryptionTool.Md5Encrypt(s, "raulalf7");
-
-            WindowsTools.WriteToTxt(@"d:\e",r, Encoding.ASCII);
-
-
-            var einfo = WindowsTools.ReadFromTxt(@"d:\e", Encoding.ASCII);
-            var d = EncryptionTool.Md5Decrypt(einfo, "raulalf7").Trim();
-
-            WindowsTools.WriteToTxt(@"D:\d.txt", d, Encoding.ASCII);
 
             Console.ReadLine();
            // var list = ALF.MSSQL.Tools.DataSetTransferToList(new Int32(), ds);
