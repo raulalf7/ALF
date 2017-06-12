@@ -2,3 +2,8 @@ E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\Bin\Debug\ALF.SILVERLIGHT.dll
 E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\Bin\Debug\ALF.SILVERLIGHT.pdb
 E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\ALF.SILVERLIGHT.dll
 E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\ALF.SILVERLIGHT.pdb
+E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\TitleControl\Combo.g.cs
+E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\TitleControl\Label.g.cs
+E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\TitleControl\SilverlightControl1.g.cs
+E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\TitleControl\Text.g.cs
+E:\文档\5_Code\ALF_DLL\ALF.SILVERLIGHT\obj\Debug\ALF.SILVERLIGHT.g.resources

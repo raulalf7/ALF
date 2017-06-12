@@ -562,11 +562,11 @@ namespace ALF.MSSQL
                 }
                 dataSql = dataSql.Substring(0, dataSql.Length - 1);
                 sql = string.Format("INSERT INTO {0} VALUES ({1})", tableName, dataSql);
-            }
-            result = ExecSql(sql);
-            if (result != "")
-            {
-                return string.Format("插入数据发生错误：【{0}】", tableName);
+                result = ExecSql(sql);
+                if (result != "")
+                {
+                    return string.Format("插入数据发生错误：【{0}】", tableName);
+                }
             }
             return result;
         }
