@@ -187,6 +187,19 @@ namespace ALF.OFFICE
             SaveAndClose(openWord);
         }
 
+        /// <summary>
+        /// 打印Word文档
+        /// </summary>
+        /// <param name="filePath">Word文档路径</param>
+        public static void PrintWord(string filePath)
+        {
+            Console.WriteLine("Print Word");
+            Document wordDoc = new Document();
+            wordDoc = OpenWord(filePath);
+            wordDoc.PrintOut(ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis, ref _mis);
+            CloseWord(wordDoc);
+        }
+
         #endregion
 
 

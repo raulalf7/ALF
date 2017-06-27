@@ -235,5 +235,11 @@
             <param name="isPasteAtLast">是否粘贴在文章最后</param>
             <param name="replaceKeyWord">替换书签名称（不粘贴在最后的情况下）</param>
         </member>
+        <member name="M:ALF.OFFICE.WordTools.PrintWord(System.String)">
+            <summary>
+            打印Word文档
+            </summary>
+            <param name="filePath">Word文档路径</param>
+        </member>
     </members>
 </doc>
