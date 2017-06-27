@@ -11,3 +11,17 @@ E:\文档\5_Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.MSSQL.pdb
 E:\文档\5_Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.MSSQL.xml
 E:\文档\5_Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.SYSTEM.pdb
 E:\文档\5_Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.SYSTEM.xml
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.OFFICE.xml
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.OFFICE.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.OFFICE.pdb
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.MSSQL.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.SYSTEM.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.MSSQL.pdb
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.MSSQL.xml
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.MSSQL.dll.config
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.SYSTEM.pdb
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\bin\Debug\ALF.SYSTEM.xml
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\obj\Debug\ALF.OFFICE.csprojResolveAssemblyReference.cache
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\obj\Debug\ALF.OFFICE.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.OFFICE\obj\Debug\ALF.OFFICE.pdb

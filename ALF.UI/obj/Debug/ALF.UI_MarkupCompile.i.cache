@@ -4,7 +4,7 @@
 library
 C#
 .cs
-E:\文档\5_Code\ALF_DLL\ALF.UI\obj\Debug\
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.UI\obj\Debug\
 ALF.UI
 none
 false
@@ -13,8 +13,8 @@ DEBUG;TRACE
 4634899816
 
 82003844629
-11-135475611
+11-2066004387
 EduUI\RegionTreeControl.xaml;TitleControl\Combo.xaml;TitleControl\Label.xaml;TitleControl\Text.xaml;
 
-False
+True
 

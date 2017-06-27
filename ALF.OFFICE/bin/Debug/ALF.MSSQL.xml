@@ -238,11 +238,12 @@
         </member>
         <member name="M:ALF.MSSQL.Tools.DataViewToSqlTable(System.Data.DataView,System.String)">
             <summary>
-            
+            将DataView插入到数据库中
+            若数据库中已有表则会往已有数据表中插入数据
+            若数据库中没有表则会先新建数据表再插入数据
             </summary>
-            <param name="dataView"></param>
-            <param name="tableName"></param>
-            <param name="isCreate"></param>
+            <param name="dataView">数据视图</param>
+            <param name="tableName">数据表名</param>
             <returns></returns>
         </member>
     </members>

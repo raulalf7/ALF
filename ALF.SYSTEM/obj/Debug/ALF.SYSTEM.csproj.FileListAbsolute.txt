@@ -8,3 +8,9 @@ E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.pdb
 E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.dll
 E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.pdb
 E:\文档\5_Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.csprojResolveAssemblyReference.cache
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.XML
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.SYSTEM\bin\Debug\ALF.SYSTEM.pdb
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.csprojResolveAssemblyReference.cache
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.dll
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.SYSTEM\obj\Debug\ALF.SYSTEM.pdb

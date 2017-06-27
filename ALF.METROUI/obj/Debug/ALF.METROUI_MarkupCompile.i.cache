@@ -4,7 +4,7 @@
 library
 C#
 .cs
-E:\文档\5_Code\ALF_DLL\ALF.METROUI\obj\Debug\
+C:\Users\raula\Documents\Code\ALF_DLL\ALF.METROUI\obj\Debug\
 ALF.METROUI
 none
 false
@@ -13,8 +13,8 @@ DEBUG;TRACE
 91858277736
 2-1592862028
 13-581974166
-18-1173377297
+181875324874
 App.xaml;ImageButton.xaml;Resources\Icons.xaml;TitleControl\Combo.xaml;TitleControl\Label.xaml;TitleControl\OpenFile.xaml;TitleControl\OpenFolder.xaml;TitleControl\Text.xaml;EduUI\RegionTreeControl.xaml;
 
-False
+True
 
